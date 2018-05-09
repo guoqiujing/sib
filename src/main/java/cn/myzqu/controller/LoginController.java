@@ -16,12 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
-    /*
-    fgfdgh
-     */
+
     @Autowired
     private UserService userService;
 
+    /**
+     * 注册
+     * @param code
+     * @param password
+     * @return
+     */
     @GetMapping("/login")
     public Result login(String code, String password){
         if(userService.login(code,password)){
