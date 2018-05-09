@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.myzqu.dao.ChoiceQuestionMapper" >
+  <resultMap id="BaseResultMap" type="cn.myzqu.pojo.ChoiceQuestion" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="question" property="question" jdbcType="VARCHAR" />
+    <result column="choice_a" property="choiceA" jdbcType="VARCHAR" />
+    <result column="choice_b" property="choiceB" jdbcType="VARCHAR" />
+    <result column="choice_c" property="choiceC" jdbcType="VARCHAR" />
+    <result column="choice_d" property="choiceD" jdbcType="VARCHAR" />
+    <result column="answer" property="answer" jdbcType="VARCHAR" />
+    <result column="analysis" property="analysis" jdbcType="VARCHAR" />
+    <result column="star_level" property="starLevel" jdbcType="DOUBLE" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="bank_id" property="bankId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="available" property="available" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, question, choice_a, choice_b, choice_c, choice_d, answer, analysis, star_level, 
+    user_id, bank_id, status, available, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from choice_question
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from choice_question
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.myzqu.pojo.ChoiceQuestion" >
+    insert into choice_question (id, question, choice_a, 
+      choice_b, choice_c, choice_d, 
+      answer, analysis, star_level, 
+      user_id, bank_id, status, 
+      available, create_time, update_time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, #{choiceA,jdbcType=VARCHAR}, 
+      #{choiceB,jdbcType=VARCHAR}, #{choiceC,jdbcType=VARCHAR}, #{choiceD,jdbcType=VARCHAR}, 
+      #{answer,jdbcType=VARCHAR}, #{analysis,jdbcType=VARCHAR}, #{starLevel,jdbcType=DOUBLE}, 
+      #{userId,jdbcType=VARCHAR}, #{bankId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{available,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.myzqu.pojo.ChoiceQuestion" >
+    insert into choice_question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="question != null" >
+        question,
+      </if>
+      <if test="choiceA != null" >
+        choice_a,
+      </if>
+      <if test="choiceB != null" >
+        choice_b,
+      </if>
+      <if test="choiceC != null" >
+        choice_c,
+      </if>
+      <if test="choiceD != null" >
+        choice_d,
+      </if>
+      <if test="answer != null" >
+        answer,
+      </if>
+      <if test="analysis != null" >
+        analysis,
+      </if>
+      <if test="starLevel != null" >
+        star_level,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="bankId != null" >
+        bank_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="available != null" >
+        available,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="question != null" >
+        #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceA != null" >
+        #{choiceA,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceB != null" >
+        #{choiceB,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceC != null" >
+        #{choiceC,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceD != null" >
+        #{choiceD,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="analysis != null" >
+        #{analysis,jdbcType=VARCHAR},
+      </if>
+      <if test="starLevel != null" >
+        #{starLevel,jdbcType=DOUBLE},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null" >
+        #{bankId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="available != null" >
+        #{available,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.myzqu.pojo.ChoiceQuestion" >
+    update choice_question
+    <set >
+      <if test="question != null" >
+        question = #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceA != null" >
+        choice_a = #{choiceA,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceB != null" >
+        choice_b = #{choiceB,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceC != null" >
+        choice_c = #{choiceC,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceD != null" >
+        choice_d = #{choiceD,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null" >
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="analysis != null" >
+        analysis = #{analysis,jdbcType=VARCHAR},
+      </if>
+      <if test="starLevel != null" >
+        star_level = #{starLevel,jdbcType=DOUBLE},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null" >
+        bank_id = #{bankId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="available != null" >
+        available = #{available,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.myzqu.pojo.ChoiceQuestion" >
+    update choice_question
+    set question = #{question,jdbcType=VARCHAR},
+      choice_a = #{choiceA,jdbcType=VARCHAR},
+      choice_b = #{choiceB,jdbcType=VARCHAR},
+      choice_c = #{choiceC,jdbcType=VARCHAR},
+      choice_d = #{choiceD,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      analysis = #{analysis,jdbcType=VARCHAR},
+      star_level = #{starLevel,jdbcType=DOUBLE},
+      user_id = #{userId,jdbcType=VARCHAR},
+      bank_id = #{bankId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      available = #{available,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
