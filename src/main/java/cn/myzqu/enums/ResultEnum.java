@@ -45,6 +45,9 @@ public enum ResultEnum {
 
     PSSSWORD_ERROR(4400,"密码错误"),
 
+    //题库类目类
+    CATEGORY_CREATE_FAIL(5000,"创建题库类目失败"),
+    CATEGORY_EXITS(5100,"题库类目已存在"),
 
 
     ;

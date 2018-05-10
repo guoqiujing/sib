@@ -1,11 +1,16 @@
-package cn.myzqu.pojo;
+package cn.myzqu.dto;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.util.List;
 
+
+/**
+ * Created by 的川 on 2018/5/10.
+ */
 @Data
-public class Category {
+public class CategoryDTO {
+
     private Integer id;
 
     private String name;
@@ -16,10 +21,6 @@ public class Category {
 
     private String parentIds;
 
-    private Boolean available;
-
-    private Date createTime;
-
-    private Date updateTime;
+    private List<CategoryDTO> LowerCategories;
 
 }

@@ -1,17 +1,20 @@
 package cn.myzqu.dao;
 
+import cn.myzqu.dto.CategoryDTO;
 import cn.myzqu.pojo.Category;
 
+import java.util.List;
+
 public interface CategoryMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteById(Integer id);
 
     int insert(Category record);
 
-    int insertSelective(Category record);
+    int updateById(Category record);
 
-    Category selectByPrimaryKey(Integer id);
+    Category selectById(Integer id);
 
-    int updateByPrimaryKeySelective(Category record);
+    Category selectByName(String name);
 
-    int updateByPrimaryKey(Category record);
+    List<CategoryDTO> selectByParentId(Integer parentId);
 }
