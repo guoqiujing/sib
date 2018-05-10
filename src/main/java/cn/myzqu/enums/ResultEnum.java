@@ -6,7 +6,7 @@ package cn.myzqu.enums;
 public enum ResultEnum {
     SUCCESS(0,"成功"),
     ERROR(-1,"哎呀，发生异常啦，请稍后重试！"),
-
+    PARAMETER_ERROR(-2,"参数错误"),
 //    登录
     LOGIN_FAIL(1000,"登录失败，登录信息不正确"),
 //    题库类
@@ -18,6 +18,8 @@ public enum ResultEnum {
     BANK_NOT_EXIST(2100,"题库不存在"),
 
     BANKLIST_EMPTY(2200,"哎呀，暂时还没有题库哦"),
+
+    BANK_TITLE_EXIST(2300,"题库名称已存在"),
 
     //题目类
     QUESTION_CREATE_FAIL(3000,"创建题目失败"),
