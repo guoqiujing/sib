@@ -60,5 +60,19 @@ public class ResultVOUtil {
         return result;
     }
 
+    /**
+     * 返回错误信息
+     * @param resultEnum
+     * @param object
+     * @return
+     */
+    public static ResultVO error(ResultEnum resultEnum,Object object){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setCode(resultEnum.getCode());
+        resultVO.setMsg(resultEnum.getMessage());
+        resultVO.setData(object);
+        return resultVO;
+    }
+
 
 }

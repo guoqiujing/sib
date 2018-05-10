@@ -1,8 +1,10 @@
 package cn.myzqu.pojo;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class User {
+    @NotNull(message = "用户名不能为空")
     private String id;
 
     private String nickname;
@@ -12,7 +14,7 @@ public class User {
     private String phone;
 
     private String email;
-
+    @NotNull(message = "密码不能为空")
     private String password;
 
     private String salt;

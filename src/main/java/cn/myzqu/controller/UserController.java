@@ -10,6 +10,7 @@ import cn.myzqu.vo.Result;
 import cn.myzqu.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -60,7 +61,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/info")
-    public Result addUser(User user){
+    public Result addUser(@Validated User user){
         System.out.println(user.getId());
         if(userService.add(user)){
             return ResultVOUtil.success();

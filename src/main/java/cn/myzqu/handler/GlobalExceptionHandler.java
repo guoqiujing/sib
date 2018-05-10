@@ -7,8 +7,17 @@ import cn.myzqu.vo.Result;
 import cn.myzqu.vo.ResultVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.validation.BindException;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 /**
  * 统一异常处理器
@@ -27,6 +36,25 @@ public class GlobalExceptionHandler {
     public Result customExceptionHandler(CustomException e){
         logger.error(e.getMessage(),e);
         return ResultVOUtil.error(e.getCode(),e.getMessage());
+    }
+
+    /**
+     * 处理表单验证错误
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(BindException.class)
+    public Result bindExceptionHandler(BindException e){
+        logger.error(e.getMessage(),e);
+        List<ObjectError> errors = e.getAllErrors();
+        Map<String,Object> data = new HashMap<>();
+       // List<Object> data = new ArrayList();
+        for(ObjectError error:errors){
+            System.out.println(error.getCodes().toString());
+            data.put(error.getDefaultMessage(),error.getDefaultMessage());
+           // data.add(error.getDefaultMessage());
+        }
+        return ResultVOUtil.error(ResultEnum.PARAMETER_ERROR,data);
     }
 
     /**
