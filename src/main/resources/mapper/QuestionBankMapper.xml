@@ -22,7 +22,7 @@
     status, available, create_time, update_time
   </sql>
   <select id="selectById" resultMap="BaseAndCountResultMap" parameterType="java.lang.String" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from question_bank
     where id = #{id,jdbcType=VARCHAR}
@@ -181,11 +181,11 @@
   </select>
 
   <select id="selectSortByNumber" resultMap="BaseAndCountResultMap">
-    SELECT * from question_bank ORDER BY frequency DESC
+    SELECT * FROM question_bank ORDER BY frequency DESC
   </select>
 
   <select id="selectSortBylevel" resultMap="BaseAndCountResultMap">
-    SELECT * from question_bank ORDER BY star_level DESC
+    SELECT * FROM question_bank ORDER BY star_level DESC
   </select>
 
   <select id="searchByTitle" resultMap="BaseAndCountResultMap" resultType="String">
