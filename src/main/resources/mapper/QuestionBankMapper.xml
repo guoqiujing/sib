@@ -21,29 +21,17 @@
     id, title, intro, img, value, user_id, category_name, frequency, difficulty, star_level, 
     status, available, create_time, update_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectById" resultMap="BaseAndCountResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from question_bank
     where id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteById" parameterType="java.lang.String" >
     delete from question_bank
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="cn.myzqu.pojo.QuestionBank" >
-    insert into question_bank (id, title, intro, 
-      img, value, user_id, 
-      category_name, frequency, difficulty, 
-      star_level, status, available, 
-      create_time, update_time)
-    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, 
-      #{img,jdbcType=VARCHAR}, #{value,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, 
-      #{categoryName,jdbcType=VARCHAR}, #{frequency,jdbcType=INTEGER}, #{difficulty,jdbcType=DOUBLE}, 
-      #{starLevel,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER}, #{available,jdbcType=BIT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="cn.myzqu.pojo.QuestionBank" >
     insert into question_bank
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -134,7 +122,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.myzqu.pojo.QuestionBank" >
+  <update id="updateById" parameterType="cn.myzqu.pojo.QuestionBank" >
     update question_bank
     <set >
       <if test="title != null" >
@@ -179,21 +167,37 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.myzqu.pojo.QuestionBank" >
-    update question_bank
-    set title = #{title,jdbcType=VARCHAR},
-      intro = #{intro,jdbcType=VARCHAR},
-      img = #{img,jdbcType=VARCHAR},
-      value = #{value,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=VARCHAR},
-      category_name = #{categoryName,jdbcType=VARCHAR},
-      frequency = #{frequency,jdbcType=INTEGER},
-      difficulty = #{difficulty,jdbcType=DOUBLE},
-      star_level = #{starLevel,jdbcType=DOUBLE},
-      status = #{status,jdbcType=INTEGER},
-      available = #{available,jdbcType=BIT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
+
+  <select id="selectByTitle" resultMap="BaseAndCountResultMap" parameterType="String">
+    SELECT * FROM question_bank WHERE title=#{title}
+  </select>
+
+  <select id="selectByUserId" resultMap="BaseAndCountResultMap" parameterType="String">
+    SELECT * FROM question_bank WHERE user_id=#{id}
+  </select>
+
+  <select id="selectByCategory" resultMap="BaseAndCountResultMap" parameterType="String">
+    SELECT * FROM question_bank WHERE category_name=#{category }
+  </select>
+
+  <select id="selectSortByNumber" resultMap="BaseAndCountResultMap">
+    SELECT * from question_bank ORDER BY frequency DESC
+  </select>
+
+  <select id="selectSortBylevel" resultMap="BaseAndCountResultMap">
+    SELECT * from question_bank ORDER BY star_level DESC
+  </select>
+
+  <select id="searchByTitle" resultMap="BaseAndCountResultMap" resultType="String">
+    SELECT * FROM question_bank WHERE title LIKE '%${value}%'
+  </select>
+
+  <select id="countChoiceByBank" resultType="int" parameterType="int">
+    SELECT count(*) FROM choice_question WHERE bank_id = #{id}
+  </select>
+
+  <resultMap type="cn.myzqu.dto.BankDTO" id="BaseAndCountResultMap"
+             extends="BaseResultMap">
+  <association property="count" column="id" javaType="int" select="cn.myzqu.dao.QuestionBankMapper.countChoiceByBank"></association>
+  </resultMap>
 </mapper>

@@ -1,12 +1,18 @@
 package cn.myzqu.pojo;
 
+import cn.myzqu.utils.Serializer.CustomDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Data;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.util.Date;
-
+@Data
 public class QuestionBank {
+
     private String id;
-
+    @NotEmpty(message = "题库名称不能为空")
     private String title;
-
+    @NotEmpty(message = "题库介绍不能为空")
     private String intro;
 
     private String img;
@@ -27,119 +33,10 @@ public class QuestionBank {
 
     private Boolean available;
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date createTime;
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date updateTime;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
-    }
-
-    public String getIntro() {
-        return intro;
-    }
-
-    public void setIntro(String intro) {
-        this.intro = intro == null ? null : intro.trim();
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img == null ? null : img.trim();
-    }
-
-    public Integer getValue() {
-        return value;
-    }
-
-    public void setValue(Integer value) {
-        this.value = value;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName == null ? null : categoryName.trim();
-    }
-
-    public Integer getFrequency() {
-        return frequency;
-    }
-
-    public void setFrequency(Integer frequency) {
-        this.frequency = frequency;
-    }
-
-    public Double getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(Double difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public Double getStarLevel() {
-        return starLevel;
-    }
-
-    public void setStarLevel(Double starLevel) {
-        this.starLevel = starLevel;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public Boolean getAvailable() {
-        return available;
-    }
-
-    public void setAvailable(Boolean available) {
-        this.available = available;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
 }
