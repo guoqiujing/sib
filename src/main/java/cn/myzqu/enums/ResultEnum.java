@@ -6,7 +6,8 @@ package cn.myzqu.enums;
 public enum ResultEnum {
     SUCCESS(0,"成功"),
     ERROR(-1,"哎呀，发生异常啦，请稍后重试！"),
-    PARAMETER_ERROR(-2,"参数错误"),
+    PARAMETER_ERROR(-2,"哎呀，请求参数错误啦"),
+    SQL_ERROR(-3,"哎呀，操作数据异常啦"),
 //    登录
     LOGIN_FAIL(1000,"登录失败，登录信息不正确"),
 //    题库类
@@ -36,7 +37,7 @@ public enum ResultEnum {
     USER_DELETE_FAIL(4003,"删除账号失败"),
     PASSWORD_UPDATE_FAIL(4004,"更新密码失败"),
 
-    USER_ID_EXIST(4100,"用户名已存在，请换个试试"),
+    USER_NAME_EXIST(4100,"用户名已存在，请换个试试"),
     PHONE_EXIST(4101,"该手机号码已经绑定其他账号"),
     EMAIL_EXITS(4102,"该邮箱已经绑定其他账号"),
     WXID_EXITS(4103,"该微信已经绑定其他账号"),
@@ -51,6 +52,10 @@ public enum ResultEnum {
     CATEGORY_CREATE_FAIL(5000,"创建题库类目失败"),
     CATEGORY_EXITS(5100,"题库类目已存在"),
 
+
+    //答题类
+    ANSWERSHEET_CREATE_FAIL(6000,"哎呀，提交答题记录失败啦"),
+    ANSWERSHEETLIST_EMPTY(6100,"还没有答题记录哦"),
 
     ;
 

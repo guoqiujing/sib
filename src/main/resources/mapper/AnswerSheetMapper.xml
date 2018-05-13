@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="question_id" property="questionId" jdbcType="VARCHAR" />
-    <result column="bank_id" property="bankId" jdbcType="INTEGER" />
+    <result column="bank_id" property="bankId" jdbcType="VARCHAR" />
     <result column="answer" property="answer" jdbcType="VARCHAR" />
     <result column="istrue" property="istrue" jdbcType="BIT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -14,25 +14,13 @@
   <sql id="Base_Column_List" >
     id, user_id, question_id, bank_id, answer, istrue, create_time, update_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from answer_sheet
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <!--根据id删除记录-->
+  <delete id="deleteById" parameterType="java.lang.String" >
     delete from answer_sheet
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+  <!--插入一条新记录-->
   <insert id="insert" parameterType="cn.myzqu.pojo.AnswerSheet" >
-    insert into answer_sheet (id, user_id, question_id, 
-      bank_id, answer, istrue, 
-      create_time, update_time)
-    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{questionId,jdbcType=VARCHAR}, 
-      #{bankId,jdbcType=INTEGER}, #{answer,jdbcType=VARCHAR}, #{istrue,jdbcType=BIT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="cn.myzqu.pojo.AnswerSheet" >
     insert into answer_sheet
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -87,7 +75,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.myzqu.pojo.AnswerSheet" >
+  <!--根据id更新记录-->
+  <update id="updateById" parameterType="cn.myzqu.pojo.AnswerSheet" >
     update answer_sheet
     <set >
       <if test="userId != null" >
@@ -114,15 +103,40 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.myzqu.pojo.AnswerSheet" >
-    update answer_sheet
-    set user_id = #{userId,jdbcType=VARCHAR},
-      question_id = #{questionId,jdbcType=VARCHAR},
-      bank_id = #{bankId,jdbcType=INTEGER},
-      answer = #{answer,jdbcType=VARCHAR},
-      istrue = #{istrue,jdbcType=BIT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+  <!--根据id查询记录-->
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from answer_sheet
     where id = #{id,jdbcType=VARCHAR}
-  </update>
+  </select>
+
+  <!--综合查询答题记录-->
+  <select id="select" resultType="cn.myzqu.dto.AnswerSheetDTO" parameterType="Map" >
+    SELECT (@sort:=@sort+1)sort,
+
+    answer_sheet.* ,
+
+    question_bank.title as bank_title ,
+
+    question_bank.category_name as bank_category,
+
+    choice_question.question as question
+
+    FROM (select @sort:=0) as sort ,answer_sheet
+
+    INNER JOIN question_bank ON answer_sheet.bank_id = question_bank.id
+
+    INNER JOIN choice_question ON answer_sheet.question_id = choice_question.id
+
+    <where>
+      <if test="userId!=null">
+        AND answer_sheet.user_id = #{userId}
+      </if>
+      <if test="answerIsTrue!=null">
+        AND answer_sheet.istrue = #{answerIsTrue}
+      </if>
+    </where>
+  </select>
+
 </mapper>

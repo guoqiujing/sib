@@ -49,6 +49,13 @@ public interface UserService {
     Boolean add(User user);
 
     /**
+     * 检测用户id是否存在，存在返回true，不存在返回false
+     * @param id
+     * @return
+     */
+    Boolean checkId(String id);
+
+    /**
      * 锁定用户账号
      * @param id
      * @return

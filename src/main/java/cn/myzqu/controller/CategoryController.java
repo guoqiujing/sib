@@ -31,7 +31,13 @@ public class CategoryController {
         return ResultVOUtil.success(categoryDTOList);
     }
 
-    @PostMapping("/add")
+    /**
+     * 新增题库类目
+     * @param name
+     * @param parentId
+     * @return
+     */
+    @PostMapping("/info")
     public Result add(@RequestParam(value = "name") String name,
                       @RequestParam(value = "parentId",defaultValue = "") Integer parentId){
 

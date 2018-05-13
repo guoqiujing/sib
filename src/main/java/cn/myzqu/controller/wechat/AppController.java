@@ -37,9 +37,9 @@ public class AppController {
         params.put("js_code", code);
         params.put("grant_type", "authorization_code");
         //发送请求
-        String resutl = HttpRequestUtil.get(urlParam,params);
-        logger.info("result:{}"+resutl);
-        JSONObject object = JSONObject.parseObject(resutl);
+        String result = HttpRequestUtil.get(urlParam,params);
+        logger.info("result:{}"+result);
+        JSONObject object = JSONObject.parseObject(result);
         //获取openid
         String openid = object.getString("openid");
         if(!StringUtils.isEmpty(openid)){

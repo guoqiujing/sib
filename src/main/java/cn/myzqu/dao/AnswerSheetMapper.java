@@ -1,17 +1,47 @@
 package cn.myzqu.dao;
 
+import cn.myzqu.dto.AnswerSheetDTO;
 import cn.myzqu.pojo.AnswerSheet;
 
-public interface AnswerSheetMapper {
-    int deleteByPrimaryKey(String id);
+import java.util.List;
+import java.util.Map;
 
+public interface AnswerSheetMapper {
+    /**
+     * 根据id删除记录
+     * @param id
+     * @return
+     */
+    int deleteById(String id);
+
+    /**
+     * 插入一条新记录
+     * @param record
+     * @return
+     */
     int insert(AnswerSheet record);
 
-    int insertSelective(AnswerSheet record);
+    /**
+     * 根据id更新记录
+     * @param record
+     * @return
+     */
+    int updateById(AnswerSheet record);
 
-    AnswerSheet selectByPrimaryKey(String id);
+    /**
+     * 根据id查询记录
+     * @param id
+     * @return
+     */
+    AnswerSheet selectById(String id);
 
-    int updateByPrimaryKeySelective(AnswerSheet record);
+    /**
+     * 综合查询答题记录
+     * @param map
+     * @return
+     */
+    List<AnswerSheetDTO> select(Map<String,Object> map);
 
-    int updateByPrimaryKey(AnswerSheet record);
+
+
 }

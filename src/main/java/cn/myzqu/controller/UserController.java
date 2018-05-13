@@ -45,7 +45,6 @@ public class UserController {
      * @param id 用户id
      * @return
      */
-
     @GetMapping("/info/{id}")
     public Result getUserById(@PathVariable("id") String id){
         UserDTO userDTO = userService.findById(id);
@@ -69,7 +68,27 @@ public class UserController {
         return ResultVOUtil.error(ResultEnum.USER_CREATE_FAIL);
     }
 
-//    public Result update(User user)
+    /**
+     * 更新用户昵称、手机号码、电子邮箱
+     * @param user
+     * @return
+     */
+    @PutMapping("/info")
+    public Result updateUser(User user){
+        //将可以更新的信息复制到新的对象
+        User obejct = new User();
+        obejct.setId(user.getId());
+        obejct.setNickname(user.getNickname());
+        obejct.setEmail(user.getEmail());
+        obejct.setPhone(user.getPhone());
+        //调用更新用户信息服务，更新信息到数据库
+        if(userService.update(obejct)){
+            //返回更新用户信息成功信息
+            return ResultVOUtil.success();
+        }
+        //返回更新用户信息失败信息
+        return ResultVOUtil.error(ResultEnum.USER_UPDATE_FAIL);
+    }
 
 
     /**
@@ -83,13 +102,10 @@ public class UserController {
     public Result updatePassword(@RequestParam(value="id") String id,
                                  @RequestParam(value = "password") String password,
                                  @RequestParam(value = "newPassword") String newPassword){
-
         //检测原密码是否正确
         if(!userService.checkPassword(id,password)) return ResultVOUtil.error(ResultEnum.PSSSWORD_ERROR);
-
         //更新密码
         if(userService.updatePassword(id,newPassword)) return ResultVOUtil.success();
-
         return ResultVOUtil.error(ResultEnum.PASSWORD_UPDATE_FAIL);
 
     }

@@ -3,6 +3,7 @@
 <mapper namespace="cn.myzqu.dao.UserMapper" >
   <resultMap id="BaseResultMap" type="cn.myzqu.pojo.User" >
     <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="nickname" property="nickname" jdbcType="VARCHAR" />
     <result column="icon" property="icon" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
@@ -14,22 +15,9 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, nickname, icon, phone, email, password, salt, wxid, value, locked, create_time, 
+    id, name, nickname, icon, phone, email, password, salt, wxid, value, locked, create_time,
     update_time
   </sql>
-  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from user
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <!-- 通过微信ID查询用户 -->
-  <select id="selectByWxid" resultMap="BaseResultMap" parameterType="java.lang.String">
-    select
-    <include refid="Base_Column_List" />
-    from user
-    where wxid = #{wxid,jdbcType=VARCHAR}
-  </select>
   <delete id="deleteById" parameterType="java.lang.String" >
     delete from user
     where id = #{id,jdbcType=VARCHAR}
@@ -39,6 +27,9 @@
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
+      </if>
+      <if test="name != null" >
+        name,
       </if>
       <if test="nickname != null" >
         nickname,
@@ -78,6 +69,9 @@
       <if test="id != null" >
         #{id,jdbcType=VARCHAR},
       </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
       <if test="nickname != null" >
         #{nickname,jdbcType=VARCHAR},
       </if>
@@ -116,6 +110,9 @@
   <update id="updateById" parameterType="cn.myzqu.pojo.User" >
     update user
     <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
       <if test="nickname != null" >
         nickname = #{nickname,jdbcType=VARCHAR},
       </if>
@@ -152,7 +149,49 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <!--根据用户id查询用户-->
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <!--根据用户名查询用户-->
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+  <!-- 通过微信ID查询用户 -->
+  <select id="selectByWxid" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where wxid = #{wxid,jdbcType=VARCHAR}
+  </select>
+  <!-- 查询所有用户信息 -->
   <select id="selectAll" resultType="cn.myzqu.dto.UserDTO">
     SELECT <include refid="Base_Column_List" /> FROM USER
+    ORDER BY create_time DESC
+  </select>
+  <!-- 综合查询用户信息 -->
+  <select id="select" parameterType="cn.myzqu.pojo.User" resultType="cn.myzqu.dto.UserDTO">
+    SELECT <include refid="Base_Column_List" /> FROM USER
+    <where>
+      <if test="id!=null||id.trim()!=''">
+        and id LIKE  CONCAT('%',id,'%')
+      </if>
+      <if test="name!=null||name.trim()!=''">
+        and name LIKE  CONCAT('%',name,'%')
+      </if>
+      <if test="phone!=null||phone.trim()!=''">
+        and phone LIKE CONCAT('%',phone,'%')
+      </if>
+      <if test="email!=null||email.trim()!=''">
+        and email LIKE CONCAT('%',email,'%')
+      </if>
+    </where>
+    ORDER BY create_time DESC
   </select>
 </mapper>

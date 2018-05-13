@@ -1,85 +1,30 @@
 package cn.myzqu.pojo;
 
+import cn.myzqu.utils.Serializer.CustomDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Data;
+
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+@Data
 public class AnswerSheet {
     private String id;
 
+    @NotNull(message = "用户名不能为空")
     private String userId;
-
+    @NotNull(message = "答案不能为空哦")
     private String questionId;
 
-    private Integer bankId;
-
+    private String bankId;
+    @NotNull(message = "答案不能为空")
     private String answer;
 
     private Boolean istrue;
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date createTime;
-
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date updateTime;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
-    }
-
-    public String getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(String questionId) {
-        this.questionId = questionId == null ? null : questionId.trim();
-    }
-
-    public Integer getBankId() {
-        return bankId;
-    }
-
-    public void setBankId(Integer bankId) {
-        this.bankId = bankId;
-    }
-
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer == null ? null : answer.trim();
-    }
-
-    public Boolean getIstrue() {
-        return istrue;
-    }
-
-    public void setIstrue(Boolean istrue) {
-        this.istrue = istrue;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
 }

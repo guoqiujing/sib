@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.security.Key;
 import java.util.List;
 
 /**
@@ -82,11 +83,11 @@ public class UserServiceImpl implements UserService{
         //根据用户id查找用户
         User user = userMapper.selectById(id);
         //判断用户是否已经存在
-        // 不存返回null
+        //1.不存在返回null
         if(StringUtils.isEmpty(user)){
             return null;
         }
-        //存在，复制user到userDTO
+        //2.存在，复制user到userDTO
         BeanUtils.copyProperties(user,userDTO);
         return userDTO;
     }
@@ -110,10 +111,13 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Boolean add(User user) {
-        //检查用户名是否已经存在
-        String id = user.getId();
-        if(findById(id)!=null){
-            throw new CustomException(ResultEnum.USER_ID_EXIST);
+        //生成用户唯一id
+        String id = KeyUtil.getUUID();
+        user.setId(id);
+        //检查用户名是否存在,存在抛出异常
+        String name = user.getName();
+        if(checkId(id)){
+            throw new CustomException(ResultEnum.USER_NAME_EXIST);
         }
         //检查微信openid是否已经存在
         String wxid = user.getWxid();
@@ -136,7 +140,23 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public Boolean checkId(String id) {
+        //调用dao查询
+        User user = userMapper.selectById(id);
+        //判断用户是否已经存在
+        // 不存在返回false
+        if(StringUtils.isEmpty(user)){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public Boolean lock(String id) {
+        //检查用户id是否存在,不存在抛出异常
+        if(!checkId(id)){
+            throw new CustomException(ResultEnum.USER_NOT_EXIST);
+        }
         User user = new User();
         user.setId(id);
         //设置lock为true，表示锁定账号
@@ -149,6 +169,10 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Boolean unLock(String id) {
+        //检查用户id是否存在,不存在抛出异常
+        if(!checkId(id)){
+            throw new CustomException(ResultEnum.USER_NOT_EXIST);
+        }
         User user = new User();
         user.setId(id);
         //设置lock为false，表示解除锁定账号
@@ -161,6 +185,11 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Boolean update(User user) {
+        String id = user.getId();
+        //检查用户id是否存在,不存在抛出异常
+        if(!checkId(id)){
+            throw new CustomException(ResultEnum.USER_NOT_EXIST);
+        }
         int result = userMapper.updateById(user);
         if(result>0) return true;
         return false;
@@ -168,6 +197,10 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Boolean updatePassword(String id, String password) {
+        //检查用户id是否存在,不存在抛出异常
+        if(!checkId(id)){
+            throw new CustomException(ResultEnum.USER_NOT_EXIST);
+        }
         User user = new User();
         user.setId(id);
         //获取随机密码
