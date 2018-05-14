@@ -3,28 +3,72 @@ package cn.myzqu.dao;
 import cn.myzqu.dto.BankDTO;
 import cn.myzqu.pojo.QuestionBank;
 
+import java.security.SecureRandom;
 import java.util.List;
+import java.util.Map;
 
 public interface QuestionBankMapper {
-    int deleteById(String id);//根据题库id删除题库信息
 
-    int insert(QuestionBank questionBank);//创建题库
+    /**
+     * 根据题库id删除题库信息
+     * @param id
+     * @return
+     */
+    int deleteById(String id);
 
-    BankDTO selectById(String id);//根据题库id查询题库
+    /**
+     * 创建题库
+     * @param questionBank
+     * @return
+     */
+    int insert(QuestionBank questionBank);
 
-    int updateById(QuestionBank questionBank);//根据题库id修改题库信息
+    /**
+     * 根据题库id修改题库信息
+     * @param questionBank
+     * @return
+     */
+    int updateById(QuestionBank questionBank);
 
-    BankDTO selectByTitle(String title);//根据题库标题查询题库
+    /**
+     * 题库排序综合显示(练习人数，评价星级，否则更新时间)
+     * @param Map
+     * @return
+     */
+    List<BankDTO> selectSort(Map<String ,Object> Map);
 
-    List<BankDTO> selectByUserId(String id);//根据用户id查询题库
+    /**
+     * 综合查询(根据题库id，用户id，类名名称，题库标题)
+     * @param Map
+     * @return
+     */
+    List<BankDTO> select(Map<String,Object> Map);
 
-    List<BankDTO> selectByCategory(String name);//根据类目名称查询题库
+    /**
+     * 根据题库id查询题库
+     * @param id
+     * @return
+     */
+    QuestionBank selectById(String id);
 
-    List<BankDTO> selectSortByNumber();//根据练习人数排序题库
+    /**
+     * 根据题库标题查询题库
+     * @param title
+     * @return
+     */
+    QuestionBank selectByTitle(String title);
 
-    List<BankDTO> selectSortBylevel();//根据评价星级排序题库
+    /**
+     * 根据用户id查询题库
+     * @param userId
+     * @return
+     */
+    List<BankDTO> selectByUserId(String userId);
 
-    List<BankDTO> searchByTitle(String title);//根据题库标题模糊搜索题库
-
-    int countChoiceByBank (String id);//计算该题库下题目数目
+    /**
+     * 根据类目名称查询题库
+     * @param name
+     * @return
+     */
+    List<BankDTO> selectByTypeName(String name);
 }

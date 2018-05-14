@@ -1,5 +1,8 @@
 package cn.myzqu.pojo;
 
+import cn.myzqu.utils.Serializer.CustomDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import java.util.Date;
 
 public class ChoiceQuestion {
@@ -29,8 +32,10 @@ public class ChoiceQuestion {
 
     private Boolean available;
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date createTime;
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date updateTime;
 
     public String getId() {
@@ -151,5 +156,26 @@ public class ChoiceQuestion {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "ChoiceQuestion{" +
+                "id='" + id + '\'' +
+                ", question='" + question + '\'' +
+                ", choiceA='" + choiceA + '\'' +
+                ", choiceB='" + choiceB + '\'' +
+                ", choiceC='" + choiceC + '\'' +
+                ", choiceD='" + choiceD + '\'' +
+                ", answer='" + answer + '\'' +
+                ", analysis='" + analysis + '\'' +
+                ", starLevel=" + starLevel +
+                ", userId='" + userId + '\'' +
+                ", bankId='" + bankId + '\'' +
+                ", status=" + status +
+                ", available=" + available +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 }

@@ -28,6 +28,7 @@ public enum ResultEnum {
     QUESTION_DELETE_FAIL(3002,"删除题目失败"),
 
     QUESTION_NOT_EXIST(3100,"题目不存在"),
+    QUESTION_IS_EXIST(3101,"题目已存在"),
 
     QUESTIONLIST_EMPTY(3200,"哎呀，暂时还没有题目哦"),
 

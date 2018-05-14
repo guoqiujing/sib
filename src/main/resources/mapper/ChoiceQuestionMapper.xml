@@ -22,31 +22,81 @@
     id, question, choice_a, choice_b, choice_c, choice_d, answer, analysis, star_level, 
     user_id, bank_id, status, available, create_time, update_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+
+  <!--根据题目id查询题目-->
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from choice_question
     where id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+
+  <!--根据题目查询题目-->
+  <select id="selectByQuestion" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from choice_question
+    where question = #{question,jdbcType=VARCHAR}
+  </select>
+
+  <!--根据题库id查询题目-->
+  <select id="selectByBankId" resultType="cn.myzqu.dto.ChoiceDTO" parameterType="java.lang.String" >
+    select choice_question.*,question_bank.title
+    from choice_question,question_bank
+    where choice_question.bank_id=question_bank.id and bank_id=#{bank_id}
+  </select>
+
+  <!--根据题目id删除题目-->
+  <delete id="deleteById" parameterType="java.lang.String" >
     delete from choice_question
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+
+  <!--综合查询(根据题目id，题目，答案，分析,用户id，题库标题模糊搜索-->
+  <select id="select" resultType="cn.myzqu.dto.ChoiceDTO" parameterType="Map">
+    SELECT choice_question.*,question_bank.title
+    FROM choice_question,question_bank
+    WHERE question_bank.id=choice_question.bank_id
+      <choose>
+        <when test="id!=null and id!=''">
+          AND choice_question.id LIKE '%${id}%'
+        </when>
+        <when test="question!=null and question!=''">
+          AND choice_question.question LIKE '%${question}%'
+        </when>
+        <when test="answer!=null and answer!=''">
+          AND choice_question.answer LIKE '%${answer}%'
+        </when>
+        <when test="analysis!=null and analysis!=''">
+          AND choice_question.analysis LIKE '%${analysis}%'
+        </when>
+        <when test="userId!=null and userId!=''">
+          AND choice_question.user_id LIKE '%${user_id}%'
+        </when>
+        <otherwise>
+          AND 1=2
+        </otherwise>
+      </choose>
+  </select>
+
+  <!---->
+  <select id="selectSort" parameterMap="cn.myzqu.dto.ChoiceDTO" parameterType="Map">
+    SELECT * FROM choice_question
+    <choose>
+      <when test="id!=null || id!=''">
+        ORDER BY id DESC
+      </when>
+      <when test="star_level!=null || star_level!=''">
+        ORDER BY star_level DESC
+      </when>
+      <otherwise>
+        ORDER BY update_time DESC
+      </otherwise>
+    </choose>
+  </select>
+
+  <!--添加题目-->
   <insert id="insert" parameterType="cn.myzqu.pojo.ChoiceQuestion" >
-    insert into choice_question (id, question, choice_a, 
-      choice_b, choice_c, choice_d, 
-      answer, analysis, star_level, 
-      user_id, bank_id, status, 
-      available, create_time, update_time
-      )
-    values (#{id,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, #{choiceA,jdbcType=VARCHAR}, 
-      #{choiceB,jdbcType=VARCHAR}, #{choiceC,jdbcType=VARCHAR}, #{choiceD,jdbcType=VARCHAR}, 
-      #{answer,jdbcType=VARCHAR}, #{analysis,jdbcType=VARCHAR}, #{starLevel,jdbcType=DOUBLE}, 
-      #{userId,jdbcType=VARCHAR}, #{bankId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{available,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="cn.myzqu.pojo.ChoiceQuestion" >
     insert into choice_question
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -143,7 +193,9 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.myzqu.pojo.ChoiceQuestion" >
+
+<!--根据题目id修改题目-->
+  <update id="updateById" parameterType="cn.myzqu.pojo.ChoiceQuestion" >
     update choice_question
     <set >
       <if test="question != null" >
@@ -189,24 +241,6 @@
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="cn.myzqu.pojo.ChoiceQuestion" >
-    update choice_question
-    set question = #{question,jdbcType=VARCHAR},
-      choice_a = #{choiceA,jdbcType=VARCHAR},
-      choice_b = #{choiceB,jdbcType=VARCHAR},
-      choice_c = #{choiceC,jdbcType=VARCHAR},
-      choice_d = #{choiceD,jdbcType=VARCHAR},
-      answer = #{answer,jdbcType=VARCHAR},
-      analysis = #{analysis,jdbcType=VARCHAR},
-      star_level = #{starLevel,jdbcType=DOUBLE},
-      user_id = #{userId,jdbcType=VARCHAR},
-      bank_id = #{bankId,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
-      available = #{available,jdbcType=BIT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>
