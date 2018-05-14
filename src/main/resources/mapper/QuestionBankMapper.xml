@@ -21,16 +21,14 @@
     id, title, intro, img, value, user_id, category_name, frequency, difficulty, star_level, 
     status, available, create_time, update_time
   </sql>
-  <select id="selectById" resultMap="BaseAndCountResultMap" parameterType="java.lang.String" >
-    select
-    <include refid="Base_Column_List" />
-    from question_bank
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
+
+  <!--删除题库-->
   <delete id="deleteById" parameterType="java.lang.String" >
     delete from question_bank
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+
+  <!--创建题库-->
   <insert id="insert" parameterType="cn.myzqu.pojo.QuestionBank" >
     insert into question_bank
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -122,6 +120,8 @@
       </if>
     </trim>
   </insert>
+
+  <!--修改题库-->
   <update id="updateById" parameterType="cn.myzqu.pojo.QuestionBank" >
     update question_bank
     <set >
@@ -168,36 +168,75 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-  <select id="selectByTitle" resultMap="BaseAndCountResultMap" parameterType="String">
+<!--综合查询(根据题库id，用户id，类名名称，题库标题模糊查询)-->
+  <select id="select" resultMap="BaseAndCountResultMap" parameterType="Map">
+    SELECT * FROM question_bank
+    <where>
+      <choose>
+        <when test="title!=null and title!=''">
+          AND title like '%${title}%'
+        </when>
+        <when test="userId!=null and userId!=''">
+          AND user_id like '%${userId}%'
+        </when>
+        <when test="categoryName!=null and categoryName!=''">
+          AND category_name like '%${categoryName}%'
+        </when>
+        <when test="id!=null and id!=''">
+          AND id like '%${id}%'
+        </when>
+        <otherwise>
+          1=2
+        </otherwise>
+      </choose>
+    </where>
+    ORDER BY update_time DESC
+  </select>
+
+  <!--题库排序显示综合查询-->
+  <select id="selectSort" parameterType="Map" resultMap="BaseAndCountResultMap">
+    SELECT * FROM question_bank
+    <choose>
+      <when test="frequency!=null || frequency!=''">
+        ORDER BY frequency DESC
+      </when>
+      <when test="star_level!=null || star_level!=''">
+        ORDER BY star_level DESC
+      </when>
+      <otherwise>
+        ORDER BY update_time DESC
+      </otherwise>
+    </choose>
+  </select>
+
+  <!--根据题库标题查询题库-->
+  <select id="selectByTitle" resultMap="BaseResultMap" resultType="String">
     SELECT * FROM question_bank WHERE title=#{title}
   </select>
 
-  <select id="selectByUserId" resultMap="BaseAndCountResultMap" parameterType="String">
-    SELECT * FROM question_bank WHERE user_id=#{id}
+  <!--根据题库id查询题库-->
+  <select id="selectById" resultMap="BaseResultMap" resultType="String">
+    SELECT * FROM question_bank WHERE id=#{id}
   </select>
 
-  <select id="selectByCategory" resultMap="BaseAndCountResultMap" parameterType="String">
-    SELECT * FROM question_bank WHERE category_name=#{category }
+  <!--根据用户id查询题库-->
+  <select id="selectByUserId" resultMap="BaseAndCountResultMap" resultType="String">
+    SELECT * FROM question_bank WHERE user_id=#{userId}
   </select>
 
-  <select id="selectSortByNumber" resultMap="BaseAndCountResultMap">
-    SELECT * FROM question_bank ORDER BY frequency DESC
+  <!--根据题库类名查询题库-->
+  <select id="selectByTypeName" resultMap="BaseAndCountResultMap" resultType="String">
+    SELECT * FROM question_bank WHERE category_name=#{categoryName}
   </select>
 
-  <select id="selectSortBylevel" resultMap="BaseAndCountResultMap">
-    SELECT * FROM question_bank ORDER BY star_level DESC
-  </select>
-
-  <select id="searchByTitle" resultMap="BaseAndCountResultMap" resultType="String">
-    SELECT * FROM question_bank WHERE title LIKE '%${value}%'
-  </select>
-
+  <!--查询该题库下的题目数目-->
   <select id="countChoiceByBank" resultType="int" parameterType="int">
     SELECT count(*) FROM choice_question WHERE bank_id = #{id}
   </select>
 
+  <!--连结显示题库下的题目数目-->
   <resultMap type="cn.myzqu.dto.BankDTO" id="BaseAndCountResultMap"
              extends="BaseResultMap">
-  <association property="count" column="id" javaType="int" select="cn.myzqu.dao.QuestionBankMapper.countChoiceByBank"></association>
+  <association property="count" column="count" javaType="int" select="cn.myzqu.dao.QuestionBankMapper.countChoiceByBank"></association>
   </resultMap>
 </mapper>

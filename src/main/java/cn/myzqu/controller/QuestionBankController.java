@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -31,7 +32,6 @@ public class QuestionBankController {
 
     /**
      * 创建题库
-     *
      * @param questionBank
      * @return
      */
@@ -44,7 +44,6 @@ public class QuestionBankController {
 
     /**
      * 根据题库id删除题库
-     *
      * @param id
      * @return
      */
@@ -55,7 +54,6 @@ public class QuestionBankController {
         }
         return ResultVOUtil.error(ResultEnum.BANK_DELETE_FAIL);
     }
-
     /**
      * 修改题库信息
      * 只能用x-www-form-urlencoded
@@ -70,94 +68,71 @@ public class QuestionBankController {
             return ResultVOUtil.error(ResultEnum.BANK_UPDATE_FAIL);
     }
 
+
     /**
-     * 根据题库id查询题库
-     *
-     * @param id
+     * 题库排序显示
+     * @param condition  说明:frequency 按人数排序 star_level按星级排序 否则按更新时间排序
      * @return
      */
-    @GetMapping("/info/{id}")
-    public Result getQuestionBankById(@PathVariable("id") String id) {
-        BankDTO BankDTO = questionBankService.findById(id);
-        if (BankDTO != null) {
-            return ResultVOUtil.success(BankDTO);
-        }
-        return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
+    @GetMapping("/infoSort")
+    public Result getBankByNumber(@RequestParam Map<String,Object> condition,
+                                  @RequestParam(value="page",defaultValue = "1") Integer page,
+                                  @RequestParam(value = "size",defaultValue = "10") Integer size) {
+        PageDTO pageDTO = questionBankService.selectSort(condition,page,size);
+        if (pageDTO==null)
+            return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
+        else
+            return ResultVOUtil.success(pageDTO);
+    }
+
+    /**
+     * 根据题库id或题库标题或用户id或类目名称查询题库信息
+     * @param condition  说明:  id or title or userId or categoryName
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("/info")
+    public Result get(@RequestParam Map<String,Object> condition,
+                                    @RequestParam(value="page",defaultValue = "1") Integer page,
+                                    @RequestParam(value = "size",defaultValue = "10") Integer size) {
+        PageDTO pageDTO = questionBankService.select(condition,page,size);
+        if (pageDTO==null)
+            return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
+        else
+            return ResultVOUtil.success(pageDTO);
     }
 
     /**
      * 根据用户id查询题库
-     *
      * @param id
+     * @param page
+     * @param size
      * @return
      */
     @GetMapping("/infoByUserId")
-    public Result getBankByUserId(@RequestParam("id") String id) {
-        List<BankDTO> bankDTOS = questionBankService.selectByUserId(id);
-        if (bankDTOS.isEmpty())
+    public Result getByUserId(@RequestParam String id,
+                      @RequestParam(value="page",defaultValue = "1") Integer page,
+                      @RequestParam(value = "size",defaultValue = "10") Integer size) {
+        PageDTO pageDTO = questionBankService.findByUserId(id,page,size);
+        if (pageDTO==null)
             return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
         else
-            return ResultVOUtil.success(bankDTOS);
+            return ResultVOUtil.success(pageDTO);
     }
 
     /**
      * 根据类目名称查询题库
-     *
      * @param name
+     * @param page
+     * @param size
      * @return
      */
-    @GetMapping("/infoByCategory")
-    public Result getBankByCateName(@RequestParam(value = "name") String name,
-                                    @RequestParam(value="page",defaultValue = "1") Integer page,
-                                    @RequestParam(value = "size",defaultValue = "10") Integer size) {
-        PageDTO pageDTO = questionBankService.selectByCategory(name,page,size);
-        if (pageDTO==null)
-            return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
-        else
-            return ResultVOUtil.success(pageDTO);
-    }
-
-    /**
-     * 根据题库标题模糊搜索题库
-     * @param title
-     * @return
-     */
-    @GetMapping("/infoSearch")
-    public Result getBankByTitle(@RequestParam(value = "title") String title,
-                                 @RequestParam(value="page",defaultValue = "1") Integer page,
-                                 @RequestParam(value = "size",defaultValue = "10") Integer size)
-    {
-        PageDTO pageDTO=questionBankService.searchByTitle(title,page,size);
-        if(pageDTO==null)
-                return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
-            else
-                return ResultVOUtil.success(pageDTO);
-    }
-
-    /**
-     * 根据练习人数排序题库
-     *
-     * @return
-     */
-    @GetMapping("/infoSortByNumber")
-    public Result getBankByNumber(@RequestParam(value="page",defaultValue = "1") Integer page,
-                                  @RequestParam(value = "size",defaultValue = "10") Integer size) {
-        PageDTO pageDTO = questionBankService.selectSortByNumber(page,size);
-        if (pageDTO==null)
-            return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
-        else
-            return ResultVOUtil.success(pageDTO);
-    }
-
-    /**
-     * 根据星级排序题库
-     *
-     * @return
-     */
-    @GetMapping("/infoSortBylevel")
-    public Result getBankBylevel(@RequestParam(value="page",defaultValue = "1") Integer page,
-                                 @RequestParam(value = "size",defaultValue = "10") Integer size) {
-        PageDTO pageDTO = questionBankService.selectSortBylevel(page,size);
+    @GetMapping("/infoTypeName")
+    public Result getTypeName(@RequestParam String name,
+                              @RequestParam(value="page",defaultValue = "1") Integer page,
+                              @RequestParam(value = "size",defaultValue = "10") Integer size) {
+        PageDTO pageDTO = questionBankService.findByTypeName(name,page,size);
         if (pageDTO==null)
             return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
         else

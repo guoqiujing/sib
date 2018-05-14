@@ -6,6 +6,7 @@ import cn.myzqu.pojo.QuestionBank;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Chrky on 2018/5/10.
@@ -34,50 +35,49 @@ public interface QuestionBankService
     Boolean updateById(QuestionBank questionBank);
 
     /**
-     * 根据题库id查询题库信息
+     * 根据题库id或题库标题或用户id或类目名称查询题库信息
+     * @param Map id or title or userId or categoryName
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    PageDTO select(Map<String,Object> Map,int pageNum, int pageSize);
+
+    /**
+     * 根据练习人数或星级评价排序题库
+     * @return
+     */
+    PageDTO selectSort(Map<String ,Object> Map,int pageNum, int pageSize);
+
+    /**
+     * 根据题库id查询题库
      * @param id
      * @return
      */
-    BankDTO findById(String id);
+    QuestionBank findById(String id);
 
     /**
-     * 根据题库标题查询题库信息
+     * 根据题库标题查询题库
      * @param title
      * @return
      */
-    BankDTO findByTitle(String title);
+    QuestionBank findByTitle(String title);
 
     /**
-     * 根据用户id查询题库信息
-     * @param id
+     * 根据用户id查询题库
+     * @param userId
+     * @param pageNum
+     * @param pageSize
      * @return
      */
-    List<BankDTO> selectByUserId(String id);
+    PageDTO findByUserId(String userId,int pageNum, int pageSize);
 
     /**
      * 根据类目名称查询题库
      * @param name
+     * @param pageNum
+     * @param pageSize
      * @return
      */
-    PageDTO selectByCategory(String name,int pageNum, int pageSize);
-
-    /**
-     * 根据题库标题模糊搜索题库
-     * @param title
-     * @return
-     */
-    PageDTO searchByTitle(String title,int pageNum, int pageSize);
-
-    /**
-     * 根据练习人数排序题库
-     * @return
-     */
-    PageDTO selectSortByNumber(int pageNum, int pageSize);
-
-    /**
-     * 根据星级评价排序题库
-     * @return
-     */
-    PageDTO selectSortBylevel(int pageNum, int pageSize);
-
+    PageDTO findByTypeName(String name,int pageNum, int pageSize);
 }

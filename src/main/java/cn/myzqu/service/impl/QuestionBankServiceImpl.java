@@ -18,7 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户服务接口实现类
@@ -40,6 +42,7 @@ public class QuestionBankServiceImpl implements QuestionBankService {
             throw new CustomException(ResultEnum.BANK_TITLE_EXIST);
         }
         questionBank.setId(KeyUtil.getUUID());
+        //创建题库
         int result = questionBankMapper.insert(questionBank);
         if (result > 0) {
             return true;
@@ -69,54 +72,31 @@ public class QuestionBankServiceImpl implements QuestionBankService {
     }
 
     @Override
-    public BankDTO findById(String id) {
-        BankDTO bankDTO = new BankDTO();
+    public QuestionBank findById(String id) {
         //根据题库id查询题库
-        bankDTO = questionBankMapper.selectById(id);
-        if (StringUtils.isEmpty(bankDTO)) {
+        QuestionBank questionBank = questionBankMapper.selectById(id);
+        if (StringUtils.isEmpty(questionBank)) {
             return null;
         }
-        return bankDTO;
+        return questionBank;
     }
 
     @Override
-    public BankDTO findByTitle(String title) {
-        return questionBankMapper.selectByTitle(title);
+    public QuestionBank findByTitle(String title) {
+        //根据题库标题查询题库
+        QuestionBank questionBank = questionBankMapper.selectByTitle(title);
+        if (StringUtils.isEmpty(questionBank)) {
+            return null;
+        }
+        return questionBank;
     }
 
     @Override
-    public List<BankDTO> selectByUserId(String id) {
-        return questionBankMapper.selectByUserId(id);
-    }
-
-    @Override
-    public PageDTO selectByCategory(String name,int pageNum, int pageSize) {
-        Page page = PageHelper.startPage(pageNum,pageSize);
-        List<BankDTO> bankDTOS  =questionBankMapper.selectByCategory(name);
-        if(bankDTOS.isEmpty()) return null;
-        int total = (int)page.getTotal();
-        int pages = page.getPages();
-        PageDTO pageDTO = new PageDTO(bankDTOS,total,pageSize,pageNum,pages);
-        return pageDTO;
-    }
-
-    @Override
-    public PageDTO searchByTitle(String title,int pageNum, int pageSize) {
-        Page page = PageHelper.startPage(pageNum,pageSize);
-        List<BankDTO> bankDTOS  =questionBankMapper.searchByTitle(title);
-        if(bankDTOS.isEmpty()) return null;
-        int total = (int)page.getTotal();
-        int pages = page.getPages();
-        PageDTO pageDTO = new PageDTO(bankDTOS,total,pageSize,pageNum,pages);
-        return pageDTO;
-    }
-
-    @Override
-    public PageDTO selectSortByNumber(int pageNum,int pageSize) {
+    public PageDTO findByUserId(String userId, int pageNum, int pageSize) {
         //使用PageHelper插件实现分页
         //注意：下面这两条语句必须紧跟，保证分页安全
         Page page = PageHelper.startPage(pageNum,pageSize);
-        List<BankDTO> bankDTOS  =questionBankMapper.selectSortByNumber();
+        List<BankDTO> bankDTOS  = questionBankMapper.selectByUserId(userId);
         //判断bankDTOS是否有数据,没有数据返回null
         if(bankDTOS.isEmpty()) return null;
         //获取总记录数
@@ -129,9 +109,44 @@ public class QuestionBankServiceImpl implements QuestionBankService {
     }
 
     @Override
-    public PageDTO selectSortBylevel(int pageNum, int pageSize) {
+    public PageDTO findByTypeName(String name, int pageNum, int pageSize) {
+        //使用PageHelper插件实现分页
+        //注意：下面这两条语句必须紧跟，保证分页安全
         Page page = PageHelper.startPage(pageNum,pageSize);
-        List<BankDTO> bankDTOS  =questionBankMapper.selectSortBylevel();
+        List<BankDTO> bankDTOS  = questionBankMapper.selectByTypeName(name);
+        //判断bankDTOS是否有数据,没有数据返回null
+        if(bankDTOS.isEmpty()) return null;
+        //获取总记录数
+        int total = (int)page.getTotal();
+        //获取总页数
+        int pages = page.getPages();
+        //封装数据到分页类PageDTO
+        PageDTO pageDTO = new PageDTO(bankDTOS,total,pageSize,pageNum,pages);
+        return pageDTO;
+    }
+
+    @Override
+    public PageDTO selectSort(Map<String ,Object> Map,int pageNum,int pageSize) {
+        //使用PageHelper插件实现分页
+        //注意：下面这两条语句必须紧跟，保证分页安全
+        Page page = PageHelper.startPage(pageNum,pageSize);
+        List<BankDTO> bankDTOS  = questionBankMapper.selectSort(Map);
+        //判断bankDTOS是否有数据,没有数据返回null
+        if(bankDTOS.isEmpty()) return null;
+        //获取总记录数
+        int total = (int)page.getTotal();
+        //获取总页数
+        int pages = page.getPages();
+        //封装数据到分页类PageDTO
+        PageDTO pageDTO = new PageDTO(bankDTOS,total,pageSize,pageNum,pages);
+        return pageDTO;
+    }
+
+    @Override
+    public PageDTO select(Map<String,Object> Map,int pageNum, int pageSize) {
+        Page page = PageHelper.startPage(pageNum,pageSize);
+        //综合查询
+        List<BankDTO> bankDTOS  =questionBankMapper.select(Map);
         if(bankDTOS.isEmpty()) return null;
         int total = (int)page.getTotal();
         int pages = page.getPages();
