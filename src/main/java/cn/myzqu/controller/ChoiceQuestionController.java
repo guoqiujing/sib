@@ -45,7 +45,7 @@ public class ChoiceQuestionController {
      * @return
      */
     @DeleteMapping("/info")
-    public Result deleteChoice(String id)
+    public Result deleteChoice(@RequestParam String id)
     {
         //删除题目
         if(choiceQuestionService.deleteById(id))
@@ -60,7 +60,7 @@ public class ChoiceQuestionController {
      * @return
      */
     @GetMapping("/infoById")
-    public Result getChoiceById(String id)
+    public Result getChoiceById(@RequestParam String id)
     {
         //创建choice对象
         ChoiceQuestion choiceQuestion=choiceQuestionService.findById(id);
@@ -92,7 +92,7 @@ public class ChoiceQuestionController {
      * @return
      */
     @GetMapping("/infoByBankId")
-    public Result getChoiceByBankId(String id)
+    public Result getChoiceByBankId(@RequestParam String id)
     {
         //创建choice对象
         List<ChoiceDTO> choiceDTOS=choiceQuestionService.findByBankId(id);
