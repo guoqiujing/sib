@@ -61,7 +61,7 @@ public class QuestionBankController {
      * @return
      */
     @PutMapping("/info")
-    public Result updateQuestionbank(QuestionBank questionBank) {
+    public Result updateQuestionBank(QuestionBank questionBank) {
         if (questionBankService.updateById(questionBank))
             return ResultVOUtil.success();
         else
@@ -78,7 +78,7 @@ public class QuestionBankController {
     public Result getBankByNumber(@RequestParam Map<String,Object> condition,
                                   @RequestParam(value="page",defaultValue = "1") Integer page,
                                   @RequestParam(value = "size",defaultValue = "10") Integer size) {
-        PageDTO pageDTO = questionBankService.selectSort(condition,page,size);
+        PageDTO pageDTO = questionBankService.findSort(condition,page,size);
         if (pageDTO==null)
             return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
         else
@@ -96,7 +96,7 @@ public class QuestionBankController {
     public Result get(@RequestParam Map<String,Object> condition,
                                     @RequestParam(value="page",defaultValue = "1") Integer page,
                                     @RequestParam(value = "size",defaultValue = "10") Integer size) {
-        PageDTO pageDTO = questionBankService.select(condition,page,size);
+        PageDTO pageDTO = questionBankService.find(condition,page,size);
         if (pageDTO==null)
             return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
         else

@@ -126,7 +126,7 @@ public class QuestionBankServiceImpl implements QuestionBankService {
     }
 
     @Override
-    public PageDTO selectSort(Map<String ,Object> Map,int pageNum,int pageSize) {
+    public PageDTO findSort(Map<String ,Object> Map,int pageNum,int pageSize) {
         //使用PageHelper插件实现分页
         //注意：下面这两条语句必须紧跟，保证分页安全
         Page page = PageHelper.startPage(pageNum,pageSize);
@@ -143,7 +143,7 @@ public class QuestionBankServiceImpl implements QuestionBankService {
     }
 
     @Override
-    public PageDTO select(Map<String,Object> Map,int pageNum, int pageSize) {
+    public PageDTO find(Map<String,Object> Map,int pageNum, int pageSize) {
         Page page = PageHelper.startPage(pageNum,pageSize);
         //综合查询
         List<BankDTO> bankDTOS  =questionBankMapper.select(Map);
