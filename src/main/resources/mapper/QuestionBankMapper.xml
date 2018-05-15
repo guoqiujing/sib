@@ -193,8 +193,6 @@
     ORDER BY update_time DESC
   </select>
 
-
-
   <!--题库排序显示综合查询-->
   <select id="selectSort" parameterType="Map" resultMap="BaseAndCountResultMap">
     SELECT * FROM question_bank

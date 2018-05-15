@@ -79,18 +79,20 @@
       </choose>
   </select>
 
-  <!---->
-  <select id="selectSort" parameterMap="cn.myzqu.dto.ChoiceDTO" parameterType="Map">
-    SELECT * FROM choice_question
+  <!--综合显示-->
+  <select id="selectSort"  parameterType="Map" resultType="cn.myzqu.dto.ChoiceDTO">
+    SELECT choice_question.*,question_bank.title
+    FROM choice_question,question_bank
+    WHERE choice_question.bank_id=question_bank.id
     <choose>
       <when test="id!=null || id!=''">
-        ORDER BY id DESC
+        ORDER BY choice_question.id DESC
       </when>
       <when test="star_level!=null || star_level!=''">
-        ORDER BY star_level DESC
+        ORDER BY choice_question.star_level DESC
       </when>
       <otherwise>
-        ORDER BY update_time DESC
+        ORDER BY choice_question.update_time DESC
       </otherwise>
     </choose>
   </select>

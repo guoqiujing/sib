@@ -19,8 +19,8 @@ public class ChoiceDTO extends ChoiceQuestion{
 
     @Override
     public String toString() {
-        return "ChoiceDTO{" +
-                "title='" + title + '\'' +
-                "} " + super.toString();
+        {
+            return "BankDTO [title=" + title + ", toString()=" + super.toString() + "]";
+        }
     }
 }

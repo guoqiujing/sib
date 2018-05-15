@@ -1,6 +1,7 @@
 package cn.myzqu.controller;
 
 import cn.myzqu.dto.ChoiceDTO;
+import cn.myzqu.dto.PageDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.pojo.ChoiceQuestion;
 import cn.myzqu.service.ChoiceQuestionService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Chrky on 2018/5/14.
@@ -99,5 +101,44 @@ public class ChoiceQuestionController {
             return ResultVOUtil.error(ResultEnum.QUESTION_NOT_EXIST);
         else
             return ResultVOUtil.success(choiceDTOS);
+    }
+
+    /**
+     * 综合查询(根据题目id，题目，答案，分析,用户id，题库标题模糊搜索）
+     * @param condition
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("/info")
+    public Result get(@RequestParam Map<String,Object> condition,
+                      @RequestParam(value="page",defaultValue = "1") Integer page,
+                      @RequestParam(value = "size",defaultValue = "10") Integer size)
+    {
+        PageDTO pageDTO =choiceQuestionService.find(condition,page,size);
+        if (pageDTO==null)
+            return ResultVOUtil.error(ResultEnum.QUESTION_NOT_EXIST);
+        else
+            return ResultVOUtil.success(pageDTO);
+
+    }
+
+    /**
+     * 题目综合显示
+     * @param condition
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("/infoSort")
+    public Result getSort(@RequestParam Map<String,Object> condition,
+                          @RequestParam(value="page",defaultValue = "1") Integer page,
+                          @RequestParam(value = "size",defaultValue = "10") Integer size)
+    {
+        PageDTO pageDTO =choiceQuestionService.findSort(condition,page,size);
+        if (pageDTO==null)
+            return ResultVOUtil.error(ResultEnum.QUESTION_NOT_EXIST);
+        else
+            return ResultVOUtil.success(pageDTO);
     }
 }

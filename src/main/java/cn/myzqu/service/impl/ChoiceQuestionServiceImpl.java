@@ -3,20 +3,21 @@ package cn.myzqu.service.impl;
 
 import cn.myzqu.dao.ChoiceQuestionMapper;
 import cn.myzqu.dto.ChoiceDTO;
+import cn.myzqu.dto.PageDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.exception.CustomException;
 import cn.myzqu.pojo.ChoiceQuestion;
-import cn.myzqu.pojo.QuestionBank;
 import cn.myzqu.service.ChoiceQuestionService;
 import cn.myzqu.utils.KeyUtil;
-import cn.myzqu.utils.ResultVOUtil;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Chrky on 2018/5/14.
@@ -82,5 +83,29 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
             return true;
         else
             return false;
+    }
+
+    @Override
+    public PageDTO find(Map<String, Object> map, int pageNum, int pageSize) {
+        Page page = PageHelper.startPage(pageNum,pageSize);
+        //综合查询
+        List<ChoiceDTO> choiceDTOS  =choiceQuestionMapper.select(map);
+        if(choiceDTOS.isEmpty()) return null;
+        int total = (int)page.getTotal();
+        int pages = page.getPages();
+        PageDTO pageDTO = new PageDTO(choiceDTOS,total,pageSize,pageNum,pages);
+        return pageDTO;
+    }
+
+    @Override
+    public PageDTO findSort(Map<String, Object> map, int pageNum, int pageSize) {
+        Page page = PageHelper.startPage(pageNum,pageSize);
+        //综合排序
+        List<ChoiceDTO> choiceDTOS=choiceQuestionMapper.selectSort(map);
+        if(choiceDTOS.isEmpty()) return null;
+        int total = (int)page.getTotal();
+        int pages = page.getPages();
+        PageDTO pageDTO = new PageDTO(choiceDTOS,total,pageSize,pageNum,pages);
+        return pageDTO;
     }
 }

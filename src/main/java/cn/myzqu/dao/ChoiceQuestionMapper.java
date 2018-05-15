@@ -43,11 +43,19 @@ public interface ChoiceQuestionMapper {
      */
     List<ChoiceDTO> selectByBankId(String id);
 
-    ChoiceQuestion selectByQuestion(String question);//根据题目查询题目详情
+    /**
+     * 综合查询(根据题目id，题目，答案，分析,用户id，题库标题模糊搜索）
+     * @param map
+     * @return
+     */
+    List<ChoiceDTO> select(Map<String,Object> map);
 
-    List<ChoiceDTO> select(Map<String,Object> map);//综合查询(根据题目id，题目，答案，分析,用户id，题库标题模糊搜索）
+    /**
+     * 根据题目查询题目详情
+     * @param question
+     * @return
+     */
+    ChoiceQuestion selectByQuestion(String question);
 
     List<ChoiceDTO> selectSort(Map<String,Object> map);//题目综合显示
-
-
 }

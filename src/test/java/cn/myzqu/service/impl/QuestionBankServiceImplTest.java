@@ -19,6 +19,11 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class QuestionBankServiceImplTest {
+    @Test
+    public void findByTitle() throws Exception {
+        String title="实打实的";
+        System.out.print(questionBankService.findByTitle(title));
+    }
 //    @Test
 //    public void searchByTitle() throws Exception {
 //        String title="1";
@@ -56,8 +61,8 @@ public class QuestionBankServiceImplTest {
 //        System.out.print(questionBankService.deleteById(id));
 //    }
 //
-//    @Autowired
-//    private QuestionBankService questionBankService;
+
+    private QuestionBankService questionBankService;
 //
 //    @Test
 //    public void add() throws Exception {
