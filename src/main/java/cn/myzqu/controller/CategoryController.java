@@ -33,8 +33,8 @@ public class CategoryController {
 
     /**
      * 新增题库类目
-     * @param name
-     * @param parentId
+     * @param name 新增的题库类型名称
+     * @param parentId 所属父题库类型
      * @return
      */
     @PostMapping("/info")
@@ -43,7 +43,6 @@ public class CategoryController {
 
         if(categoryService.add(name,parentId)) return ResultVOUtil.success();
         else return ResultVOUtil.error(ResultEnum.CATEGORY_CREATE_FAIL);
-
     }
 
 }

@@ -40,7 +40,7 @@ public class AnswerSheetController {
 
     /**
      * 获取单个用户的答题记录
-     * @param userId
+     * @param userId 用户id
      * @return
      */
     @GetMapping("/list/{user_id}")
@@ -52,7 +52,7 @@ public class AnswerSheetController {
 
     /**
      * 获取单个用户的错题记录
-     * @param userId
+     * @param userId 用户id
      * @return
      */
     @GetMapping("/list/fault/{user_id}")

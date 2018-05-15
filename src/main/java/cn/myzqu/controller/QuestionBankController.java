@@ -11,14 +11,10 @@ import cn.myzqu.pojo.QuestionBank;
 import cn.myzqu.service.QuestionBankService;
 import cn.myzqu.utils.ResultVOUtil;
 import cn.myzqu.vo.Result;
-import cn.myzqu.vo.ResultVO;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

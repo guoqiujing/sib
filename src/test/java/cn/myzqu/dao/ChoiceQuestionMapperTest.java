@@ -23,15 +23,19 @@ public class ChoiceQuestionMapperTest {
     @Test
     public void selectSort() throws Exception {
         Map<String,Object> map=new HashMap<>();
-        //map.put("star_level",1);
+        map.put("star_level","star_level");
         //map.put("id",1);
-        System.out.println(choiceQuestionMapper.selectSort(map));
+        List<ChoiceDTO> choiceDTOS = choiceQuestionMapper.selectSort(map);
+        for(ChoiceDTO choiceDTO:choiceDTOS){
+            System.out.println(choiceDTO.toString());
+        }
+
     }
 
     @Test
     public void select() throws Exception {
         Map<String,Object> map=new HashMap<>();
-        //map.put("id",1);
+        map.put("id",1);
         //map.put("sdd",22);
         System.out.print(choiceQuestionMapper.select(map));
     }

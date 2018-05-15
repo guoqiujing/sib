@@ -82,17 +82,17 @@
   <!--综合显示-->
   <select id="selectSort"  parameterType="Map" resultType="cn.myzqu.dto.ChoiceDTO">
     SELECT choice_question.*,question_bank.title
-    FROM choice_question,question_bank
-    WHERE choice_question.bank_id=question_bank.id
+    FROM choice_question
+    INNER JOIN question_bank ON choice_question.bank_id = question_bank.id
     <choose>
-      <when test="id!=null || id!=''">
-        ORDER BY choice_question.id DESC
+      <when test="id!=null and id!=''">
+        ORDER BY id DESC
       </when>
-      <when test="star_level!=null || star_level!=''">
-        ORDER BY choice_question.star_level DESC
+      <when test="star_level!=null and star_level!=''">
+        ORDER BY star_level DESC
       </when>
       <otherwise>
-        ORDER BY choice_question.update_time DESC
+        ORDER BY update_time DESC
       </otherwise>
     </choose>
   </select>
