@@ -42,7 +42,7 @@ public interface UserService {
 
 
     /**
-     * 新增一条用户信息
+     * 注册、新增用户
      * @param user
      * @return
      */
