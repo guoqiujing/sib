@@ -4,7 +4,6 @@ package cn.myzqu.controller;
  * Created by Chrky on 2018/5/10.
  */
 
-import cn.myzqu.dto.BankDTO;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.pojo.QuestionBank;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Map;
 
 

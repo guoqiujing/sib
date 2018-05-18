@@ -55,7 +55,7 @@ public class AnswerSheetController {
      * @param userId 用户id
      * @return
      */
-    @GetMapping("/list/fault/{user_id}")
+    @GetMapping("/list/{user_id}/fault")
     public Result getUserFaultAnswerSheet(@PathVariable("user_id") String userId){
         List<AnswerSheetDTO> data = answerSheetService.findFaultByUserId(userId);
         if(data.size()>0) return ResultVOUtil.success(data);
