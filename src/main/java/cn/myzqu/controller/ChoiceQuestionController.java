@@ -18,7 +18,7 @@ import java.util.Map;
  * Created by Chrky on 2018/5/14.
  */
 @RestController
-@RequestMapping("/choiceQuestion")
+@RequestMapping("/choice")
 public class ChoiceQuestionController {
 
     @Autowired
@@ -59,7 +59,7 @@ public class ChoiceQuestionController {
      * @param id
      * @return
      */
-    @GetMapping("/infoById")
+    @GetMapping("/info/way/id")
     public Result getChoiceById(@RequestParam String id)
     {
         //创建choice对象
@@ -91,7 +91,7 @@ public class ChoiceQuestionController {
      * @param id
      * @return
      */
-    @GetMapping("/infoByBankId")
+    @GetMapping("/info/way/bank")
     public Result getChoiceByBankId(@RequestParam String id)
     {
         //创建choice对象
@@ -130,7 +130,7 @@ public class ChoiceQuestionController {
      * @param size
      * @return
      */
-    @GetMapping("/infoSort")
+    @GetMapping("/info/sort")
     public Result getSort(@RequestParam Map<String,Object> condition,
                           @RequestParam(value="page",defaultValue = "1") Integer page,
                           @RequestParam(value = "size",defaultValue = "10") Integer size)

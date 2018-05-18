@@ -1,5 +1,8 @@
 package cn.myzqu.pojo;
 
+import cn.myzqu.utils.Serializer.CustomDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import java.util.Date;
 
 public class Favorite {
@@ -13,6 +16,7 @@ public class Favorite {
 
     private Boolean available;
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date createTime;
 
     public String getId() {
@@ -61,5 +65,17 @@ public class Favorite {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Favorite{" +
+                "id='" + id + '\'' +
+                ", userId='" + userId + '\'' +
+                ", questionId='" + questionId + '\'' +
+                ", bankId='" + bankId + '\'' +
+                ", available=" + available +
+                ", createTime=" + createTime +
+                '}';
     }
 }
