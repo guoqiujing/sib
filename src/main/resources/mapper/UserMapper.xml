@@ -52,13 +52,13 @@
       <if test="wxid != null" >
         wxid,
       </if>
-      <if test="value != null" >
-        value,
-      </if>
       <if test="locked != null" >
         locked,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null" >      <if test="value != null" >
+        value,
+      </if>
+
         create_time,
       </if>
       <if test="updateTime != null" >

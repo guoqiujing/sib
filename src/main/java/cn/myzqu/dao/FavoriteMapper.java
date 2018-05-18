@@ -2,16 +2,26 @@ package cn.myzqu.dao;
 
 import cn.myzqu.pojo.Favorite;
 
+import java.util.List;
+
 public interface FavoriteMapper {
-    int deleteByPrimaryKey(String id);
+    /**
+     * 取消收藏题目
+     * @param id
+     * @return
+     */
+    int deleteById(String id);
 
-    int insert(Favorite record);
+    int insertById(Favorite favorite);//收藏题目
 
-    int insertSelective(Favorite record);
+    Favorite selectById(String id);//查询题目的收藏状态
 
-    Favorite selectByPrimaryKey(String id);
+    /**
+     * 用户查看收藏的所有题目
+     * @param userId
+     * @return
+     */
+    List<Favorite> selectByUserId(String userId);
 
-    int updateByPrimaryKeySelective(Favorite record);
-
-    int updateByPrimaryKey(Favorite record);
+    Favorite judgeFavorite(String userId,String questionId);//判断是否收藏该题目;
 }
