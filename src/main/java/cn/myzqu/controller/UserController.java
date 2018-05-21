@@ -55,6 +55,20 @@ public class UserController {
     }
 
     /**
+     * 通过wxid获取用户信息
+     * @param wxId
+     * @return
+     */
+    @GetMapping("/info/wxid")
+    public Result getUserByWxId(@RequestParam(value="wxid") String wxId){
+        UserDTO userDTO = userService.findByWxId(wxId);
+        if(userDTO!=null){
+            return ResultVOUtil.success(userDTO);
+        }
+        return ResultVOUtil.error(ResultEnum.USER_NOT_EXIST);
+    }
+
+    /**
      * 新增用户
      * @param user
      * @return
