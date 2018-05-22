@@ -28,6 +28,26 @@ public class AnswerSheetMapperTest {
     private AnswerSheetMapper dao;
 
     @Test
+    public void selectCountByUserId() throws Exception {
+        String userId = "1";
+//        Boolean isTrue = true;
+//        Integer result = dao.selectCountByUserId(userId,isTrue);
+//        System.out.println("true:"+result);
+        Boolean isTrue = false;
+        System.out.println(isTrue);
+        Integer result = dao.selectCountByUserId(userId,isTrue);
+        System.out.println("false:"+result);
+
+//        isTrue = null;
+//        result = dao.selectCountByUserId(userId,isTrue);
+//        System.out.println("all:"+result);
+//        userId = "2";
+//        isTrue = null;
+//        result = dao.selectCountByUserId(userId,isTrue);
+//        System.out.println(result);
+    }
+
+    @Test
     public void deleteById() throws Exception {
     }
 

@@ -2,6 +2,7 @@ package cn.myzqu.controller;
 
 import cn.myzqu.dto.AnswerSheetDTO;
 import cn.myzqu.dto.PageDTO;
+import cn.myzqu.dto.QuestionCountDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.pojo.AnswerSheet;
 import cn.myzqu.service.AnswerSheetService;
@@ -49,6 +50,14 @@ public class AnswerSheetController {
         if(data.size()>0) return ResultVOUtil.success(data);
         return ResultVOUtil.error(ResultEnum.ANSWERSHEETLIST_EMPTY);
     }
+
+    @GetMapping("/count/{user_id}")
+    public Result getCount(@PathVariable("user_id") String userId){
+        QuestionCountDTO questionCountDTO = answerSheetService.findCount(userId);
+        return ResultVOUtil.success(questionCountDTO);
+    }
+
+
 
     /**
      * 获取单个用户的错题记录
