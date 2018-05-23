@@ -64,6 +64,9 @@ public enum ResultEnum {
     FAVORITE_CANCEL_ERROR(7002,"取消收藏失败"),
     FAVORITE_EMPTY(7003,"收藏记录为空"),
 
+    //积分类
+    POINT_SIGN_EXIST(8000,"用户已签到"),
+    POINT_SIGN_ERROR(8001,"用户签到失败"),
     ;
 
     private Integer code;
