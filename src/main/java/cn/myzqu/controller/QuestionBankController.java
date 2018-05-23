@@ -132,4 +132,22 @@ public class QuestionBankController {
         else
             return ResultVOUtil.success(pageDTO);
     }
+
+    /**
+     * 用户根据题库标题模糊查询题库
+     * @param title
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("/info/way/title")
+    public Result getByTitle(@RequestParam String title,
+                              @RequestParam(value="page",defaultValue = "1") Integer page,
+                              @RequestParam(value = "size",defaultValue = "10") Integer size) {
+        PageDTO pageDTO = questionBankService.searchByTitle(title,page,size);
+        if (pageDTO==null)
+            return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
+        else
+            return ResultVOUtil.success(pageDTO);
+    }
 }

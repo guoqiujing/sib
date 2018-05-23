@@ -238,4 +238,9 @@
   <resultMap type="cn.myzqu.dto.BankDTO" id="BaseAndCountResultMap" extends="BaseResultMap">
   <association property="count" column="id" javaType="int" select="cn.myzqu.dao.QuestionBankMapper.countChoiceByBank"></association>
   </resultMap>
+
+  <!--用户根据题库标题模糊查询题库-->
+  <select id="searchByTitle" resultMap="BaseAndCountResultMap" parameterType="String">
+    SELECT * FROM question_bank WHERE title LIKE '%${value}%'
+  </select>
 </mapper>

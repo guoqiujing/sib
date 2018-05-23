@@ -21,6 +21,12 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class QuestionBankMapperTest {
     @Test
+    public void searchByTitle() throws Exception {
+        String title="12";
+        System.out.print(questionBankMapper.searchByTitle(title));
+    }
+
+    @Test
     public void selectByUserId() throws Exception {
         String id="1";
         System.out.print(questionBankMapper.selectByUserId(id));

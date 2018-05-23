@@ -126,6 +126,18 @@ public class QuestionBankServiceImpl implements QuestionBankService {
     }
 
     @Override
+    public PageDTO searchByTitle(String title, int pageNum, int pageSize) {
+        Page page = PageHelper.startPage(pageNum,pageSize);
+        //用户根据题库标题模糊查询题库
+        List<BankDTO> bankDTOS  =questionBankMapper.searchByTitle(title);
+        if(bankDTOS.isEmpty()) return null;
+        int total = (int)page.getTotal();
+        int pages = page.getPages();
+        PageDTO pageDTO = new PageDTO(bankDTOS,total,pageSize,pageNum,pages);
+        return pageDTO;
+    }
+
+    @Override
     public PageDTO findSort(Map<String ,Object> Map,int pageNum,int pageSize) {
         //使用PageHelper插件实现分页
         //注意：下面这两条语句必须紧跟，保证分页安全

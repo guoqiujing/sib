@@ -83,4 +83,13 @@ public interface QuestionBankService
      * @return
      */
     PageDTO findByTypeName(String name,int pageNum, int pageSize);
+
+    /**
+     * 用户根据题库标题模糊查询题库
+     * @param title
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    PageDTO searchByTitle(String title,int pageNum, int pageSize);
 }
