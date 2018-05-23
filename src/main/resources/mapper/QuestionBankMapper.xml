@@ -197,10 +197,10 @@
   <select id="selectSort" parameterType="Map" resultMap="BaseAndCountResultMap">
     SELECT * FROM question_bank
     <choose>
-      <when test="frequency!=null || frequency!=''">
+      <when test="frequency!=null">
         ORDER BY frequency DESC
       </when>
-      <when test="star_level!=null || star_level!=''">
+      <when test="star_level!=null">
         ORDER BY star_level DESC
       </when>
       <otherwise>
