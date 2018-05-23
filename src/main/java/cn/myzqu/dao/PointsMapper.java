@@ -2,12 +2,19 @@ package cn.myzqu.dao;
 
 import cn.myzqu.pojo.Points;
 
+import java.util.List;
+
 public interface PointsMapper {
     int deleteByPrimaryKey(String id);
 
-    int insert(Points record);
+    /**
+     * 添加用户积分记录
+     * @param points
+     * @return
+     */
+    int insert(Points points);
 
-    int insertSelective(Points record);
+    Points SignByUser(String userId);//查询该用户今天是否已签到
 
     Points selectByPrimaryKey(String id);
 
