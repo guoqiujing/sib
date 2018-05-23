@@ -6,13 +6,10 @@ import cn.myzqu.pojo.Favorite;
 import cn.myzqu.service.FavoriteService;
 import cn.myzqu.utils.ResultVOUtil;
 import cn.myzqu.vo.Result;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Chrky on 2018/5/18.
@@ -30,7 +27,7 @@ public class FavoriteController {
      * @return
      */
     @PostMapping("/info")
-    public Result addFavorite(@Valid Favorite favorite)
+    public Result addFavorite(@Valid @RequestBody Favorite favorite)
     {
         if(favoriteService.add(favorite))
             return ResultVOUtil.success();

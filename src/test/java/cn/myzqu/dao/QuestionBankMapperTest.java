@@ -38,7 +38,8 @@ public class QuestionBankMapperTest {
    @Test
     public void selectSort() throws Exception {
         Map<String,Object> map=new HashMap<>();
-        map.put("frequency",1);
+        //map.put("frequency",1);
+        map.put("star_level",1);
         System.out.print(questionBankMapper.selectSort(map));
     }/*
 
