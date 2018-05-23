@@ -71,4 +71,6 @@ public interface QuestionBankMapper {
      * @return
      */
     List<BankDTO> selectByTypeName(String name);
+
+    int countChoiceByBank(String id);
 }

@@ -230,13 +230,12 @@
   </select>
 
   <!--查询该题库下的题目数目-->
-  <select id="countChoiceByBank" resultType="int" parameterType="int">
+  <select id="countChoiceByBank" resultType="int" parameterType="String">
     SELECT count(*) FROM choice_question WHERE bank_id = #{id}
   </select>
 
   <!--连结显示题库下的题目数目-->
-  <resultMap type="cn.myzqu.dto.BankDTO" id="BaseAndCountResultMap"
-             extends="BaseResultMap">
-  <association property="count" column="count" javaType="int" select="cn.myzqu.dao.QuestionBankMapper.countChoiceByBank"></association>
+  <resultMap type="cn.myzqu.dto.BankDTO" id="BaseAndCountResultMap" extends="BaseResultMap">
+  <association property="count" column="id" javaType="int" select="cn.myzqu.dao.QuestionBankMapper.countChoiceByBank"></association>
   </resultMap>
 </mapper>
