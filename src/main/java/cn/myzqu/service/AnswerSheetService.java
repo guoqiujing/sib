@@ -1,5 +1,6 @@
 package cn.myzqu.service;
 
+import cn.myzqu.dto.AnswerCountDTO;
 import cn.myzqu.dto.AnswerSheetDTO;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.dto.QuestionCountDTO;
@@ -40,7 +41,7 @@ public interface AnswerSheetService {
      * @param userId
      * @return
      */
-    QuestionCountDTO findCount(String userId);
+    AnswerCountDTO findCount(String userId);
 
     /**
      * 根据用户id查询错题记录

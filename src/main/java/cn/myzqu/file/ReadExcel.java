@@ -1,14 +1,19 @@
 package cn.myzqu.file;
 
-import cn.myzqu.pojo.ChoiceQuestion;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -17,12 +22,20 @@ import java.util.*;
 
 public class ReadExcel {
 
+    public static List start(String path) throws  IOException {
+        InputStream in = new FileInputStream(new File(path));
 
-    public static List<ChoiceQuestion> start(InputStream in, String path) throws  IOException {
         Workbook book = getWorkBook(in, path);// 获取文件
         List<Sheet> sheets = getSheets(book);// 获取所有工作表
-        List<ChoiceQuestion> list=sheetIterator(sheets);// 对工作表操作
-        System.out.println(list);
+        List list=sheetIterator(sheets);// 对工作表操作
+
+        for(int i=0;i<list.size();i++){
+            List row  = (List)list.get(i);
+            for (int j=0;j<row.size();j++){
+                System.out.println(i+":"+j+":" +row.get(j));
+            }
+        }
+
         return list;
     }
 
@@ -69,13 +82,21 @@ public class ReadExcel {
                 Row row = sheet.getRow(i);
                 //获取每行的有效单元格个数
                 int cellNum = row.getLastCellNum();
+                List<String> rowList = new ArrayList();
                 //遍历每行的单元格
                 for (int j = 1; j <= cellNum; j++) {
                     Cell cell = row.getCell(j - 1);
-                    //将格式统一设置为字符串
-                    cell.setCellType(XSSFCell.CELL_TYPE_STRING);
-                    System.out.println("第" + j + "列：" + cell.getStringCellValue());
+                    if(cell != null){
+                        //将格式统一设置为字符串
+                        cell.setCellType(XSSFCell.CELL_TYPE_STRING);
+                        System.out.println("第" + j + "列：" + cell.getStringCellValue());
+                        rowList.add(cell.getStringCellValue());
+                    }else{
+                        rowList.add("");
+                    }
+
                 }
+                list.add(rowList);
             }
         }
         return list;

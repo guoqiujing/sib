@@ -1,10 +1,7 @@
 package cn.myzqu.service.impl;
 
 import cn.myzqu.dao.AnswerSheetMapper;
-import cn.myzqu.dto.AnswerSheetDTO;
-import cn.myzqu.dto.PageDTO;
-import cn.myzqu.dto.QuestionCountDTO;
-import cn.myzqu.dto.UserDTO;
+import cn.myzqu.dto.*;
 import cn.myzqu.pojo.AnswerSheet;
 import cn.myzqu.service.AnswerSheetService;
 import cn.myzqu.utils.KeyUtil;
@@ -53,17 +50,18 @@ public class AnswerSheetServiceImpl implements AnswerSheetService {
     }
 
     @Override
-    public QuestionCountDTO findCount(String userId) {
-        QuestionCountDTO questionCountDTO = new QuestionCountDTO();
+    public AnswerCountDTO findCount(String userId) {
+        //查询用户是否存在
+        AnswerCountDTO answerCountDTO = new AnswerCountDTO();
         //查询用户所有答题数量
         Boolean isTrue = null;
         Integer all = answerSheetMapper.selectCountByUserId(userId,isTrue);
         //查询用户所有答错题数量
         isTrue = false;
         Integer error = answerSheetMapper.selectCountByUserId(userId,isTrue);
-        questionCountDTO.setAll(all);
-        questionCountDTO.setError(error);
-        return questionCountDTO;
+        answerCountDTO.setAll(all);
+        answerCountDTO.setError(error);
+        return answerCountDTO;
     }
 
     @Override
