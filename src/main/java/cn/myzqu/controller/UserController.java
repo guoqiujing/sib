@@ -70,7 +70,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/info")
-    public Result addUser(@Validated User user){
+    public Result addUser(@Validated @RequestBody  User user){
         System.out.println(user.getId());
         if(userService.add(user)){
             return ResultVOUtil.success();
@@ -84,7 +84,7 @@ public class UserController {
      * @return
      */
     @PutMapping("/info")
-    public Result updateUser(User user){
+    public Result updateUser(@RequestBody  User user){
         //将可以更新的信息复制到新的对象
         User obejct = new User();
         obejct.setId(user.getId());

@@ -1,5 +1,6 @@
 package cn.myzqu.controller;
 
+import cn.myzqu.dto.AnswerCountDTO;
 import cn.myzqu.dto.AnswerSheetDTO;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.dto.QuestionCountDTO;
@@ -32,7 +33,7 @@ public class AnswerSheetController {
      * @return
      */
     @PostMapping("/recode")
-    public Result addAnswerSheet(@Validated AnswerSheet answerSheet){
+    public Result addAnswerSheet(@Validated @RequestBody AnswerSheet answerSheet){
         //调用answerSheetService，成功返回信息
         if(answerSheetService.add(answerSheet)) return ResultVOUtil.success();
         //失败返回
@@ -51,10 +52,15 @@ public class AnswerSheetController {
         return ResultVOUtil.error(ResultEnum.ANSWERSHEETLIST_EMPTY);
     }
 
+    /**
+     * 获取用户答题数量
+     * @param userId
+     * @return
+     */
     @GetMapping("/count/{user_id}")
     public Result getCount(@PathVariable("user_id") String userId){
-        QuestionCountDTO questionCountDTO = answerSheetService.findCount(userId);
-        return ResultVOUtil.success(questionCountDTO);
+        AnswerCountDTO answerCountDTO = answerSheetService.findCount(userId);
+        return ResultVOUtil.success(answerCountDTO);
     }
 
 
