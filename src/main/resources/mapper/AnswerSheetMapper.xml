@@ -139,4 +139,12 @@
     </where>
   </select>
 
+  <select id="selectCountByUserId" resultType="java.lang.Integer">
+    SELECT COUNT(*) from answer_sheet
+    where answer_sheet.user_id = #{userId}
+      <if test=" isTrue!= null">
+        AND answer_sheet.istrue = #{isTrue}
+      </if>
+  </select>
+
 </mapper>

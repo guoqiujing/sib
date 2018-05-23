@@ -2,6 +2,7 @@ package cn.myzqu.service;
 
 import cn.myzqu.dto.AnswerSheetDTO;
 import cn.myzqu.dto.PageDTO;
+import cn.myzqu.dto.QuestionCountDTO;
 import cn.myzqu.pojo.AnswerSheet;
 
 import java.util.List;
@@ -33,6 +34,13 @@ public interface AnswerSheetService {
      * @return
      */
     List<AnswerSheetDTO> findByUserId(String userId);
+
+    /**
+     * 根据用户id查询题目数量信息
+     * @param userId
+     * @return
+     */
+    QuestionCountDTO findCount(String userId);
 
     /**
      * 根据用户id查询错题记录

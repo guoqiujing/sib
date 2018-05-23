@@ -7,13 +7,9 @@ import cn.myzqu.pojo.User;
 import cn.myzqu.service.UserService;
 import cn.myzqu.utils.ResultVOUtil;
 import cn.myzqu.vo.Result;
-import cn.myzqu.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * 用户控制器
@@ -48,6 +44,20 @@ public class UserController {
     @GetMapping("/info/{id}")
     public Result getUserById(@PathVariable("id") String id){
         UserDTO userDTO = userService.findById(id);
+        if(userDTO!=null){
+            return ResultVOUtil.success(userDTO);
+        }
+        return ResultVOUtil.error(ResultEnum.USER_NOT_EXIST);
+    }
+
+    /**
+     * 通过wxid获取用户信息
+     * @param wxId
+     * @return
+     */
+    @GetMapping("/info/wxid")
+    public Result getUserByWxId(@RequestParam(value="wxid") String wxId){
+        UserDTO userDTO = userService.findByWxId(wxId);
         if(userDTO!=null){
             return ResultVOUtil.success(userDTO);
         }
