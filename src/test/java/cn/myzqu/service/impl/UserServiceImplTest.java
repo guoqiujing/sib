@@ -1,13 +1,18 @@
 package cn.myzqu.service.impl;
 
 import cn.myzqu.dto.UserDTO;
+import cn.myzqu.file.ReadExcel;
+import cn.myzqu.pojo.User;
 import cn.myzqu.service.ChoiceQuestionService;
 import cn.myzqu.service.UserService;
+import cn.myzqu.utils.ListToPojo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -17,6 +22,19 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserServiceImplTest {
+    @Test
+    public void add() throws Exception {
+
+    }
+
+    @Test
+    public void batchAdd() throws Exception {
+        String filePath = "D:/user.xlsx";
+        List list = ReadExcel.start(filePath);
+        List<User> users = ListToPojo.listToUser(list);
+        userService.batchAdd(users);
+        System.out.println(users);
+    }
 
     @Autowired
     private UserService userService;

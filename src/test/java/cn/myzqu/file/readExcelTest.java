@@ -16,12 +16,7 @@ public class readExcelTest {
         String filePath = "D:/test.xlsx";
         InputStream in = null;
         try {
-            in = new FileInputStream(new File(filePath));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            ReadExcel.start(in,filePath);
+            ReadExcel.start(filePath);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -62,7 +62,6 @@ public class QuestionBankServiceImplTest {
 //    }
 //
 
-    @Autowired
     private QuestionBankService questionBankService;
 //
 //    @Test
@@ -88,12 +87,10 @@ public class QuestionBankServiceImplTest {
 //        System.out.print(questionBankService.findByTitle(title));
 //    }
 //
-    @Test
-   public void selectByUserId() throws Exception {
-       String id="1";
-       int page=1;
-       int size=10;
-        System.out.print(questionBankService.findByUserId(id,page,size));
-    }
+//    @Test
+//    public void selectByUserId() throws Exception {
+//        String id="1";
+//        System.out.print(questionBankService.selectByUserId(id));
+//    }
 
 }
