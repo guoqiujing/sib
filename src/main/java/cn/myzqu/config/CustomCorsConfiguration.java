@@ -16,5 +16,6 @@ public class CustomCorsConfiguration extends WebMvcConfigurerAdapter {
         // 设置了可以被跨域访问的路径和可以被哪些主机跨域访问
        // registry.addMapping("/**").allowedOrigins("http://localhost:8081", "http://localhost:8082");
         registry.addMapping("/**").allowedOrigins("*");
+        registry.addMapping("/**").allowedMethods("GET, POST, PATCH, PUT, DELETE, OPTIONS");
     }
 }
