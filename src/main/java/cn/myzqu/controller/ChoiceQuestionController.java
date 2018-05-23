@@ -30,7 +30,7 @@ public class ChoiceQuestionController {
      * @return
      */
     @PostMapping("/info")
-    public Result addChoice(@Valid ChoiceQuestion choiceQuestion)
+    public Result addChoice(@Valid @RequestBody ChoiceQuestion choiceQuestion)
     {
         //添加题目
         if(choiceQuestionService.add(choiceQuestion))

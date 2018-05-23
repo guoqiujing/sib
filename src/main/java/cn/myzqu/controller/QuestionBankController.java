@@ -30,7 +30,7 @@ public class QuestionBankController {
      * @return
      */
     @PostMapping("/info")
-    public Result addQuestionBank(@Valid QuestionBank questionBank) {
+    public Result addQuestionBank(@Valid @RequestBody QuestionBank questionBank) {
         if (questionBankService.add(questionBank))
             return ResultVOUtil.success();
         return ResultVOUtil.error(ResultEnum.BANK_CREATE_FAIL);
