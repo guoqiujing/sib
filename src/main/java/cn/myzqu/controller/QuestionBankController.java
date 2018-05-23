@@ -30,7 +30,7 @@ public class QuestionBankController {
      * @return
      */
     @PostMapping("/info")
-    public Result addQuestionBank(@Valid QuestionBank questionBank) {
+    public Result addQuestionBank(@Valid @RequestBody QuestionBank questionBank) {
         if (questionBankService.add(questionBank))
             return ResultVOUtil.success();
         return ResultVOUtil.error(ResultEnum.BANK_CREATE_FAIL);
@@ -68,7 +68,7 @@ public class QuestionBankController {
      * @param condition  说明:frequency 按人数排序 star_level按星级排序 否则按更新时间排序
      * @return
      */
-    @GetMapping("/infoSort")
+    @GetMapping("/info/sort")
     public Result getBankByNumber(@RequestParam Map<String,Object> condition,
                                   @RequestParam(value="page",defaultValue = "1") Integer page,
                                   @RequestParam(value = "size",defaultValue = "10") Integer size) {
@@ -104,7 +104,7 @@ public class QuestionBankController {
      * @param size
      * @return
      */
-    @GetMapping("/infoByUserId")
+    @GetMapping("/info/way/user")
     public Result getByUserId(@RequestParam String id,
                       @RequestParam(value="page",defaultValue = "1") Integer page,
                       @RequestParam(value = "size",defaultValue = "10") Integer size) {
@@ -122,7 +122,7 @@ public class QuestionBankController {
      * @param size
      * @return
      */
-    @GetMapping("/infoTypeName")
+    @GetMapping("/info/way/type")
     public Result getTypeName(@RequestParam String name,
                               @RequestParam(value="page",defaultValue = "1") Integer page,
                               @RequestParam(value = "size",defaultValue = "10") Integer size) {

@@ -58,6 +58,12 @@ public enum ResultEnum {
     ANSWERSHEET_CREATE_FAIL(6000,"哎呀，提交答题记录失败啦"),
     ANSWERSHEETLIST_EMPTY(6100,"还没有答题记录哦"),
 
+    //收藏类
+    FAVORITE_EXIST(7000,"该题目已收藏"),
+    FAVORITE_ERROR(7001,"收藏失败"),
+    FAVORITE_CANCEL_ERROR(7002,"取消收藏失败"),
+    FAVORITE_EMPTY(7003,"收藏记录为空"),
+
     ;
 
     private Integer code;
