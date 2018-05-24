@@ -69,7 +69,7 @@ public class QuestionBankController {
      * @return
      */
     @GetMapping("/info/sort")
-    public Result getBankByNumber(@RequestParam Map<String,Object> condition,
+    public Result getBankByNumber(@RequestParam(value="condition",defaultValue = "1") String condition,
                                   @RequestParam(value="page",defaultValue = "1") Integer page,
                                   @RequestParam(value = "size",defaultValue = "10") Integer size) {
         PageDTO pageDTO = questionBankService.findSort(condition,page,size);

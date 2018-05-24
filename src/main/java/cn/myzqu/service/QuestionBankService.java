@@ -45,12 +45,12 @@ public interface QuestionBankService
 
     /**
      * 根据练习人数或星级评价排序题库
-     * @param Map 说明:frequency 按人数排序 star_level按星级排序 否则按更新时间排序
+     * @param condition 说明:frequency 按人数排序 star_level按星级排序 否则按更新时间排序
      * @param pageNum
      * @param pageSize
      * @return
      */
-    PageDTO findSort(Map<String ,Object> Map,int pageNum, int pageSize);
+    PageDTO findSort(String condition,int pageNum, int pageSize);
 
     /**
      * 根据题库id查询题库
