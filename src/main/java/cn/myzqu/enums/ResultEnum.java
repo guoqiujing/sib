@@ -27,6 +27,7 @@ public enum ResultEnum {
     QUESTION_UPDATE_FAIL(3001,"更新题目失败"),
     QUESTION_DELETE_FAIL(3002,"删除题目失败"),
     QUESTION_SHARE_FAIL(3003,"题目分享失败"),
+    QUESTION_CHECK_FAIL(3004,"题目审核失败"),
 
     QUESTION_NOT_EXIST(3100,"题目不存在"),
     QUESTION_IS_EXIST(3101,"题目已存在"),
