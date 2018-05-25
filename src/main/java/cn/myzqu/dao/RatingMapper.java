@@ -2,16 +2,35 @@ package cn.myzqu.dao;
 
 import cn.myzqu.pojo.Rating;
 
-public interface RatingMapper {
-    int deleteByPrimaryKey(String id);
+import java.util.List;
+import java.util.Map;
 
+public interface RatingMapper {
+
+    /**
+     * 添加用户评定星级的记录
+     * @param record
+     * @return
+     */
     int insert(Rating record);
 
-    int insertSelective(Rating record);
+    /**
+     * 查询该题目的所有用户评定的星级，然后可以进行统计
+     * @param questionId
+     * @return
+     */
+    List<Rating> selectByQuestionId(String questionId);
 
-    Rating selectByPrimaryKey(String id);
+    /**
+     * 查询用户是否已经评定星级
+     * @param map
+     * @return
+     */
+    Rating selectByUserId(Map<String,Object> map);
 
-    int updateByPrimaryKeySelective(Rating record);
-
-    int updateByPrimaryKey(Rating record);
+    /**
+     * 查询所有用户星级评价记录
+     * @return
+     */
+    List<Rating> selectAllRating();
 }

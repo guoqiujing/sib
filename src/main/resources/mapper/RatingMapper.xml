@@ -13,25 +13,33 @@
   <sql id="Base_Column_List">
     id, user_id, question_id, bank_id, star_level, available, create_time
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+  <!--查询用户是否已经评价过题目星级-->
+  <select id="selectByUserId" parameterType="HashMap" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from rating
-    where id = #{id,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR} AND question_id = #{questionId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from rating
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
+
+  <!--根据题目id查询该题目所有用户评价的星级-->
+  <select id="selectByQuestionId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from rating
+    where question_id = #{questionId,jdbcType=VARCHAR}
+  </select>
+
+  <!--查询所有用户评价的星级记录-->
+  <select id="selectAllRating" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from rating
+    order by create_time desc
+  </select>
+
+  <!--添加用户评价题目星级的记录-->
   <insert id="insert" parameterType="cn.myzqu.pojo.Rating">
-    insert into rating (id, user_id, question_id, 
-      bank_id, star_level, available, 
-      create_time)
-    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{questionId,jdbcType=VARCHAR}, 
-      #{bankId,jdbcType=VARCHAR}, #{starLevel,jdbcType=DOUBLE}, #{available,jdbcType=BIT}, 
-      #{createTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="cn.myzqu.pojo.Rating">
     insert into rating
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -80,38 +88,5 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.myzqu.pojo.Rating">
-    update rating
-    <set>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="questionId != null">
-        question_id = #{questionId,jdbcType=VARCHAR},
-      </if>
-      <if test="bankId != null">
-        bank_id = #{bankId,jdbcType=VARCHAR},
-      </if>
-      <if test="starLevel != null">
-        star_level = #{starLevel,jdbcType=DOUBLE},
-      </if>
-      <if test="available != null">
-        available = #{available,jdbcType=BIT},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="cn.myzqu.pojo.Rating">
-    update rating
-    set user_id = #{userId,jdbcType=VARCHAR},
-      question_id = #{questionId,jdbcType=VARCHAR},
-      bank_id = #{bankId,jdbcType=VARCHAR},
-      star_level = #{starLevel,jdbcType=DOUBLE},
-      available = #{available,jdbcType=BIT},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
+
 </mapper>

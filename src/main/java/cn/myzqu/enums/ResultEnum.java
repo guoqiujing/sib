@@ -58,6 +58,11 @@ public enum ResultEnum {
     ANSWERSHEET_CREATE_FAIL(6000,"哎呀，提交答题记录失败啦"),
     ANSWERSHEETLIST_EMPTY(6100,"还没有答题记录哦"),
 
+    //星级类
+    RATING_UNCOMPLETE(7000,"你还没有评价过这个题目哦"),
+    RATING_COMPLETION(7100,"你已经评价过这个题目啦"),
+    RATING_EMPTY(7200,"还没有用户星级评论记录哦"),
+
     ;
 
     private Integer code;
