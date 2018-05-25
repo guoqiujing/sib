@@ -1,6 +1,7 @@
 package cn.myzqu.dao;
 
 import cn.myzqu.pojo.Rating;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -23,10 +24,10 @@ public interface RatingMapper {
 
     /**
      * 查询用户是否已经评定星级
-     * @param map
+     * @param
      * @return
      */
-    Rating selectByUserId(Map<String,Object> map);
+    Rating selectByUserId(@Param("userId") String userId, @Param("questionId") String questionId);
 
     /**
      * 查询所有用户星级评价记录

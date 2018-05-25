@@ -15,7 +15,7 @@
   </sql>
 
   <!--查询用户是否已经评价过题目星级-->
-  <select id="selectByUserId" parameterType="HashMap" resultMap="BaseResultMap">
+  <select id="selectByUserId" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from rating

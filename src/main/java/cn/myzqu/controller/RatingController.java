@@ -3,6 +3,7 @@ package cn.myzqu.controller;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.pojo.Rating;
+import cn.myzqu.service.PointsService;
 import cn.myzqu.service.RatingService;
 import cn.myzqu.utils.ResultVOUtil;
 import cn.myzqu.vo.Result;
@@ -11,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
+ * 用户星级评价控制层
  * Created by xiraly on 2018/5/22.
  */
 @RestController
@@ -19,6 +21,8 @@ public class RatingController {
 
     @Autowired
     private RatingService ratingService;
+    @Autowired
+    private PointsService pointsService;
 
     /**
      * 添加用户星级评价记录（微信端
@@ -28,7 +32,10 @@ public class RatingController {
     @PostMapping("/addRating")
     public Result addRating(@Validated Rating rating){
         //调用ratingService，成功返回信息
-        if(ratingService.addRatingRecord(rating)) return ResultVOUtil.success();
+        if(ratingService.addRatingRecord(rating)) {
+
+            return ResultVOUtil.success();
+        }
         //失败返回异常
         return ResultVOUtil.error(ResultEnum.ERROR);
     }

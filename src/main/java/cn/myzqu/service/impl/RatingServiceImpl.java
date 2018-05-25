@@ -3,6 +3,7 @@ package cn.myzqu.service.impl;
 import cn.myzqu.dao.RatingMapper;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.pojo.Rating;
+import cn.myzqu.service.PointsService;
 import cn.myzqu.service.RatingService;
 import cn.myzqu.utils.KeyUtil;
 import cn.myzqu.utils.MD5Util;
@@ -24,6 +25,11 @@ public class RatingServiceImpl implements RatingService{
     @Autowired
     private RatingMapper ratingMapper;
 
+    /**
+     * 添加用户星级评价记录
+     * @param record  用户星级评价记录
+     * @return
+     */
     @Override
     public Boolean addRatingRecord(Rating record){
 
@@ -39,20 +45,26 @@ public class RatingServiceImpl implements RatingService{
             return false;
     }
 
+    /**
+     * 查询用户是否已经评价星级
+     * @param userId  用户id
+     * @param questionId  题目id
+     * @return
+     */
     @Override
     public Rating findByUserId(String userId,String questionId){
-        //用HashMap封装数据
-        Map<String,Object> map = new HashMap<>();
-        //将userId封装
-        map.put("userId",userId);
-        //将questionId封装
-        map.put("questionId",questionId);
         //调用RatingMapper的selectByUserId查询用户是否已经有评定星级的记录
-        Rating rating = ratingMapper.selectByUserId(map);
+        Rating rating = ratingMapper.selectByUserId(userId,questionId);
         //返回rating数据
         return rating;
     }
 
+    /**
+     * 查询所有用户星级评价记录并且实现分页功能
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @Override
     public PageDTO findAllRating(int pageNum, int pageSize){
         //使用PageHelper插件实现分页
