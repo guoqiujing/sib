@@ -26,8 +26,8 @@ public class ChoiceQuestionServiceImplTest {
 
     @Test
     public void findByBankId() throws Exception {
-        String id="1";
-        String userId="1";
+        String id="2";
+        String userId="2";
         System.out.print(choiceQuestionService.findByBankId(id,userId));
     }
 

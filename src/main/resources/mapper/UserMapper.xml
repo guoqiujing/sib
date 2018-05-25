@@ -194,4 +194,14 @@
     </where>
     ORDER BY create_time DESC
   </select>
+
+  <!--用户注册获得100积分-->
+  <update id="userPointByRegister" parameterType="String">
+    UPDATE user SET value=100 WHERE id=#{id}
+  </update>
+  
+  <!--用户签到获5积分-->
+  <update id="userPointBySign" parameterType="String">
+    UPDATE user SET value=value+5 WHERE id=#{id}
+  </update>
 </mapper>

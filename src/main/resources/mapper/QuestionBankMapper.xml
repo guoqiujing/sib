@@ -229,8 +229,13 @@
     SELECT * FROM question_bank WHERE category_name=#{categoryName}
   </select>
 
-  <!--查询该题库下的题目数目-->
+  <!--查询该题库下的已通过审核题目数目-->
   <select id="countChoiceByBank" resultType="int" parameterType="String">
+    SELECT count(*) FROM choice_question WHERE bank_id = #{id} AND status=0
+  </select>
+
+  <!--查询该题库下的题目数目-->
+  <select id="countAllChoiceByBank" resultType="int" parameterType="String">
     SELECT count(*) FROM choice_question WHERE bank_id = #{id}
   </select>
 

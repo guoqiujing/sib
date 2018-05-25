@@ -62,4 +62,13 @@ public interface UserMapper {
      * @return
      */
     List<UserDTO> select(User user);
+
+    /**
+     * 用户注册获得100积分
+     * @param id
+     * @return
+     */
+    int userPointByRegister(String id);
+
+    //int userPointBySign(String id);
 }

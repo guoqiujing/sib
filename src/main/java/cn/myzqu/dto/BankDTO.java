@@ -8,7 +8,19 @@ import lombok.Data;
  */
 public class BankDTO extends QuestionBank
 {
+    //已通过审核题目数
     private int count;
+
+    //总题目数
+    private int countAll;
+
+    public int getCountAll() {
+        return countAll;
+    }
+
+    public void setCountAll(int countAll) {
+        this.countAll = countAll;
+    }
 
     public int getCount() {
         return count;
