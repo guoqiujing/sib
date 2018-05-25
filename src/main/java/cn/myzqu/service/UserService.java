@@ -4,6 +4,8 @@ import cn.myzqu.dto.PageDTO;
 import cn.myzqu.dto.UserDTO;
 import cn.myzqu.pojo.User;
 
+import java.util.List;
+
 /**
  * 用户服务接口
  * Created by 的川 on 2018/5/8.
@@ -47,6 +49,13 @@ public interface UserService {
      * @return
      */
     Boolean add(User user);
+
+    /**
+     * 批量添加用户
+     * @param users
+     * @return
+     */
+    Boolean batchAdd(List<User> users) ;
 
     /**
      * 检测用户id是否存在，存在返回true，不存在返回false

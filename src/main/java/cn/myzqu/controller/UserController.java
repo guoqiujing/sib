@@ -7,13 +7,9 @@ import cn.myzqu.pojo.User;
 import cn.myzqu.service.UserService;
 import cn.myzqu.utils.ResultVOUtil;
 import cn.myzqu.vo.Result;
-import cn.myzqu.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * 用户控制器
@@ -55,12 +51,26 @@ public class UserController {
     }
 
     /**
+     * 通过wxid获取用户信息
+     * @param wxId
+     * @return
+     */
+    @GetMapping("/info/wxid")
+    public Result getUserByWxId(@RequestParam(value="wxid") String wxId){
+        UserDTO userDTO = userService.findByWxId(wxId);
+        if(userDTO!=null){
+            return ResultVOUtil.success(userDTO);
+        }
+        return ResultVOUtil.error(ResultEnum.USER_NOT_EXIST);
+    }
+
+    /**
      * 新增用户
      * @param user
      * @return
      */
     @PostMapping("/info")
-    public Result addUser(@Validated User user){
+    public Result addUser(@Validated @RequestBody  User user){
         System.out.println(user.getId());
         if(userService.add(user)){
             return ResultVOUtil.success();
@@ -74,7 +84,7 @@ public class UserController {
      * @return
      */
     @PutMapping("/info")
-    public Result updateUser(User user){
+    public Result updateUser(@RequestBody  User user){
         //将可以更新的信息复制到新的对象
         User obejct = new User();
         obejct.setId(user.getId());

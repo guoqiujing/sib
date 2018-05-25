@@ -14,7 +14,7 @@ public interface CategoryService {
     /**
      * 新增类目
      * @param name
-     * @param parentId
+     * @param parentId 如果新增的为顶级类目，则传null
      * @return
      */
     Boolean add(String name,Integer parentId);

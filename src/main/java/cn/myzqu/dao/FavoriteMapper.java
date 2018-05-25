@@ -3,6 +3,7 @@ package cn.myzqu.dao;
 import cn.myzqu.pojo.Favorite;
 
 import java.util.List;
+import java.util.Map;
 
 public interface FavoriteMapper {
     /**
@@ -12,7 +13,12 @@ public interface FavoriteMapper {
      */
     int deleteById(String id);
 
-    int insertById(Favorite favorite);//收藏题目
+    /**
+     * 收藏题目
+     * @param favorite
+     * @return
+     */
+    int insertById(Favorite favorite);
 
     Favorite selectById(String id);//查询题目的收藏状态
 
@@ -23,5 +29,11 @@ public interface FavoriteMapper {
      */
     List<Favorite> selectByUserId(String userId);
 
-    Favorite judgeFavorite(String userId,String questionId);//判断是否收藏该题目;
+    /**
+     * 判断是否收藏该题目
+     * @param userId
+     * @param questionId
+     * @return
+     */
+    Favorite judgeFavorite(String userId,String questionId);
 }

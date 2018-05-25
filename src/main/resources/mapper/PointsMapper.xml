@@ -25,7 +25,8 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
 
-  <insert id="insertSelective" parameterType="cn.myzqu.pojo.Points">
+  <!--添加用户积分记录-->
+  <insert id="insert" parameterType="cn.myzqu.pojo.Points">
     insert into points
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -90,4 +91,9 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <!--查询该用户今天是否已签到-->
+  <select id="SignByUser" parameterType="String" resultType="cn.myzqu.pojo.Points">
+    SELECT * FROM points WHERE user_id=#{user_id} AND note="用户签到" AND to_days(create_time) = to_days(now());
+  </select>
 </mapper>

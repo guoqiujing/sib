@@ -58,11 +58,15 @@ public enum ResultEnum {
     ANSWERSHEET_CREATE_FAIL(6000,"哎呀，提交答题记录失败啦"),
     ANSWERSHEETLIST_EMPTY(6100,"还没有答题记录哦"),
 
-    //星级类
-    RATING_UNCOMPLETE(7000,"你还没有评价过这个题目哦"),
-    RATING_COMPLETION(7100,"你已经评价过这个题目啦"),
-    RATING_EMPTY(7200,"还没有用户星级评论记录哦"),
+    //收藏类
+    FAVORITE_EXIST(7000,"该题目已收藏"),
+    FAVORITE_ERROR(7001,"收藏失败"),
+    FAVORITE_CANCEL_ERROR(7002,"取消收藏失败"),
+    FAVORITE_EMPTY(7003,"收藏记录为空"),
 
+    //积分类
+    POINT_SIGN_EXIST(8000,"用户已签到"),
+    POINT_SIGN_ERROR(8001,"用户签到失败"),
     ;
 
     private Integer code;

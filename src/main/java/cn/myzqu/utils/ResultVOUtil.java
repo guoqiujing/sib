@@ -28,6 +28,17 @@ public class ResultVOUtil {
      * 返回成功信息
      * @return
      */
+    public static Result success(String msg){
+        Result result = new Result();
+        result.setCode(ResultEnum.SUCCESS.getCode());
+        result.setMsg(msg);
+        return result;
+    }
+
+    /**
+     * 返回成功信息
+     * @return
+     */
     public static Result success(){
         Result result = new Result();
         result.setCode(ResultEnum.SUCCESS.getCode());

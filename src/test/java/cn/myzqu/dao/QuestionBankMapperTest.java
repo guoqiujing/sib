@@ -21,10 +21,34 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class QuestionBankMapperTest {
     @Test
+    public void searchByTitle() throws Exception {
+        String title="12";
+        System.out.print(questionBankMapper.searchByTitle(title));
+    }
+
+    @Test
+    public void selectByUserId() throws Exception {
+        String id="1";
+        System.out.print(questionBankMapper.selectByUserId(id));
+    }
+
+    @Test
+    public void selectByTypeName() throws Exception {
+        String name="1";
+        System.out.print(questionBankMapper.selectByTypeName(name));
+    }
+
+    @Test
+    public void countChoiceByBank() throws Exception {
+        String id="1";
+        System.out.print(questionBankMapper.countChoiceByBank(id));
+    }
+
+    @Test
     public void select1() throws Exception {
        Map<String,Object> map=new HashMap<>();
        //map.put("title",1111);
-       map.put("213",213);
+       //map.put("213",213);
        //map.put("categoryName","是");
        //map.put("id",1);
        //map.put("userId",1);
@@ -38,7 +62,8 @@ public class QuestionBankMapperTest {
    @Test
     public void selectSort() throws Exception {
         Map<String,Object> map=new HashMap<>();
-        map.put("frequency",1);
+        //map.put("frequency",1);
+        map.put("star_level",1);
         System.out.print(questionBankMapper.selectSort(map));
     }/*
 
@@ -51,12 +76,12 @@ public class QuestionBankMapperTest {
 
     @Autowired
     private QuestionBankMapper questionBankMapper;
-/*
+
     @Test
     public void selectByTitle() throws Exception {
         String title="1";
         System.out.println(questionBankMapper.selectByTitle(title));
-    }*/
+    }
 
   /*  @Test
     public void select() throws Exception {

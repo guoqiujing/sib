@@ -126,11 +126,26 @@ public class QuestionBankServiceImpl implements QuestionBankService {
     }
 
     @Override
-    public PageDTO findSort(Map<String ,Object> Map,int pageNum,int pageSize) {
+    public PageDTO searchByTitle(String title, int pageNum, int pageSize) {
+        Page page = PageHelper.startPage(pageNum,pageSize);
+        //用户根据题库标题模糊查询题库
+        List<BankDTO> bankDTOS  =questionBankMapper.searchByTitle(title);
+        if(bankDTOS.isEmpty()) return null;
+        int total = (int)page.getTotal();
+        int pages = page.getPages();
+        PageDTO pageDTO = new PageDTO(bankDTOS,total,pageSize,pageNum,pages);
+        return pageDTO;
+    }
+
+    @Override
+    public PageDTO findSort(String condition,int pageNum,int pageSize) {
+        //封装条件
+        Map<String,Object> conditionMap = new HashMap<>();
+        conditionMap.put(condition,condition);
         //使用PageHelper插件实现分页
         //注意：下面这两条语句必须紧跟，保证分页安全
         Page page = PageHelper.startPage(pageNum,pageSize);
-        List<BankDTO> bankDTOS  = questionBankMapper.selectSort(Map);
+        List<BankDTO> bankDTOS  = questionBankMapper.selectSort(conditionMap);
         //判断bankDTOS是否有数据,没有数据返回null
         if(bankDTOS.isEmpty()) return null;
         //获取总记录数

@@ -71,4 +71,18 @@ public interface QuestionBankMapper {
      * @return
      */
     List<BankDTO> selectByTypeName(String name);
+
+    /**
+     * 根据题库id查询题库的题目数目
+     * @param id
+     * @return
+     */
+    int countChoiceByBank(String id);
+
+    /**
+     * 用户根据题库标题模糊查询题库
+     * @param title
+     * @return
+     */
+    List<BankDTO> searchByTitle(String title);
 }

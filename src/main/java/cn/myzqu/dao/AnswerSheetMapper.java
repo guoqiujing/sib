@@ -2,6 +2,7 @@ package cn.myzqu.dao;
 
 import cn.myzqu.dto.AnswerSheetDTO;
 import cn.myzqu.pojo.AnswerSheet;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,14 @@ public interface AnswerSheetMapper {
      * @return
      */
     AnswerSheet selectById(String id);
+
+    /**
+     * 查询用户答题数量
+     * @param userId
+     * @param isTrue
+     * @return
+     */
+    Integer selectCountByUserId(@Param("userId") String userId, @Param("isTrue") Boolean isTrue);
 
     /**
      * 综合查询答题记录

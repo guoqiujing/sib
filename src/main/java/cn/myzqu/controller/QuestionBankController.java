@@ -30,7 +30,7 @@ public class QuestionBankController {
      * @return
      */
     @PostMapping("/info")
-    public Result addQuestionBank(@Valid QuestionBank questionBank) {
+    public Result addQuestionBank(@Valid @RequestBody QuestionBank questionBank) {
         if (questionBankService.add(questionBank))
             return ResultVOUtil.success();
         return ResultVOUtil.error(ResultEnum.BANK_CREATE_FAIL);
@@ -68,8 +68,8 @@ public class QuestionBankController {
      * @param condition  说明:frequency 按人数排序 star_level按星级排序 否则按更新时间排序
      * @return
      */
-    @GetMapping("/infoSort")
-    public Result getBankByNumber(@RequestParam Map<String,Object> condition,
+    @GetMapping("/info/sort")
+    public Result getBankByNumber(@RequestParam(value="condition",defaultValue = "1") String condition,
                                   @RequestParam(value="page",defaultValue = "1") Integer page,
                                   @RequestParam(value = "size",defaultValue = "10") Integer size) {
         PageDTO pageDTO = questionBankService.findSort(condition,page,size);
@@ -104,7 +104,7 @@ public class QuestionBankController {
      * @param size
      * @return
      */
-    @GetMapping("/infoByUserId")
+    @GetMapping("/info/way/user")
     public Result getByUserId(@RequestParam String id,
                       @RequestParam(value="page",defaultValue = "1") Integer page,
                       @RequestParam(value = "size",defaultValue = "10") Integer size) {
@@ -122,11 +122,29 @@ public class QuestionBankController {
      * @param size
      * @return
      */
-    @GetMapping("/infoTypeName")
+    @GetMapping("/info/way/type")
     public Result getTypeName(@RequestParam String name,
                               @RequestParam(value="page",defaultValue = "1") Integer page,
                               @RequestParam(value = "size",defaultValue = "10") Integer size) {
         PageDTO pageDTO = questionBankService.findByTypeName(name,page,size);
+        if (pageDTO==null)
+            return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
+        else
+            return ResultVOUtil.success(pageDTO);
+    }
+
+    /**
+     * 用户根据题库标题模糊查询题库
+     * @param title
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("/info/way/title")
+    public Result getByTitle(@RequestParam String title,
+                              @RequestParam(value="page",defaultValue = "1") Integer page,
+                              @RequestParam(value = "size",defaultValue = "10") Integer size) {
+        PageDTO pageDTO = questionBankService.searchByTitle(title,page,size);
         if (pageDTO==null)
             return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
         else

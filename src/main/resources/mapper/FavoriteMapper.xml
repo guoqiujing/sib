@@ -79,7 +79,7 @@
   </select>
   
   <!--根据用户id和题目id判断是否收藏-->
-  <select id="judgeFavorite" parameterType="String" resultType="cn.myzqu.pojo.Favorite">
-    SELECT * FROM favorite WHERE user_id=#{user_id} and question_id=#{question_id}
+  <select id="judgeFavorite" resultMap="BaseResultMap">
+    SELECT * FROM favorite WHERE user_id=#{arg0} and question_id=#{arg1}
   </select>
 </mapper>

@@ -140,6 +140,17 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public Boolean batchAdd(List<User> users) {
+        for(User user :users){
+            int result =  userMapper.insert(user);
+            if(result<=0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
     public Boolean checkId(String id) {
         //调用dao查询
         User user = userMapper.selectById(id);

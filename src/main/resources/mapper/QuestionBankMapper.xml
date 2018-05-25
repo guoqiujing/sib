@@ -197,10 +197,10 @@
   <select id="selectSort" parameterType="Map" resultMap="BaseAndCountResultMap">
     SELECT * FROM question_bank
     <choose>
-      <when test="frequency!=null || frequency!=''">
+      <when test="frequency!=null">
         ORDER BY frequency DESC
       </when>
-      <when test="star_level!=null || star_level!=''">
+      <when test="star_level!=null">
         ORDER BY star_level DESC
       </when>
       <otherwise>
@@ -230,13 +230,17 @@
   </select>
 
   <!--查询该题库下的题目数目-->
-  <select id="countChoiceByBank" resultType="int" parameterType="int">
+  <select id="countChoiceByBank" resultType="int" parameterType="String">
     SELECT count(*) FROM choice_question WHERE bank_id = #{id}
   </select>
 
   <!--连结显示题库下的题目数目-->
-  <resultMap type="cn.myzqu.dto.BankDTO" id="BaseAndCountResultMap"
-             extends="BaseResultMap">
-  <association property="count" column="count" javaType="int" select="cn.myzqu.dao.QuestionBankMapper.countChoiceByBank"></association>
+  <resultMap type="cn.myzqu.dto.BankDTO" id="BaseAndCountResultMap" extends="BaseResultMap">
+  <association property="count" column="id" javaType="int" select="cn.myzqu.dao.QuestionBankMapper.countChoiceByBank"></association>
   </resultMap>
+
+  <!--用户根据题库标题模糊查询题库-->
+  <select id="searchByTitle" resultMap="BaseAndCountResultMap" parameterType="String">
+    SELECT * FROM question_bank WHERE title LIKE '%${value}%'
+  </select>
 </mapper>
