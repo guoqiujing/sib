@@ -6,12 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 public interface FavoriteMapper {
+
     /**
      * 取消收藏题目
-     * @param id
+     * @param userId questionId
      * @return
      */
-    int deleteById(String id);
+    int deleteById(String userId,String questionId);
 
     /**
      * 收藏题目

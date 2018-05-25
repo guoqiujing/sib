@@ -24,8 +24,7 @@
 
   <!--取消收藏题目-->
   <delete id="deleteById" parameterType="java.lang.String">
-    delete from favorite
-    where id = #{id,jdbcType=VARCHAR}
+    delete from favorite where user_id =#{arg0} AND question_id=#{arg1}
   </delete>
 
   <!--收藏题目-->

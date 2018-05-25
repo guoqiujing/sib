@@ -21,6 +21,13 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class FavoriteMapperTest {
     @Test
+    public void deleteById() throws Exception {
+        String userId="1";
+        String questionId="2";
+        favoriteMapper.deleteById(userId,questionId);
+    }
+
+    @Test
     public void judgeFavorite() throws Exception {
         //Map<String,Object> map=new HashMap<>();
         //map.put("userId","1");

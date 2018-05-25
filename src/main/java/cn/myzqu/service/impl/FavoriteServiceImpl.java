@@ -31,9 +31,9 @@ public class FavoriteServiceImpl implements FavoriteService {
     private FavoriteMapper favoriteMapper;
 
     @Override
-    public Boolean deleteById(String id) {
+    public Boolean deleteById(String userId,String questionId) {
         //取消收藏
-        if (favoriteMapper.deleteById(id) > 0)
+        if (favoriteMapper.deleteById(userId,questionId) > 0)
             return true;
         else
             return false;

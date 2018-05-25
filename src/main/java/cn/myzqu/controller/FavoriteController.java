@@ -36,13 +36,13 @@ public class FavoriteController {
     }
     /**
      * 取消收藏题目
-     * @param id
+     * @param userId questionId
      * @return
      */
     @DeleteMapping("/info")
-    public Result cancelFavorite(@RequestParam String id) {
+    public Result cancelFavorite(@RequestParam String userId,@RequestParam String questionId) {
         //取消收藏
-        if (favoriteService.deleteById(id))
+        if (favoriteService.deleteById(userId,questionId))
             return ResultVOUtil.success();
         else
             return ResultVOUtil.error(ResultEnum.FAVORITE_CANCEL_ERROR);
