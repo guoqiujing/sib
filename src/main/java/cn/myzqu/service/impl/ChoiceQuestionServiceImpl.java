@@ -11,6 +11,7 @@ import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.exception.CustomException;
 import cn.myzqu.pojo.ChoiceQuestion;
 import cn.myzqu.pojo.Favorite;
+import cn.myzqu.pojo.Rating;
 import cn.myzqu.service.ChoiceQuestionService;
 import cn.myzqu.utils.KeyUtil;
 import com.github.pagehelper.Page;
@@ -91,10 +92,15 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
                 choiceDTO.setFavoriteState("已收藏");
             else
                 choiceDTO.setFavoriteState("未收藏");
-            if(ratingMapper.selectByUserId(userId,choiceDTO.getId())!=null)
-                choiceDTO.setRatingState("已评级");
-            else
-                choiceDTO.setRatingState("未评级");
+            Rating rating=ratingMapper.selectByUserId(userId,choiceDTO.getId());
+            if(rating!=null) {
+                choiceDTO.setRating(rating.getStarLevel());
+                choiceDTO.setRatingState("用户已评级");
+            }
+                else {
+                choiceDTO.setRating(0.0);
+                choiceDTO.setRatingState("用户未评级");
+            }
         }
         return choiceDTOS;
     }
