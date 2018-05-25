@@ -13,12 +13,23 @@ public class ChoiceDTO extends ChoiceQuestion{
     //题目收藏状态
     private String favoriteState;
 
+    //题目评级状态
+    private String ratingState;
+
     public String getFavoriteState() {
         return favoriteState;
     }
 
     public void setFavoriteState(String favoriteState) {
         this.favoriteState = favoriteState;
+    }
+
+    public String getRatingState() {
+        return ratingState;
+    }
+
+    public void setRatingState(String ratingState) {
+        this.ratingState = ratingState;
     }
 
     public String getTitle() {
@@ -32,7 +43,7 @@ public class ChoiceDTO extends ChoiceQuestion{
     @Override
     public String toString() {
         {
-            return "BankDTO [title=" + title + ",favoriteState="+favoriteState+", toString()=" + super.toString() + "]";
+            return "BankDTO [title=" + title + ",favoriteState="+favoriteState+",ratingState="+ratingState+", toString()=" + super.toString() + "]";
         }
     }
 }

@@ -4,6 +4,7 @@ package cn.myzqu.service.impl;
 import cn.myzqu.dao.ChoiceQuestionMapper;
 import cn.myzqu.dao.FavoriteMapper;
 import cn.myzqu.dao.PointsMapper;
+import cn.myzqu.dao.RatingMapper;
 import cn.myzqu.dto.ChoiceDTO;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.enums.ResultEnum;
@@ -35,6 +36,9 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
 
     @Autowired
     private FavoriteMapper favoriteMapper;
+
+    @Autowired
+    private RatingMapper ratingMapper;
 
     @Override
     public ChoiceQuestion findById(String id) {
@@ -87,7 +91,10 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
                 choiceDTO.setFavoriteState("已收藏");
             else
                 choiceDTO.setFavoriteState("未收藏");
-            System.out.print(choiceDTOS);
+            if(ratingMapper.selectByUserId(userId,choiceDTO.getId())!=null)
+                choiceDTO.setRatingState("已评级");
+            else
+                choiceDTO.setRatingState("未评级");
         }
         return choiceDTOS;
     }
