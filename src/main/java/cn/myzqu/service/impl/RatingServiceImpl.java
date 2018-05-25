@@ -12,6 +12,7 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,7 @@ public class RatingServiceImpl implements RatingService{
         //生成唯一ID
         String id = KeyUtil.getUUID();
         record.setId(id);
+        record.setCreateTime(new Date());
         //调用RatingMapper的insert方法将记录添加到数据库并判断是否添加成功
         if (ratingMapper.insert(record)>0)
             //若成功就返回true

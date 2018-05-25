@@ -1,17 +1,31 @@
 package cn.myzqu.dao;
 
+import cn.myzqu.dto.CommentDTO;
 import cn.myzqu.pojo.Comment;
 
-public interface CommentMapper {
-    int deleteByPrimaryKey(String id);
+import java.util.List;
 
+public interface CommentMapper {
+
+    /**
+     * 添加用户评论
+     * @param record 用户评论记录
+     * @return
+     */
     int insert(Comment record);
 
-    int insertSelective(Comment record);
+    /**
+     * 根据题目id查询所有用户评论
+     * @param questionId 题目id
+     * @return
+     */
+    List<CommentDTO> selectByQuestionId(String questionId);
 
-    Comment selectByPrimaryKey(String id);
+    /**
+     * 修改用户评论可见性
+     * @param record
+     * @return
+     */
+    int updateById(Comment record);
 
-    int updateByPrimaryKeySelective(Comment record);
-
-    int updateByPrimaryKey(Comment record);
 }

@@ -13,25 +13,28 @@
   <sql id="Base_Column_List">
     id, user_id, question_id, bank_id, content, available, create_time
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from comment
-    where id = #{id,jdbcType=VARCHAR}
+
+  <!--根据题目id查询该题目的所有评论-->
+  <select id="selectByQuestionId" parameterType="java.lang.String" resultType="cn.myzqu.dto.CommentDTO">
+      SELECT
+
+      comment.*,
+
+      user.icon as icon ,
+
+      user.nickname as nickname
+
+      FROM comment
+
+      INNER JOIN user ON user.id = comment.user_id
+
+      where question_id = #{questionId,jdbcType=VARCHAR} and available = 0
+
+      order by create_time desc
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from comment
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
+
+  <!--添加用户评论-->
   <insert id="insert" parameterType="cn.myzqu.pojo.Comment">
-    insert into comment (id, user_id, question_id, 
-      bank_id, content, available, 
-      create_time)
-    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{questionId,jdbcType=VARCHAR}, 
-      #{bankId,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{available,jdbcType=BIT}, 
-      #{createTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="cn.myzqu.pojo.Comment">
     insert into comment
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -80,7 +83,9 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.myzqu.pojo.Comment">
+
+  <!--修改用户评论是否可见(某一种意义上的删除)-->
+  <update id="updateById" parameterType="cn.myzqu.pojo.Comment">
     update comment
     <set>
       <if test="userId != null">
@@ -102,16 +107,6 @@
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="cn.myzqu.pojo.Comment">
-    update comment
-    set user_id = #{userId,jdbcType=VARCHAR},
-      question_id = #{questionId,jdbcType=VARCHAR},
-      bank_id = #{bankId,jdbcType=VARCHAR},
-      content = #{content,jdbcType=VARCHAR},
-      available = #{available,jdbcType=BIT},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>
