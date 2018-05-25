@@ -23,9 +23,8 @@
   </select>
 
   <!--取消收藏题目-->
-  <delete id="deleteById" parameterType="java.lang.String">
-    delete from favorite
-    where id = #{id,jdbcType=VARCHAR}
+  <delete id="deleteById" parameterType="cn.myzqu.pojo.Favorite">
+    delete from favorite where user_id =#{userId} AND question_id=#{questionId}
   </delete>
 
   <!--收藏题目-->

@@ -1,18 +1,24 @@
 package cn.myzqu.service.impl;
 
 import cn.myzqu.dao.PointsMapper;
+import cn.myzqu.dto.ChoiceDTO;
+import cn.myzqu.dto.PageDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.exception.CustomException;
 import cn.myzqu.pojo.Points;
 import cn.myzqu.service.PointsService;
 import cn.myzqu.utils.KeyUtil;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Key;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Chrky on 2018/5/22.
@@ -26,7 +32,7 @@ public class PointsServiceImpl implements PointsService {
     private PointsMapper pointsMapper;
 
     @Override
-    public Boolean Register(String userId) {
+    public Boolean register(String userId) {
         Points points=new Points();
         points.setId(KeyUtil.getUUID());
         points.setUserId(userId);
@@ -40,16 +46,113 @@ public class PointsServiceImpl implements PointsService {
     }
 
     @Override
-    public Points SignByUser(String userId) {
+    public Points signByUser(String userId) {
         //查询该用户今天是否已签到
-        return pointsMapper.SignByUser(userId);
+        return pointsMapper.signByUser(userId);
     }
 
     @Override
-    public Boolean Sign(String userId) {
+    public Boolean checkChoice(String userId) {
+        Points points=new Points();
+        points.setId(KeyUtil.getUUID());
+        points.setValue(1);
+        points.setUserId(userId);
+        points.setNote("用户题目审核通过");
+        //用户上传题目审核
+        if(pointsMapper.insert(points)>0)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    public Boolean shareApp(String userId) {
+        //查询用户今天分享小程序次数
+        if(pointsMapper.shareCount(userId)>=3)
+            throw new CustomException(ResultEnum.USER_SIGN_FULL);
+        Points points=new Points();
+        points.setId(KeyUtil.getUUID());
+        points.setValue(2);
+        points.setUserId(userId);
+        points.setNote("用户分享小程序");
+        //用户分享小程序
+        if(pointsMapper.insert(points)>0)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    public PageDTO findByUserId(String userId, int pageNum, int pageSize) {
+        Page page = PageHelper.startPage(pageNum,pageSize);
+        //根据用户id查询个人积分记录
+        List<Points> points  =pointsMapper.selectByUserId(userId);
+        if(points.isEmpty()) return null;
+        int total = (int)page.getTotal();
+        int pages = page.getPages();
+        PageDTO pageDTO = new PageDTO(points,total,pageSize,pageNum,pages);
+        return pageDTO;
+    }
+
+    @Override
+    public PageDTO find(int pageNum, int pageSize) {
+        Page page = PageHelper.startPage(pageNum,pageSize);
+        //浏览用户积分记录
+        List<Points> points  =pointsMapper.selectByUser();
+        if(points.isEmpty()) return null;
+        int total = (int)page.getTotal();
+        int pages = page.getPages();
+        PageDTO pageDTO = new PageDTO(points,total,pageSize,pageNum,pages);
+        return pageDTO;
+    }
+
+    @Override
+    public PageDTO selectUserByTime(Map<String, Object> map, int pageNum, int pageSize) {
+        Page page = PageHelper.startPage(pageNum,pageSize);
+        //根据用户id和时间段查积分记录
+        List<Points> points  =pointsMapper.selectUserByTime(map);
+        if(points.isEmpty()) return null;
+        int total = (int)page.getTotal();
+        int pages = page.getPages();
+        PageDTO pageDTO = new PageDTO(points,total,pageSize,pageNum,pages);
+        return pageDTO;
+    }
+
+    @Override
+    public Boolean addUser(List<Points> points) {
+        for (int i = 0; i < points.size(); i++) {
+            Points point=points.get(i);
+            point.setId(KeyUtil.getUUID());
+            point.setUserId(point.getUserId());
+            point.setValue(point.getValue());
+            if (point.getValue() > 0)
+                point.setNote("管理员派送积分");
+            else
+                point.setNote("管理员扣减积分");
+            if(pointsMapper.insert(point)<1)
+                return false;
+        }
+        return true;
+    }
+
+    @Override
+    public Boolean ChoiceByGrade(String userId) {
+        Points points=new Points();
+        points.setId(KeyUtil.getUUID());
+        points.setUserId(userId);
+        points.setValue(1);
+        points.setNote("用户题目评级");
+        if(pointsMapper.insert(points)>0)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    public Boolean sign(String userId) {
         //查询该用户今日是否已签到
-        if(SignByUser(userId)!=null)
-            throw new CustomException(ResultEnum.POINT_SIGN_EXIST);
+        if(signByUser(userId)!=null)
+            throw new CustomException(ResultEnum.USER_SIGN_EXIST);
         Points points=new Points();
         points.setId(KeyUtil.getUUID());
         points.setUserId(userId);
