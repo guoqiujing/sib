@@ -196,7 +196,7 @@
     </trim>
   </insert>
 
-<!--根据题目id修改题目-->
+  <!--根据题目id修改题目-->
   <update id="updateById" parameterType="cn.myzqu.pojo.ChoiceQuestion" >
     update choice_question
     <set >

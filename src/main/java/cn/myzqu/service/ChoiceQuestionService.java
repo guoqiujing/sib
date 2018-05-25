@@ -46,7 +46,7 @@ public interface ChoiceQuestionService {
      * @param id
      * @return
      */
-    List<ChoiceDTO> findByBankId(String id);
+    List<ChoiceDTO> findByBankId(String id,String userId);
 
     /**
      * 根据题目id修改题目

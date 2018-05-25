@@ -1,6 +1,5 @@
 package cn.myzqu.service.impl;
 
-import cn.myzqu.pojo.ChoiceQuestion;
 import cn.myzqu.service.ChoiceQuestionService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,40 +10,25 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.*;
 
 /**
- * Created by Chrky on 2018/5/14.
+ * Created by Chrky on 2018/5/25.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ChoiceQuestionServiceTest {
-
-    @Autowired
-    private ChoiceQuestionService choiceQuestionService;
-
-
+public class ChoiceQuestionServiceImplTest {
     @Test
     public void findById() throws Exception {
         String id="1";
         System.out.print(choiceQuestionService.findById(id));
     }
 
-    @Test
-    public void findByQuestion() throws Exception {
-    }
-
-    @Test
-    public void add() throws Exception {
-    }
-
-    @Test
-    public void deleteById() throws Exception {
-    }
+    @Autowired
+    private ChoiceQuestionService choiceQuestionService;
 
     @Test
     public void findByBankId() throws Exception {
-    }
-
-    @Test
-    public void updateById() throws Exception {
+        String id="1";
+        String userId="1";
+        System.out.print(choiceQuestionService.findByBankId(id,userId));
     }
 
 }

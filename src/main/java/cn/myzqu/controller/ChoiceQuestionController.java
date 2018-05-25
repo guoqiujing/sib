@@ -92,14 +92,14 @@ public class ChoiceQuestionController {
 
     /**
      * 根据题库id查询题目
-     *
      * @param id
+     * @param userId
      * @return
      */
     @GetMapping("/info/way/bank")
-    public Result getChoiceByBankId(@RequestParam String id) {
+    public Result getChoiceByBankId(@RequestParam String id,@RequestParam String userId) {
         //创建choice对象
-        List<ChoiceDTO> choiceDTOS = choiceQuestionService.findByBankId(id);
+        List<ChoiceDTO> choiceDTOS = choiceQuestionService.findByBankId(id,userId);
         //根据题库id查询题目
         if (choiceDTOS.isEmpty())
             return ResultVOUtil.error(ResultEnum.QUESTION_NOT_EXIST);

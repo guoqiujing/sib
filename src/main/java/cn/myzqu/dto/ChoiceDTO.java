@@ -7,7 +7,19 @@ import cn.myzqu.pojo.ChoiceQuestion;
  */
 public class ChoiceDTO extends ChoiceQuestion{
 
+    //题库标题
     private String title;
+
+    //题目收藏状态
+    private String favoriteState;
+
+    public String getFavoriteState() {
+        return favoriteState;
+    }
+
+    public void setFavoriteState(String favoriteState) {
+        this.favoriteState = favoriteState;
+    }
 
     public String getTitle() {
         return title;
@@ -20,7 +32,7 @@ public class ChoiceDTO extends ChoiceQuestion{
     @Override
     public String toString() {
         {
-            return "BankDTO [title=" + title + ", toString()=" + super.toString() + "]";
+            return "BankDTO [title=" + title + ",favoriteState="+favoriteState+", toString()=" + super.toString() + "]";
         }
     }
 }

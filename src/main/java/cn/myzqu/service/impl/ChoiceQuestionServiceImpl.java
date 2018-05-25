@@ -2,12 +2,14 @@ package cn.myzqu.service.impl;
 
 
 import cn.myzqu.dao.ChoiceQuestionMapper;
+import cn.myzqu.dao.FavoriteMapper;
 import cn.myzqu.dao.PointsMapper;
 import cn.myzqu.dto.ChoiceDTO;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.exception.CustomException;
 import cn.myzqu.pojo.ChoiceQuestion;
+import cn.myzqu.pojo.Favorite;
 import cn.myzqu.service.ChoiceQuestionService;
 import cn.myzqu.utils.KeyUtil;
 import com.github.pagehelper.Page;
@@ -30,6 +32,9 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
 
     @Autowired
     private ChoiceQuestionMapper choiceQuestionMapper;
+
+    @Autowired
+    private FavoriteMapper favoriteMapper;
 
     @Override
     public ChoiceQuestion findById(String id) {
@@ -72,9 +77,19 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
     }
 
     @Override
-    public List<ChoiceDTO> findByBankId(String id) {
+    public List<ChoiceDTO> findByBankId(String id,String userId) {
         //根据题库id查询题目
-        return choiceQuestionMapper.selectByBankId(id);
+        List<ChoiceDTO> choiceDTOS= choiceQuestionMapper.selectByBankId(id);
+        for(int i=0;i<choiceDTOS.size();i++)
+        {
+            ChoiceDTO choiceDTO=choiceDTOS.get(i);
+            if(favoriteMapper.judgeFavorite(userId,choiceDTO.getId())!=null)
+                choiceDTO.setFavoriteState("已收藏");
+            else
+                choiceDTO.setFavoriteState("未收藏");
+            System.out.print(choiceDTOS);
+        }
+        return choiceDTOS;
     }
 
     @Override
