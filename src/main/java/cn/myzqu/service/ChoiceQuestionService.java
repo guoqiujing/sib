@@ -72,4 +72,11 @@ public interface ChoiceQuestionService {
      * @return
      */
     PageDTO findSort(Map<String,Object> map, int pageNum, int pageSize);
+
+    /**
+     * 修改题目审核信息
+     * @param choiceQuestion
+     * @return
+     */
+    Boolean check(ChoiceQuestion choiceQuestion);
 }

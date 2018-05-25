@@ -62,4 +62,16 @@ public class Points {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+    @Override
+    public String toString() {
+        return "Points{" +
+                "id='" + id + '\'' +
+                ", userId='" + userId + '\'' +
+                ", value=" + value +
+                ", note='" + note + '\'' +
+                ", available=" + available +
+                ", createTime=" + createTime +
+                '}';
+    }
 }

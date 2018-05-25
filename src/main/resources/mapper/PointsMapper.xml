@@ -93,7 +93,27 @@
   </update>
 
   <!--查询该用户今天是否已签到-->
-  <select id="SignByUser" parameterType="String" resultType="cn.myzqu.pojo.Points">
+  <select id="signByUser" parameterType="String" resultType="cn.myzqu.pojo.Points">
     SELECT * FROM points WHERE user_id=#{user_id} AND note="用户签到" AND to_days(create_time) = to_days(now());
+  </select>
+
+  <!--查询用户今天分享小程序次数-->
+  <select id="shareCount" parameterType="String" resultType="int">
+    SELECT COUNT(*) FROM points WHERE user_id=#{user_id} AND note="用户分享小程序" AND to_days(create_time) = to_days(now());
+  </select>
+
+  <!--用户查看个人积分记录-->
+  <select id="selectByUserId" parameterType="String" resultMap="BaseResultMap">
+    SELECT * FROM points WHERE user_id=#{user_id}
+  </select>
+
+  <!--浏览用户的积分记录-->
+  <select id="selectByUser" resultMap="BaseResultMap">
+    SELECT * FROM points ORDER BY create_time DESC
+  </select>
+
+  <!--通过用户名和时间段查询积分记录-->
+  <select id="selectUserByTime" parameterType="Map" resultMap="BaseResultMap">
+    SELECT * FROM points WHERE user_id=1  AND create_time  BETWEEN #{first} AND #{end}
   </select>
 </mapper>

@@ -2,6 +2,7 @@ package cn.myzqu.service.impl;
 
 
 import cn.myzqu.dao.ChoiceQuestionMapper;
+import cn.myzqu.dao.PointsMapper;
 import cn.myzqu.dto.ChoiceDTO;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.enums.ResultEnum;
@@ -107,5 +108,14 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
         int pages = page.getPages();
         PageDTO pageDTO = new PageDTO(choiceDTOS,total,pageSize,pageNum,pages);
         return pageDTO;
+    }
+
+    @Override
+    public Boolean check(ChoiceQuestion choiceQuestion) {
+        //修改审核信息
+        if(choiceQuestionMapper.updateById(choiceQuestion)>0)
+            return true;
+        else
+            return false;
     }
 }
