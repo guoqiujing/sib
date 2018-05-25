@@ -71,7 +71,7 @@ public enum ResultEnum {
     //题目星级类
     RATING_COMPLETION(9000,"你已经评价过该题的星级啦"),
     RATING_UNCOMPLETE(9001,"你还没评价这个题目的星级哦"),
-    RATING_ENPTY(9002,"现在还没有星级评价记录"),
+    RATING_EMPTY(9002,"现在还没有星级评价记录"),
     ;
 
     private Integer code;
