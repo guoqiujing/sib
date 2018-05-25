@@ -26,6 +26,7 @@ public enum ResultEnum {
     QUESTION_CREATE_FAIL(3000,"创建题目失败"),
     QUESTION_UPDATE_FAIL(3001,"更新题目失败"),
     QUESTION_DELETE_FAIL(3002,"删除题目失败"),
+    QUESTION_SHARE_FAIL(3003,"题目分享失败"),
 
     QUESTION_NOT_EXIST(3100,"题目不存在"),
     QUESTION_IS_EXIST(3101,"题目已存在"),
@@ -37,6 +38,8 @@ public enum ResultEnum {
     USER_UPDATE_FAIL(4002,"更新账号信息失败"),
     USER_DELETE_FAIL(4003,"删除账号失败"),
     PASSWORD_UPDATE_FAIL(4004,"更新密码失败"),
+    USER_SIGN_FAIL(4005,"用户签到失败"),
+    USER_SIGN_EXIST(8001,"用户已签到"),
 
     USER_NAME_EXIST(4100,"用户名已存在，请换个试试"),
     PHONE_EXIST(4101,"该手机号码已经绑定其他账号"),
@@ -65,13 +68,8 @@ public enum ResultEnum {
     FAVORITE_EMPTY(7003,"收藏记录为空"),
 
     //积分类
-    POINT_SIGN_EXIST(8000,"用户已签到"),
-    POINT_SIGN_ERROR(8001,"用户签到失败"),
-
-    //题目星级类
-    RATING_COMPLETION(9000,"你已经评价过该题的星级啦"),
-    RATING_UNCOMPLETE(9001,"你还没评价这个题目的星级哦"),
-    RATING_EMPTY(9002,"现在还没有星级评价记录"),
+    POINT_NOT_EXIST(8000,"积分记录不存在"),
+    POINT_ADD_FAIL(8001,"批量增加用户积分失败"),
     ;
 
     private Integer code;
