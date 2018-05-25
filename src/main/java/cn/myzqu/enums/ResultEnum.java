@@ -71,6 +71,11 @@ public enum ResultEnum {
     //积分类
     POINT_NOT_EXIST(8000,"积分记录不存在"),
     POINT_ADD_FAIL(8001,"批量增加用户积分失败"),
+
+    //题目星级类
+    RATING_COMPLETION(9000,"你已经评价过该题的星级啦"),
+    RATING_UNCOMPLETE(9001,"你还没评价这个题目的星级哦"),
+    RATING_EMPTY(9002,"现在还没有星级评价记录"),
     ;
 
     private Integer code;

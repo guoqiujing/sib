@@ -27,7 +27,7 @@
     select
     <include refid="Base_Column_List" />
     from rating
-    where question_id = #{questionId,jdbcType=VARCHAR}
+    where question_id = #{questionId,jdbcType=VARCHAR} and available = 0
   </select>
 
   <!--查询所有用户评价的星级记录-->
@@ -35,6 +35,7 @@
     select
     <include refid="Base_Column_List" />
     from rating
+    where available = 0
     order by create_time desc
   </select>
 
