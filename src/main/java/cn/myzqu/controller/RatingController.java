@@ -20,6 +20,11 @@ public class RatingController {
     @Autowired
     private RatingService ratingService;
 
+    /**
+     * 添加用户星级评价记录（微信端
+     * @param rating 星级类对象
+     * @return
+     */
     @PostMapping("/addRating")
     public Result addRating(@Validated Rating rating){
         //调用ratingService，成功返回信息
@@ -28,6 +33,12 @@ public class RatingController {
         return ResultVOUtil.error(ResultEnum.ERROR);
     }
 
+    /**
+     * 判断用户是否已经评价题目星级，如果有就返回该用户的星级评价记录（微信端
+     * @param userId  用户id
+     * @param questionId  题目id
+     * @return
+     */
     @GetMapping("/getRating")
     public Result getRating(@RequestParam String userId,String questionId){
         Rating rating = ratingService.findByUserId(userId,questionId);
@@ -37,6 +48,12 @@ public class RatingController {
         return ResultVOUtil.error(ResultEnum.RATING_UNCOMPLETE);
     }
 
+    /**
+     * 查找并分页显示用户星级评价记录（管理端
+     * @param page  当前页数
+     * @param size  当前页数的记录条数
+     * @return
+     */
     @GetMapping("/getAllRating")
     public Result getAllRating(@RequestParam(value="page",defaultValue = "1") Integer page,
                                @RequestParam(value = "size",defaultValue = "10") Integer size){
