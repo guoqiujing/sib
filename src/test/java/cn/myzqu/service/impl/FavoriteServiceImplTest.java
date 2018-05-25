@@ -17,6 +17,13 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class FavoriteServiceImplTest {
+    @Test
+    public void deleteById1() throws Exception {
+        Favorite favorite=new Favorite();
+        favorite.setQuestionId("1");
+        favorite.setUserId("1");
+        System.out.print(favoriteService.deleteById(favorite));
+    }
 
     @Autowired
     private FavoriteService favoriteService;

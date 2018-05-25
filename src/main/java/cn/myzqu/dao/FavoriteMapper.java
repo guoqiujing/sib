@@ -9,10 +9,10 @@ public interface FavoriteMapper {
 
     /**
      * 取消收藏题目
-     * @param userId questionId
+     * @param favorite
      * @return
      */
-    int deleteById(String userId,String questionId);
+    int deleteById(Favorite favorite);
 
     /**
      * 收藏题目

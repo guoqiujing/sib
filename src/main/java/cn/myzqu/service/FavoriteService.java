@@ -13,10 +13,10 @@ import java.util.Map;
 public interface FavoriteService {
     /**
      * 取消收藏题目
-     * @param userId questionId
+     * @param favorite
      * @return
      */
-    Boolean deleteById(String userId,String questionId);
+    Boolean deleteById(Favorite favorite);
 
     /**
      * 收藏题目

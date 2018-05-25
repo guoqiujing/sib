@@ -22,9 +22,10 @@ import static org.junit.Assert.*;
 public class FavoriteMapperTest {
     @Test
     public void deleteById() throws Exception {
-        String userId="1";
-        String questionId="2";
-        favoriteMapper.deleteById(userId,questionId);
+        Favorite favorite=new Favorite();
+        favorite.setQuestionId("1");
+        favorite.setUserId("1");
+        favoriteMapper.deleteById(favorite);
     }
 
     @Test
