@@ -32,8 +32,8 @@ public class StatisticsServiceImpl implements StatisticsService{
             //返回星级平均数
             return sum;
         }
-        //没有则返回默认星级 3
-        sum=3;
+        //没有则返回默认星级 0
+
         return sum;
     }
 
