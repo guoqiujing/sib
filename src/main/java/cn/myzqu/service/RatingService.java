@@ -28,6 +28,8 @@ public interface RatingService {
 
     /**
      * 查找并分页显示所有用户星级评价记录
+     * @param pageNum
+     * @param pageSize
      * @return
      */
     PageDTO findAllRating(int pageNum, int pageSize);
