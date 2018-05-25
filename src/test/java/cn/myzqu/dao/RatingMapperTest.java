@@ -59,7 +59,7 @@ public class RatingMapperTest {
         Map<String,Object> map = new HashMap<>();
         map.put("userId",u);
         map.put("questionId",q);
-        Rating t = ratingMapper.selectByUserId(map);
+        Rating t = ratingMapper.selectByUserId(u,q);
     }
 
 }

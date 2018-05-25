@@ -30,13 +30,13 @@ public class RatingController {
      * @return
      */
     @PostMapping("/addRating")
-    public Result addRating(@Validated Rating rating){
-        //调用ratingService，成功返回信息
+    public Result addRating(@Validated @RequestBody Rating rating){
+        //调用ratingService，成功则返回信息
         if(ratingService.addRatingRecord(rating)) {
 
             return ResultVOUtil.success();
         }
-        //失败返回异常
+        //失败则返回异常
         return ResultVOUtil.error(ResultEnum.ERROR);
     }
 
