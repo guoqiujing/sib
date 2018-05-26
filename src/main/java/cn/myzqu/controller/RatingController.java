@@ -33,7 +33,7 @@ public class RatingController {
     public Result addRating(@Validated @RequestBody Rating rating){
         //调用ratingService，成功则返回信息
         if(ratingService.addRatingRecord(rating)) {
-
+            pointsService.ChoiceByGrade(rating.getUserId());
             return ResultVOUtil.success();
         }
         //失败则返回异常
