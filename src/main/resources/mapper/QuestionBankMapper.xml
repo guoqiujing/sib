@@ -247,6 +247,6 @@
 
   <!--用户根据题库标题模糊查询题库-->
   <select id="searchByTitle" resultMap="BaseAndCountResultMap" parameterType="String">
-    SELECT * FROM question_bank WHERE title LIKE '%${title}%'
+    SELECT * FROM question_bank WHERE title LIKE '%${value}%'
   </select>
 </mapper>
