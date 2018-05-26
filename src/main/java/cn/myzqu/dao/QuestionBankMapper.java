@@ -85,4 +85,6 @@ public interface QuestionBankMapper {
      * @return
      */
     List<BankDTO> searchByTitle(String title);
+
+    int countAllChoiceByBank();
 }

@@ -242,6 +242,7 @@
   <!--连结显示题库下的题目数目-->
   <resultMap type="cn.myzqu.dto.BankDTO" id="BaseAndCountResultMap" extends="BaseResultMap">
   <association property="count" column="id" javaType="int" select="cn.myzqu.dao.QuestionBankMapper.countChoiceByBank"></association>
+    <association property="countAll" column="id" javaType="int" select="cn.myzqu.dao.QuestionBankMapper.countAllChoiceByBank"></association>
   </resultMap>
 
   <!--用户根据题库标题模糊查询题库-->

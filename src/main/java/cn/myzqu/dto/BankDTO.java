@@ -32,6 +32,6 @@ public class BankDTO extends QuestionBank
 
     @Override
     public String toString() {
-        return "BankDTO [count=" + count + ", toString()=" + super.toString() + "]";
+        return "BankDTO [count=" + count + ",countAll="+countAll+", toString()=" + super.toString() + "]";
     }
 }
