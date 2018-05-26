@@ -24,4 +24,18 @@ public interface CommentService {
      * @return
      */
     List<CommentDTO> findByQuestionId(String questionId);
+
+    /**
+     * 根据用户id查询该用户所有的评论记录
+     * @param userId
+     * @return
+     */
+    List<Comment> findByUserId(String userId);
+
+    /**
+     * 根据id更新用户评论可见性
+     * @param id
+     * @return
+     */
+    Boolean updateById(String id);
 }

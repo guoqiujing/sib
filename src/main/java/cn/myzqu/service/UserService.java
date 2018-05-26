@@ -48,7 +48,7 @@ public interface UserService {
      * @param user
      * @return
      */
-    Boolean add(User user);
+    User add(User user);
 
     /**
      * 批量添加用户

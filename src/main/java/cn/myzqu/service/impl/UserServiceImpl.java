@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Boolean add(User user) {
+    public User add(User user) {
         //生成用户唯一id
         String id = KeyUtil.getUUID();
         user.setId(id);
@@ -135,9 +135,9 @@ public class UserServiceImpl implements UserService{
         int result =  userMapper.insert(user);
         if(result>0){
             userMapper.userPointByRegister(user.getId());
-            return true;
+            return user;
         }
-        return false;
+        return null;
     }
 
     @Override
