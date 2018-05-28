@@ -49,8 +49,8 @@ public class ChoiceQuestionController {
      * @param id
      * @return
      */
-    @DeleteMapping("/info")
-    public Result deleteChoice(@RequestParam String id) {
+    @DeleteMapping("/info/{id}")
+    public Result deleteChoice(@PathVariable(value="id") String id) {
         //删除题目
         if (choiceQuestionService.deleteById(id))
             return ResultVOUtil.success();
