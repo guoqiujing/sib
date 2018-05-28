@@ -58,4 +58,6 @@ public interface ChoiceQuestionMapper {
     ChoiceQuestion selectByQuestion(String question);
 
     List<ChoiceDTO> selectSort(Map<String,Object> map);//题目综合显示
+
+    List<ChoiceDTO> selectByUserBankId(String id);
 }
