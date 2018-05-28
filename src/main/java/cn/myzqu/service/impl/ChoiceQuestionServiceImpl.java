@@ -150,6 +150,6 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
     @Override
     public List<ChoiceDTO> findByUserBankId(String id) {
         //根据题库id查询题库
-        return choiceQuestionMapper.selectByBankId(id);
+        return choiceQuestionMapper.selectByUserBankId(id);
     }
 }
