@@ -42,7 +42,7 @@ public class QuestionBankController {
      * @return
      */
     @DeleteMapping("/info")
-    public Result deleteQuestionBank(@RequestParam @RequestBody String id) {
+    public Result deleteQuestionBank(@RequestParam(value="id") String id) {
         if (questionBankService.deleteById(id)) {
             return ResultVOUtil.success();
         }
