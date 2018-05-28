@@ -1,6 +1,7 @@
 package cn.myzqu.service.impl;
 
 import cn.myzqu.dao.FavoriteMapper;
+import cn.myzqu.dto.FavoriteDTO;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.exception.CustomException;
@@ -68,7 +69,7 @@ public class FavoriteServiceImpl implements FavoriteService {
         //注意：下面这两条语句必须紧跟，保证分页安全
         Page page = PageHelper.startPage(pageNum,pageSize);
         //根据用户id查看用户所有收藏记录
-        List<Favorite> favorites=favoriteMapper.selectByUserId(userId);
+        List<FavoriteDTO> favorites=favoriteMapper.selectByUserId(userId);
         if(favorites.isEmpty())
             return null;
         //获取总记录数
