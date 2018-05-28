@@ -12,25 +12,21 @@
   <sql id="Base_Column_List">
     id, user_id, ip, address, available, create_time
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from attendance
     where id = #{id,jdbcType=VARCHAR}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from attendance
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="cn.myzqu.pojo.Attendance">
-    insert into attendance (id, user_id, ip, 
-      address, available, create_time
-      )
-    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{available,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="cn.myzqu.pojo.Attendance">
+
+  <!--用户签到-->
+  <insert id="signByUser" parameterType="cn.myzqu.pojo.Attendance">
     insert into attendance
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -73,6 +69,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="cn.myzqu.pojo.Attendance">
     update attendance
     <set>
@@ -94,13 +91,10 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.myzqu.pojo.Attendance">
-    update attendance
-    set user_id = #{userId,jdbcType=VARCHAR},
-      ip = #{ip,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      available = #{available,jdbcType=BIT},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
+
+  <!--查询用户是否今日签到-->
+  <select id="selectSignByUser" parameterType="String" resultType="cn.myzqu.pojo.Attendance">
+    SELECT * FROM attendance WHERE user_id=#{user_id} AND to_days(create_time) = to_days(now());
+  </select>
+
 </mapper>

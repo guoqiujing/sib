@@ -42,6 +42,7 @@ public enum ResultEnum {
     USER_SIGN_FAIL(4005,"用户签到失败"),
     USER_SIGN_EXIST(4006,"用户已签到"),
     USER_SIGN_FULL(4007,"用户今日签到次数达到上限"),
+    USER_SIGN_NOT_EXIST(4008,"用户未签到"),
 
     USER_NAME_EXIST(4100,"用户名已存在，请换个试试"),
     PHONE_EXIST(4101,"该手机号码已经绑定其他账号"),
