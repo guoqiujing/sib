@@ -162,4 +162,20 @@ public class ChoiceQuestionController {
             return ResultVOUtil.error(ResultEnum.QUESTION_CHECK_FAIL);
     }
 
+    /**
+     * 用户题库管理根据题库id查看题目
+     * @param id
+     * @return
+     */
+    @GetMapping("/info/user/bank")
+    public Result getUserChoiceByBankId(@RequestParam String id)
+    {
+        //创建choice对象
+        List<ChoiceDTO> choiceDTOS = choiceQuestionService.findByUserBankId(id);
+        //根据题库id查询题目
+        if (choiceDTOS.isEmpty())
+            return ResultVOUtil.error(ResultEnum.QUESTION_NOT_EXIST);
+        else
+            return ResultVOUtil.success(choiceDTOS);
+    }
 }

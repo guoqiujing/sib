@@ -43,7 +43,7 @@
   <select id="selectByBankId" resultType="cn.myzqu.dto.ChoiceDTO" parameterType="java.lang.String" >
     select choice_question.*,question_bank.title
     from choice_question,question_bank
-    where choice_question.bank_id=question_bank.id and bank_id=#{bank_id}
+    where choice_question.bank_id=question_bank.id and bank_id=#{bank_id} and choice_question.status=0
   </select>
 
   <!--根据题目id删除题目-->
@@ -245,4 +245,11 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <!--用户根据题库id查询题目-->
+  <select id="selectByUserBankId" resultType="cn.myzqu.dto.ChoiceDTO" parameterType="java.lang.String">
+    select choice_question.*,question_bank.title
+    from choice_question,question_bank
+    where choice_question.bank_id=question_bank.id and bank_id=#{bank_id}
+  </select>
 </mapper>

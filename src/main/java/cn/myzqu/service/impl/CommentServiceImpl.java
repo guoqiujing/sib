@@ -56,4 +56,41 @@ public class CommentServiceImpl implements CommentService{
             return list;
     }
 
+    /**
+     * 根据用户id查询该用户所有的评论记录
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<Comment> findByUserId(String userId){
+        //调用commentMapper的selectByUserId方法查询该用户评论记录
+        List<Comment> list = commentMapper.selectByUserId(userId);
+        //判断是否为空
+        if(list.isEmpty())
+            //没有数据，则返回null
+            return null;
+        else
+            //有则返回list数据
+            return list;
+    }
+
+    /**
+     * 根据id更新用户评论可见性
+     * @param id
+     * @return
+     */
+    @Override
+    public Boolean updateById(String id){
+        //把id封装到Comment对象中
+        Comment record = new Comment();
+        record.setId(id);
+        //可见性设置为1，即不可见
+        record.setAvailable(true);
+        //调用Mapper接口
+        if(commentMapper.updateById(record)>0){
+            return true;
+        }
+        return false;
+    }
+
 }

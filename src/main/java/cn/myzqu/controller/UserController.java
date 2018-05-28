@@ -72,8 +72,9 @@ public class UserController {
     @PostMapping("/info")
     public Result addUser(@Validated @RequestBody  User user){
         System.out.println(user.getId());
-        if(userService.add(user)){
-            return ResultVOUtil.success();
+        User data = userService.add(user);
+        if(data!=null){
+            return ResultVOUtil.success(data);
         }
         return ResultVOUtil.error(ResultEnum.USER_CREATE_FAIL);
     }

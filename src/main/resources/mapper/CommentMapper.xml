@@ -33,6 +33,15 @@
       order by create_time desc
   </select>
 
+  <!--根据用户id查询评论记录-->
+  <select id="selectByUserId" parameterType="java.lang.String" resultType="cn.myzqu.pojo.Comment">
+      SELECT
+      <include refid="Base_Column_List" />
+      FROM comment
+      WHERE user_id = #{userId,jdbcType=VARCHAR} AND available = 0
+      ORDER BY create_time DESC
+  </select>
+
   <!--添加用户评论-->
   <insert id="insert" parameterType="cn.myzqu.pojo.Comment">
     insert into comment

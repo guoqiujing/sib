@@ -79,4 +79,6 @@ public interface ChoiceQuestionService {
      * @return
      */
     Boolean check(ChoiceQuestion choiceQuestion);
+
+    List<ChoiceDTO> findByUserBankId(String id);
 }

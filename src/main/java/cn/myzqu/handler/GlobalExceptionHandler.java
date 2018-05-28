@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,12 +48,12 @@ public class GlobalExceptionHandler {
     public Result bindExceptionHandler(BindException e){
         logger.error(e.getMessage(),e);
         List<ObjectError> errors = e.getAllErrors();
-        Map<String,Object> data = new HashMap<>();
-       // List<Object> data = new ArrayList();
+       // Map<String,Object> data = new HashMap<>();
+        List<Object> data = new ArrayList();
         for(ObjectError error:errors){
             System.out.println(error.getCodes().toString());
-            data.put(error.getDefaultMessage(),error.getDefaultMessage());
-           // data.add(error.getDefaultMessage());
+          //  data.put(error.getDefaultMessage(),error.getDefaultMessage());
+            data.add(error.getDefaultMessage());
         }
         return ResultVOUtil.error(ResultEnum.PARAMETER_ERROR,data);
     }

@@ -28,4 +28,10 @@ public interface CommentMapper {
      */
     int updateById(Comment record);
 
+    /**
+     * 根据用户id查询用户评论
+     * @param userId
+     * @return
+     */
+    List<Comment> selectByUserId(String  userId);
 }

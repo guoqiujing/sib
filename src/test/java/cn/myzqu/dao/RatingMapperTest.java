@@ -52,14 +52,14 @@ public class RatingMapperTest {
     public void selectByQuestionId() throws Exception {
     }
 
-    @Test
+   /* @Test
     public void selectByUserId() throws Exception {
         String u = "2";
         String q = "22";
         Map<String,Object> map = new HashMap<>();
         map.put("userId",u);
         map.put("questionId",q);
-        Rating t = ratingMapper.selectByUserId(u,q);
-    }
+        Rating t = ratingMapper.selectByUserId(map);
+    }*/
 
 }

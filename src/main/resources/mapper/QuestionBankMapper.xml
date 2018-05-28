@@ -229,18 +229,24 @@
     SELECT * FROM question_bank WHERE category_name=#{categoryName}
   </select>
 
-  <!--查询该题库下的题目数目-->
+  <!--查询该题库下的已通过审核题目数目-->
   <select id="countChoiceByBank" resultType="int" parameterType="String">
+    SELECT count(*) FROM choice_question WHERE bank_id = #{id} AND status=0
+  </select>
+
+  <!--查询该题库下的题目数目-->
+  <select id="countAllChoiceByBank" resultType="int" parameterType="String">
     SELECT count(*) FROM choice_question WHERE bank_id = #{id}
   </select>
 
   <!--连结显示题库下的题目数目-->
   <resultMap type="cn.myzqu.dto.BankDTO" id="BaseAndCountResultMap" extends="BaseResultMap">
   <association property="count" column="id" javaType="int" select="cn.myzqu.dao.QuestionBankMapper.countChoiceByBank"></association>
+    <association property="countAll" column="id" javaType="int" select="cn.myzqu.dao.QuestionBankMapper.countAllChoiceByBank"></association>
   </resultMap>
 
   <!--用户根据题库标题模糊查询题库-->
   <select id="searchByTitle" resultMap="BaseAndCountResultMap" parameterType="String">
-    SELECT * FROM question_bank WHERE title LIKE '%${title}%'
+    SELECT * FROM question_bank WHERE title LIKE '%${value}%'
   </select>
 </mapper>

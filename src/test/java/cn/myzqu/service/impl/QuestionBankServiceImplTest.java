@@ -24,6 +24,7 @@ public class QuestionBankServiceImplTest {
         String title="实打实的";
         System.out.print(questionBankService.findByTitle(title));
     }
+
 //    @Test
 //    public void searchByTitle() throws Exception {
 //        String title="1";
@@ -62,6 +63,7 @@ public class QuestionBankServiceImplTest {
 //    }
 //
 
+    @Autowired
     private QuestionBankService questionBankService;
 //
 //    @Test
@@ -81,11 +83,6 @@ public class QuestionBankServiceImplTest {
 //        System.out.print(questionBankService.findById(id));
 //    }
 //
-//    @Test
-//    public void findByTitle() throws Exception {
-//        String title="2";
-//        System.out.print(questionBankService.findByTitle(title));
-//    }
 //
 //    @Test
 //    public void selectByUserId() throws Exception {

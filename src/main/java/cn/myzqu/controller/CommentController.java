@@ -54,4 +54,33 @@ public class CommentController {
         return  ResultVOUtil.error(ResultEnum.COMMENT_EMPTY);
     }
 
+    /**
+     * 根据用户id查询该用户的评论记录
+     * @param userId  用户id
+     * @return
+     */
+    @GetMapping("/getUserComment")
+    public Result getCommentByUserId(@RequestParam String userId){
+        //调用commentService的findByUserId方法查询出该用户的所有评论记录
+        List<Comment> data = commentService.findByUserId(userId);
+        //若有数据，则返回成功信息和数据
+        if(data.size()>0)  return ResultVOUtil.success(data);
+        //若没有就返回错误提示信息
+        return  ResultVOUtil.error(ResultEnum.COMMENT_USER_EMPTY);
+    }
+
+    /**
+     * 根据id更新用户评论可见性(即删除
+     * @param id  用户评论记录id（不是用户id
+     * @return
+     */
+     @PutMapping("/updateComment")
+    public Result updateComment(@RequestParam String id){
+         //调用commentService的updateById方法更新数据库，成功则返回成功信息
+         if(commentService.updateById(id)) {
+             return ResultVOUtil.success();
+         }
+         //失败则返回异常
+         return ResultVOUtil.error(ResultEnum.COMMENT_UPDATE_FAIL);
+     }
 }
