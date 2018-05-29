@@ -4,7 +4,6 @@ import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.service.UserService;
 import cn.myzqu.utils.ResultVOUtil;
 import cn.myzqu.vo.Result;
-import cn.myzqu.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
