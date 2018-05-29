@@ -66,16 +66,19 @@ public class QuestionBankServiceImplTest {
     @Autowired
     private QuestionBankService questionBankService;
 //
-//    @Test
-//    public void add() throws Exception {
-//        QuestionBank questionBank=new QuestionBank();
-//        questionBank.setTitle("4");
-//        questionBank.setIntro("2");
-//        questionBank.setImg("3");
-//        questionBank.setUserId("4");
-//        questionBank.setCategoryName("5");
-//        System.out.print(questionBankService.add(questionBank));
-//    }
+    @Test
+    public void add() throws Exception {
+        for(int i=0;i<10;i++){
+            String name = ""+"("+i+")";
+            QuestionBank questionBank=new QuestionBank();
+            questionBank.setTitle(name);
+            questionBank.setIntro(name);
+            questionBank.setUserId("82e705688305435382df908076ba3e66");
+            questionBank.setCategoryName("初级程序员");
+            System.out.print(questionBankService.add(questionBank));
+        }
+
+    }
 //
 //    @Test
 //    public void findById() throws Exception {
