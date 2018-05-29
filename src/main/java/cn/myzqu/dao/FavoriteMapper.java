@@ -1,5 +1,6 @@
 package cn.myzqu.dao;
 
+import cn.myzqu.dto.FavoriteDTO;
 import cn.myzqu.pojo.Favorite;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public interface FavoriteMapper {
      * @param userId
      * @return
      */
-    List<Favorite> selectByUserId(String userId);
+    List<FavoriteDTO> selectByUserId(String userId);
 
     /**
      * 判断是否收藏该题目

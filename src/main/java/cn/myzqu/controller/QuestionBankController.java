@@ -41,8 +41,8 @@ public class QuestionBankController {
      * @param id
      * @return
      */
-    @DeleteMapping("/info")
-    public Result deleteQuestionBank(@RequestParam String id) {
+    @DeleteMapping("/info/{id}")
+    public Result deleteQuestionBank(@PathVariable (value="id") String id) {
         if (questionBankService.deleteById(id)) {
             return ResultVOUtil.success();
         }

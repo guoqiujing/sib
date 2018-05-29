@@ -1,84 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.myzqu.dao.FavoriteMapper">
-  <resultMap id="BaseResultMap" type="cn.myzqu.pojo.Favorite">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="question_id" jdbcType="VARCHAR" property="questionId" />
-    <result column="bank_id" jdbcType="VARCHAR" property="bankId" />
-    <result column="available" jdbcType="BIT" property="available" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="cn.myzqu.pojo.Favorite">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="question_id" jdbcType="VARCHAR" property="questionId"/>
+        <result column="bank_id" jdbcType="VARCHAR" property="bankId"/>
+        <result column="available" jdbcType="BIT" property="available"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, user_id, question_id, bank_id, available, create_time
   </sql>
 
+    <!--查询题目的收藏状态-->
+    <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from favorite
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
 
-  <!--查询题目的收藏状态-->
-  <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from favorite
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-
-  <!--取消收藏题目-->
-  <delete id="deleteById" parameterType="cn.myzqu.pojo.Favorite">
+    <!--取消收藏题目-->
+    <delete id="deleteById" parameterType="cn.myzqu.pojo.Favorite">
     delete from favorite where user_id =#{userId} AND question_id=#{questionId}
   </delete>
 
-  <!--收藏题目-->
-  <insert id="insertById" parameterType="cn.myzqu.pojo.Favorite">
-    insert into favorite
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="questionId != null">
-        question_id,
-      </if>
-      <if test="bankId != null">
-        bank_id,
-      </if>
-      <if test="available != null">
-        available,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="questionId != null">
-        #{questionId,jdbcType=VARCHAR},
-      </if>
-      <if test="bankId != null">
-        #{bankId,jdbcType=VARCHAR},
-      </if>
-      <if test="available != null">
-        #{available,jdbcType=BIT},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
+    <!--收藏题目-->
+    <insert id="insertById" parameterType="cn.myzqu.pojo.Favorite">
+        insert into favorite
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="questionId != null">
+                question_id,
+            </if>
+            <if test="bankId != null">
+                bank_id,
+            </if>
+            <if test="available != null">
+                available,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="questionId != null">
+                #{questionId,jdbcType=VARCHAR},
+            </if>
+            <if test="bankId != null">
+                #{bankId,jdbcType=VARCHAR},
+            </if>
+            <if test="available != null">
+                #{available,jdbcType=BIT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
 
-  <!--查看该用户所有收藏的题目-->
-  <select id="selectByUserId" parameterType="String" resultMap="BaseResultMap">
-    SELECT * FROM favorite WHERE user_id=#{user_id}
+    <!--查看该用户所有收藏的题目-->
+    <select id="selectByUserId" parameterType="String" resultType="cn.myzqu.dto.FavoriteDTO">
+    SELECT favorite.*,choice_question.question,question_bank.title
+    FROM favorite,choice_question,question_bank
+    WHERE favorite.user_id=#{VALUE } AND favorite.question_id=choice_question.id AND favorite.bank_id=question_bank.id
   </select>
-  
-  <!--根据用户id和题目id判断是否收藏-->
-  <select id="judgeFavorite" resultMap="BaseResultMap">
+
+    <!--根据用户id和题目id判断是否收藏-->
+    <select id="judgeFavorite" resultMap="BaseResultMap">
     SELECT * FROM favorite WHERE user_id=#{arg0} and question_id=#{arg1}
   </select>
 </mapper>
