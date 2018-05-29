@@ -19,7 +19,6 @@ public  class ListToPojo {
         for(int i=0;i<list.size();i++) {
             List row = (List) list.get(i);
             ChoiceQuestion choiceQuestion = new ChoiceQuestion();
-
             choiceQuestion.setBankId(bankId);
             choiceQuestion.setUserId(userId);
             choiceQuestion.setQuestion((String)row.get(0));
@@ -28,7 +27,8 @@ public  class ListToPojo {
             choiceQuestion.setChoiceC((String)row.get(3));
             choiceQuestion.setChoiceD((String)row.get(4));
             choiceQuestion.setAnswer((String)row.get(5));
-            choiceQuestion.setAnalysis((String)row.get(6));
+            if(row.size()<6)
+                choiceQuestion.setAnalysis((String)row.get(6));
             choiceQuestions.add(choiceQuestion);
         }
         return choiceQuestions;
