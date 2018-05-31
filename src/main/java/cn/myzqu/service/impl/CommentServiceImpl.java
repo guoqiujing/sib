@@ -79,7 +79,7 @@ public class CommentServiceImpl implements CommentService{
         //注意：下面这两条语句必须紧跟，保证分页安全
         Page page = PageHelper.startPage(pageNum,pageSize);
         //调用commentMapper的selectByUserId方法查询该用户评论记录
-        List<Comment> list = commentMapper.selectByUserId(userId);
+        List<CommentDTO> list = commentMapper.selectByUserId(userId);
         //判断是否为空
         if(list.isEmpty())
             //没有数据，则返回null

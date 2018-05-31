@@ -19,4 +19,14 @@ public class CommentDTO extends Comment{
      */
     private String icon;
 
+    /**
+     * 题干
+     */
+    private String question;
+
+    /**
+     *  所属题库名称
+     */
+    private String bankTitle;
+
 }
