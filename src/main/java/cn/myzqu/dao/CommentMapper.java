@@ -33,5 +33,5 @@ public interface CommentMapper {
      * @param userId
      * @return
      */
-    List<Comment> selectByUserId(String  userId);
+    List<CommentDTO> selectByUserId(String  userId);
 }

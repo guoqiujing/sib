@@ -2,9 +2,13 @@ package cn.myzqu.service.impl;
 
 import cn.myzqu.dao.CommentMapper;
 import cn.myzqu.dto.CommentDTO;
+import cn.myzqu.dto.PageDTO;
 import cn.myzqu.pojo.Comment;
+import cn.myzqu.pojo.Rating;
 import cn.myzqu.service.CommentService;
 import cn.myzqu.utils.KeyUtil;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,15 +49,23 @@ public class CommentServiceImpl implements CommentService{
      * @return
      */
     @Override
-    public List<CommentDTO> findByQuestionId(String questionId){
+    public PageDTO findByQuestionId(String questionId,int pageNum,int pageSize){
+        //使用PageHelper插件实现分页
+        //注意：下面这两条语句必须紧跟，保证分页安全
+        Page page = PageHelper.startPage(pageNum,pageSize);
         //调用commentMapper的selectByQuestionId方法查询出该题目所有的评论记录
         List<CommentDTO> list = commentMapper.selectByQuestionId(questionId);
         if(list.isEmpty())
             //没有就返回null
             return null;
-        else
-            //若有就返回数据
-            return list;
+
+        //获取总记录数
+        int total = (int)page.getTotal();
+        //获取总页数
+        int pages = page.getPages();
+        //封装数据到分页类PageDTO
+        PageDTO pageDTO = new PageDTO(list,total,pageSize,pageNum,pages);
+        return pageDTO;
     }
 
     /**
@@ -62,16 +74,24 @@ public class CommentServiceImpl implements CommentService{
      * @return
      */
     @Override
-    public List<Comment> findByUserId(String userId){
+    public PageDTO findByUserId(String userId,int pageNum,int pageSize){
+        //使用PageHelper插件实现分页
+        //注意：下面这两条语句必须紧跟，保证分页安全
+        Page page = PageHelper.startPage(pageNum,pageSize);
         //调用commentMapper的selectByUserId方法查询该用户评论记录
-        List<Comment> list = commentMapper.selectByUserId(userId);
+        List<CommentDTO> list = commentMapper.selectByUserId(userId);
         //判断是否为空
         if(list.isEmpty())
             //没有数据，则返回null
             return null;
-        else
-            //有则返回list数据
-            return list;
+
+        //获取总记录数
+        int total = (int)page.getTotal();
+        //获取总页数
+        int pages = page.getPages();
+        //封装数据到分页类PageDTO
+        PageDTO pageDTO = new PageDTO(list,total,pageSize,pageNum,pages);
+        return pageDTO;
     }
 
     /**

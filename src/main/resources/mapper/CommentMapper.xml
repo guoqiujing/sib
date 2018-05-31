@@ -34,12 +34,25 @@
   </select>
 
   <!--根据用户id查询评论记录-->
-  <select id="selectByUserId" parameterType="java.lang.String" resultType="cn.myzqu.pojo.Comment">
+  <select id="selectByUserId" parameterType="java.lang.String" resultType="cn.myzqu.dto.CommentDTO">
       SELECT
-      <include refid="Base_Column_List" />
+
+      comment.*,
+
+      question_bank.title as bank_title ,
+
+      choice_question.question as question
+
       FROM comment
-      WHERE user_id = #{userId,jdbcType=VARCHAR} AND available = 0
-      ORDER BY create_time DESC
+
+      INNER JOIN question_bank ON comment.bank_id = question_bank.id
+
+      INNER JOIN choice_question ON comment.question_id = choice_question.id
+
+      WHERE comment.user_id = #{userId,jdbcType=VARCHAR} AND comment.available = 0
+
+      ORDER BY comment.create_time DESC
+
   </select>
 
   <!--添加用户评论-->

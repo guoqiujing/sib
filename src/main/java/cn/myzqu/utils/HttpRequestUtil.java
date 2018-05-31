@@ -21,7 +21,7 @@ public class HttpRequestUtil {
      * @return
      * @throws IOException
      */
-    public static String get(String urlParam, Map<String, Object> params) throws IOException {
+    public static String get(String urlParam, Map<String, Object> params)  {
 
         StringBuffer resultBuffer = null;
         StringBuffer sbParams = new StringBuffer();
@@ -62,8 +62,16 @@ public class HttpRequestUtil {
             throw new RuntimeException(e);
         } finally {
             //关闭连接
-            if(br!=null) br.close();
-            if(osw!=null) osw.close();
+            if(br!=null) try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if(osw!=null) try {
+                osw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             if(con!=null) con.disconnect();
         }
         return resultBuffer.toString();

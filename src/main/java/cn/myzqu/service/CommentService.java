@@ -1,6 +1,7 @@
 package cn.myzqu.service;
 
 import cn.myzqu.dto.CommentDTO;
+import cn.myzqu.dto.PageDTO;
 import cn.myzqu.pojo.Comment;
 
 import java.util.List;
@@ -23,14 +24,14 @@ public interface CommentService {
      * @param questionId
      * @return
      */
-    List<CommentDTO> findByQuestionId(String questionId);
+    PageDTO findByQuestionId(String questionId, int pageNum, int pageSize);
 
     /**
      * 根据用户id查询该用户所有的评论记录
      * @param userId
      * @return
      */
-    List<Comment> findByUserId(String userId);
+    PageDTO findByUserId(String userId, int pageNum, int pageSize);
 
     /**
      * 根据id更新用户评论可见性
