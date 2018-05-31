@@ -30,6 +30,13 @@ public class AttendanceController {
     @Autowired
     private PointsService pointsService;
 
+    /**
+     * 用户签到
+     * @param userId
+     * @param request
+     * @return
+     * @throws IOException
+     */
     @PostMapping("/sign")
     public Result sign(@RequestParam String userId, HttpServletRequest request) throws IOException
     {
@@ -50,6 +57,11 @@ public class AttendanceController {
             return ResultVOUtil.error(ResultEnum.USER_SIGN_FAIL);
     }
 
+    /**
+     * 查询用户签到状态
+     * @param userId
+     * @return
+     */
     @GetMapping("/state")
         public Result findSignByUser(@RequestParam String userId)
         {

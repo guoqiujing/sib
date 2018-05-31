@@ -10,9 +10,25 @@ import java.io.IOException;
  */
 public interface AttendanceService {
 
-    Boolean sign(Attendance attendance) throws IOException;//用户签到
+    /**
+     * 用户签到
+     * @param attendance
+     * @return
+     * @throws IOException
+     */
+    Boolean sign(Attendance attendance) throws IOException;
 
-    Boolean selectSignByUser(String userId);//查询是否签到
+    /**
+     * 查询是否签到
+     * @param userId
+     * @return
+     */
+    Boolean selectSignByUser(String userId);
 
-    Attendance findSignByUser(String userId);//得到用户签到状态
+    /**
+     * 得到用户签到状态
+     * @param userId
+     * @return
+     */
+    Attendance findSignByUser(String userId);
 }

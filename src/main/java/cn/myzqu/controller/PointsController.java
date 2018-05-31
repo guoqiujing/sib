@@ -25,20 +25,6 @@ public class PointsController {
     private PointsService pointsService;
 
     /**
-     * 用户签到
-     * @param userId
-     * @return
-     */
-    @PostMapping("/sign")
-    public Result Sign(@RequestParam String userId)
-    {
-        if(pointsService.sign(userId))
-            return ResultVOUtil.success();
-        else
-            return ResultVOUtil.error(ResultEnum.USER_SIGN_FAIL);
-    }
-
-    /**
      * 用户分享小程序
      * @param userId
      * @return

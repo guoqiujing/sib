@@ -5,11 +5,21 @@ import cn.myzqu.pojo.Attendance;
 public interface AttendanceMapper {
     int deleteByPrimaryKey(String id);
 
-    int signByUser(Attendance attendance);//用户签到
+    /**
+     * 用户签到
+     * @param attendance
+     * @return
+     */
+    int signByUser(Attendance attendance);
 
     Attendance selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(Attendance record);
 
-    Attendance selectSignByUser(String userId);//查询今天是否签到
+    /**
+     * 根据用户id查询今天是否签到
+     * @param userId
+     * @return
+     */
+    Attendance selectSignByUser(String userId);
 }
