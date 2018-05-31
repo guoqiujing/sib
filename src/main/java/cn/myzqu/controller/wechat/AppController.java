@@ -8,9 +8,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -26,7 +24,7 @@ public class AppController {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @GetMapping("/openid")
-    public Result getOpenId(String code) throws IOException {
+    public Result getOpenId(String code) {
         //向腾讯服务器请求获取用户openid
         //请求地址
         String urlParam = "https://api.weixin.qq.com/sns/jscode2session";
@@ -50,5 +48,14 @@ public class AppController {
         return ResultVOUtil.error(9000,"获取用户openid错误");
     }
 
-
+    /**
+     * 获取小程序的token
+     * @return
+     */
+    @GetMapping("/token")
+    public Result getToken() {
+        Map<String,Object> data = new HashMap<>();
+        data.put("token",App.getTOKEN());
+        return ResultVOUtil.success(data);
+    }
 }
