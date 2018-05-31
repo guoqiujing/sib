@@ -1,5 +1,8 @@
 package cn.myzqu.pojo;
 
+import cn.myzqu.utils.Serializer.CustomDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import java.util.Date;
 
 public class Rating {
@@ -15,6 +18,7 @@ public class Rating {
 
     private Boolean available;
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date createTime;
 
     public String getId() {

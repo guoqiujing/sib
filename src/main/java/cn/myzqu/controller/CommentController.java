@@ -1,6 +1,7 @@
 package cn.myzqu.controller;
 
 import cn.myzqu.dto.CommentDTO;
+import cn.myzqu.dto.PageDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.pojo.Comment;
 import cn.myzqu.service.CommentService;
@@ -45,13 +46,15 @@ public class CommentController {
      * @return
      */
     @GetMapping("/getComment")
-    public Result getCommentByQusetionId(@RequestParam String questionId){
+    public Result getCommentByQusetionId(@RequestParam String questionId,
+                                         @RequestParam(value="page",defaultValue = "1") Integer page,
+                                         @RequestParam(value = "size",defaultValue = "10") Integer size){
         //调用commentService的findByQuestionId方法查询出该题目的所有用户的评论记录
-        List<CommentDTO> data = commentService.findByQuestionId(questionId);
-        //若有数据，则返回成功信息和数据
-        if(data.size()>0)  return ResultVOUtil.success(data);
+        PageDTO data = commentService.findByQuestionId(questionId,page,size);
         //若没有就返回错误提示信息
-        return  ResultVOUtil.error(ResultEnum.COMMENT_EMPTY);
+        if(data==null)  return ResultVOUtil.error(ResultEnum.COMMENT_EMPTY);
+        //若有数据，则返回成功信息和数据
+        return  ResultVOUtil.success(data);
     }
 
     /**
@@ -60,13 +63,15 @@ public class CommentController {
      * @return
      */
     @GetMapping("/getUserComment")
-    public Result getCommentByUserId(@RequestParam String userId){
+    public Result getCommentByUserId(@RequestParam String userId,
+                                     @RequestParam(value="page",defaultValue = "1") Integer page,
+                                     @RequestParam(value = "size",defaultValue = "10") Integer size){
         //调用commentService的findByUserId方法查询出该用户的所有评论记录
-        List<Comment> data = commentService.findByUserId(userId);
-        //若有数据，则返回成功信息和数据
-        if(data.size()>0)  return ResultVOUtil.success(data);
+        PageDTO data = commentService.findByUserId(userId,page,size);
         //若没有就返回错误提示信息
-        return  ResultVOUtil.error(ResultEnum.COMMENT_USER_EMPTY);
+        if(data==null)  ResultVOUtil.error(ResultEnum.COMMENT_USER_EMPTY);
+        //若有数据，则返回成功信息和数据
+        return ResultVOUtil.success(data);
     }
 
     /**
