@@ -46,7 +46,6 @@ public class AttendanceController {
         attendance.setId(KeyUtil.getUUID());
         attendance.setIp(ip);
         attendance.setUserId(userId);
-        attendance.setIp(ip);
         attendance.setAddress(address);
         //用户添加到签到记录
         if(attendanceService.sign(attendance)) {
