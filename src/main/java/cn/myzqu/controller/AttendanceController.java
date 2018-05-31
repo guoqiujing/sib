@@ -55,7 +55,6 @@ public class AttendanceController {
         else
             return ResultVOUtil.error(ResultEnum.USER_SIGN_FAIL);
     }
-
     /**
      * 查询用户签到状态
      * @param userId
