@@ -12,4 +12,11 @@ public interface StatisticsService {
      * @return
      */
     double reckonStareLevel(String questionId);
+
+    /**
+     * 计算题库星级平均值
+     * @param bankId
+     * @return
+     */
+    double reckonBankStareLevel(String bankId);
 }
