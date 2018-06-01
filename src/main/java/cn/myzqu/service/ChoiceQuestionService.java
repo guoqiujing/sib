@@ -81,4 +81,6 @@ public interface ChoiceQuestionService {
     Boolean check(ChoiceQuestion choiceQuestion);
 
     List<ChoiceDTO> findByUserBankId(String id);
+
+    Boolean updateChoiceRating();//批量更新题目评分
 }

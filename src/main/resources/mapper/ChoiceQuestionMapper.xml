@@ -252,4 +252,9 @@
     from choice_question,question_bank
     where choice_question.bank_id=question_bank.id and bank_id=#{bank_id}
   </select>
+
+  <!--显示题目id-->
+  <select id="selectAllChoice" resultType="cn.myzqu.pojo.ChoiceQuestion">
+    SELECT * FROM choice_question
+  </select>
 </mapper>

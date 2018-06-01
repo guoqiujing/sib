@@ -13,6 +13,7 @@ import cn.myzqu.pojo.ChoiceQuestion;
 import cn.myzqu.pojo.Favorite;
 import cn.myzqu.pojo.Rating;
 import cn.myzqu.service.ChoiceQuestionService;
+import cn.myzqu.service.StatisticsService;
 import cn.myzqu.utils.KeyUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -40,6 +41,9 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
 
     @Autowired
     private RatingMapper ratingMapper;
+
+    @Autowired
+    private StatisticsService statisticsService;
 
     @Override
     public ChoiceQuestion findById(String id) {
@@ -151,5 +155,32 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
     public List<ChoiceDTO> findByUserBankId(String id) {
         //根据题库id查询题库
         return choiceQuestionMapper.selectByUserBankId(id);
+    }
+
+    @Override
+    public Boolean updateChoiceRating() {
+        //获得所有题目
+        List<ChoiceQuestion> choiceQuestions=choiceQuestionMapper.selectAllChoice();
+        //定义更新次数
+        int size=0;
+        for(int i=0;i<choiceQuestions.size();i++)
+        {
+            //获得题目对象
+            ChoiceQuestion choiceQuestion=choiceQuestions.get(i);
+            //获得题目id
+            String id=choiceQuestion.getId();
+            //获得更新后的题目评分
+            double starLevel=statisticsService.reckonStareLevel(id);
+            //更新题目评分
+            choiceQuestion.setStarLevel(starLevel);
+            if(choiceQuestionMapper.updateById(choiceQuestion)>0) {
+                size = size + 1;
+            }
+        }
+        //判断是否批量更新成功
+        if(size==choiceQuestions.size())
+            return true;
+        else
+            return false;
     }
 }
