@@ -16,6 +16,11 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class ChoiceQuestionServiceImplTest {
     @Test
+    public void updateChoiceRating() throws Exception {
+        System.out.println(choiceQuestionService.updateChoiceRating());
+    }
+
+    @Test
     public void findById() throws Exception {
         String id="1";
         System.out.print(choiceQuestionService.findById(id));
