@@ -87,4 +87,6 @@ public interface QuestionBankMapper {
     List<BankDTO> searchByTitle(String title);
 
     int countAllChoiceByBank();
+
+    int insertPractiseByBankId(String id);//根据题库id练习人数+1
 }

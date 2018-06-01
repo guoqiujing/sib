@@ -249,4 +249,9 @@
   <select id="searchByTitle" resultMap="BaseAndCountResultMap" parameterType="String">
     SELECT * FROM question_bank WHERE title LIKE '%${value}%'
   </select>
+  
+  <!--根据题库id练习人数+1-->
+  <update id="insertPractiseByBankId" parameterType="String">
+    UPDATE question_bank SET frequency=frequency+1 WHERE id=#{id};
+  </update>
 </mapper>
