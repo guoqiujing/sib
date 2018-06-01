@@ -99,7 +99,7 @@
 
   <!--用户查看个人积分记录-->
   <select id="selectByUserId" parameterType="String" resultMap="BaseResultMap">
-    SELECT * FROM points WHERE user_id=#{user_id}
+    SELECT * FROM points WHERE user_id=#{user_id} ORDER BY create_time DESC
   </select>
 
   <!--浏览用户的积分记录-->

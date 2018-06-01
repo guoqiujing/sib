@@ -84,7 +84,6 @@ public enum ResultEnum {
     COMMENT_FAIL(11000,"评论失败了呢，请稍后重试"),
     COMMENT_USER_EMPTY(12000,"你还有评论过题目哦"),
     COMMENT_UPDATE_FAIL(13000,"删除失败了呢，请稍后重试"),
-
     ;
 
     private Integer code;

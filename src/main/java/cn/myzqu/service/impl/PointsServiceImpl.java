@@ -46,12 +46,6 @@ public class PointsServiceImpl implements PointsService {
     }
 
     @Override
-    public Points signByUser(String userId) {
-        //查询该用户今天是否已签到
-        return pointsMapper.signByUser(userId);
-    }
-
-    @Override
     public Boolean checkChoice(String userId) {
         Points points=new Points();
         points.setId(KeyUtil.getUUID());
@@ -150,15 +144,12 @@ public class PointsServiceImpl implements PointsService {
 
     @Override
     public Boolean sign(String userId) {
-        //查询该用户今日是否已签到
-        if(signByUser(userId)!=null)
-            throw new CustomException(ResultEnum.USER_SIGN_EXIST);
         Points points=new Points();
         points.setId(KeyUtil.getUUID());
         points.setUserId(userId);
         points.setValue(5);
         points.setNote("用户签到");
-        //用户签到
+        //添加到用户签到记录
         if(pointsMapper.insert(points)>0)
             return true;
         else

@@ -27,13 +27,6 @@ public interface PointsService {
     Boolean sign(String userId);
 
     /**
-     * 查询该用户今天是否已签到
-     * @param userId
-     * @return
-     */
-    Points signByUser(String userId);
-
-    /**
      * 用户上传题目审核后加分
      * @param userId
      * @return
