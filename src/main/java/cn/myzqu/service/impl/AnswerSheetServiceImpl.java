@@ -1,6 +1,7 @@
 package cn.myzqu.service.impl;
 
 import cn.myzqu.dao.AnswerSheetMapper;
+import cn.myzqu.dao.QuestionBankMapper;
 import cn.myzqu.dto.*;
 import cn.myzqu.pojo.AnswerSheet;
 import cn.myzqu.service.AnswerSheetService;
@@ -23,13 +24,18 @@ public class AnswerSheetServiceImpl implements AnswerSheetService {
 
     @Autowired
     private AnswerSheetMapper answerSheetMapper;
+    @Autowired
+    private QuestionBankMapper questionBankMapper;
 
     @Override
     public Boolean add(AnswerSheet answerSheet) {
         //生成记录id
         answerSheet.setId(KeyUtil.getUUID());
         //调用answerSheetMapper插入记录,成功返回true
-        if (answerSheetMapper.insert(answerSheet)>0) return true;
+        if (answerSheetMapper.insert(answerSheet)>0) {
+            questionBankMapper.insertPractiseByBankId(answerSheet.getBankId());
+            return true;
+        }
         //否则返回false
         return false;
     }
