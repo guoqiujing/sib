@@ -92,4 +92,10 @@ public interface QuestionBankService
      * @return
      */
     PageDTO searchByTitle(String title,int pageNum, int pageSize);
+
+    /**
+     * 批量更新题库评分
+     * @return
+     */
+    Boolean updateBankRating();
 }

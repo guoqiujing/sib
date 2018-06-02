@@ -254,4 +254,9 @@
   <update id="insertPractiseByBankId" parameterType="String">
     UPDATE question_bank SET frequency=frequency+1 WHERE id=#{id};
   </update>
+
+  <!--显示所有题库-->
+  <select id="selectAllBank" resultType="BaseResultMap">
+    SELECT * FROM question_bank
+  </select>
 </mapper>

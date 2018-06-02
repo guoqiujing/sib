@@ -8,6 +8,7 @@ import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.exception.CustomException;
 import cn.myzqu.pojo.QuestionBank;
 import cn.myzqu.service.QuestionBankService;
+import cn.myzqu.service.StatisticsService;
 import cn.myzqu.utils.KeyUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -33,6 +34,9 @@ public class QuestionBankServiceImpl implements QuestionBankService {
 
     @Autowired
     private QuestionBankMapper questionBankMapper;
+
+    @Autowired
+    private StatisticsService statisticsService;
 
     @Override
     public Boolean add(QuestionBank questionBank) {
@@ -135,6 +139,30 @@ public class QuestionBankServiceImpl implements QuestionBankService {
         int pages = page.getPages();
         PageDTO pageDTO = new PageDTO(bankDTOS,total,pageSize,pageNum,pages);
         return pageDTO;
+    }
+
+    @Override
+    public Boolean updateBankRating() {
+        //获得所有题库对象
+       List<QuestionBank> questionBanks=questionBankMapper.selectAllBank();
+        //定义更新次数
+        int size=0;
+       //遍历所有题库对象
+       for(int i=0;i<questionBanks.size();i++)
+       {
+           QuestionBank questionBank=questionBanks.get(i);
+           String id=questionBank.getId();
+           Double starLevel=statisticsService.reckonBankStareLevel(id);
+           questionBank.setStarLevel(starLevel);
+           //更新题库评分
+           if(questionBankMapper.updateById(questionBank)>0)
+               size=size+1;
+       }
+       //判断是否更新成功
+        if(size==questionBanks.size())
+            return true;
+       else
+           return false;
     }
 
     @Override

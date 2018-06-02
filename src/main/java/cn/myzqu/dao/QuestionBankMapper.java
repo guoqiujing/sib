@@ -88,5 +88,12 @@ public interface QuestionBankMapper {
 
     int countAllChoiceByBank();
 
-    int insertPractiseByBankId(String id);//根据题库id练习人数+1
+    /**
+     * 根据题库id练习人数+1
+     * @param id
+     * @return
+     */
+    int insertPractiseByBankId(String id);
+
+    List<QuestionBank> selectAllBank();//显示所有题库
 }
