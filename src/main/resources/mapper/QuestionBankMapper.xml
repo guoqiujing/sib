@@ -256,7 +256,7 @@
   </update>
 
   <!--显示所有题库-->
-  <select id="selectAllBank" resultType="BaseResultMap">
+  <select id="selectAllBank" resultMap="BaseResultMap">
     SELECT * FROM question_bank
   </select>
 </mapper>
