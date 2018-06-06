@@ -3,6 +3,7 @@ package cn.myzqu.service.impl;
 import cn.myzqu.dao.PointsMapper;
 import cn.myzqu.dto.ChoiceDTO;
 import cn.myzqu.dto.PageDTO;
+import cn.myzqu.dto.PointsDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.exception.CustomException;
 import cn.myzqu.pojo.Points;
