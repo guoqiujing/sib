@@ -27,6 +27,7 @@ public class StatisticsServiceImpl implements StatisticsService{
         double sum = 0;
         //调用ratingMapper的selectByQuestionId查询该题目的所有用户星级评价的记录
         List<Rating> list = ratingMapper.selectByQuestionId(questionId);
+        System.err.println(list.size());
         //判断是否有用户星级评定记录
         if(list.size()>0){
             //有则计算星级平均数
@@ -56,17 +57,18 @@ public class StatisticsServiceImpl implements StatisticsService{
         if(list.size()>0){
             //有则计算星级平均数
             for (int i=0;i<list.size();i++) {
+                //判断这个题目有没有评分
                 if(list.get(i).getStarLevel()!=0) {
                     sum = sum + list.get(i).getStarLevel();
                     count++;
                 }
             }
-            sum = sum/count;
+            if(count!=0)
+              sum = sum/count;
             //返回星级平均数
             return sum;
         }
         //没有则返回默认星级 0
-
         return sum;
     }
 }
