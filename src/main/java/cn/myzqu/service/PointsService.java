@@ -71,5 +71,5 @@ public interface PointsService {
 
     Boolean ChoiceByGrade(String userId);//用户评级题目后增加积分
 
-//    PointsDTO calUserPoints(String userId);//计算用户积分
+    PointsDTO calUserPoints(String userId);//计算用户积分
 }

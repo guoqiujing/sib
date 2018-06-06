@@ -1,6 +1,7 @@
 package cn.myzqu.controller;
 
 import cn.myzqu.dto.PageDTO;
+import cn.myzqu.dto.PointsDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.pojo.Points;
 import cn.myzqu.service.PointsService;
@@ -105,5 +106,20 @@ public class PointsController {
             return ResultVOUtil.success();
         else
             return ResultVOUtil.error(ResultEnum.POINT_ADD_FAIL);
+    }
+
+    /**
+     * 根据用户id查询用户积分
+     * @param userId
+     * @return
+     */
+    @GetMapping("/points")
+    public Result calUserPoints(@RequestParam String userId)
+    {
+        PointsDTO pointsDTO=pointsService.calUserPoints(userId);
+        if(pointsDTO!=null)
+            return ResultVOUtil.success(pointsDTO);
+        else
+            return ResultVOUtil.error(ResultEnum.POINT_USER_FALL);
     }
 }
