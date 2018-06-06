@@ -144,6 +144,15 @@ public class PointsServiceImpl implements PointsService {
     }
 
     @Override
+    public PointsDTO calUserPoints(String userId) {
+        PointsDTO pointsDTO=new PointsDTO();
+        //计算用户积分
+        int points=pointsMapper.selectUserPoints(userId);
+        pointsDTO.setPoints(points);
+        return pointsDTO;
+    }
+
+    @Override
     public Boolean sign(String userId) {
         Points points=new Points();
         points.setId(KeyUtil.getUUID());
