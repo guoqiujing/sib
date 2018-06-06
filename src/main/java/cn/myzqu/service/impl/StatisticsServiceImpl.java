@@ -49,15 +49,19 @@ public class StatisticsServiceImpl implements StatisticsService{
      */
     public double reckonBankStareLevel(String bankId){
         double sum = 0;
+        int count=0;
         //调用choiceQuestionMapper的selectByBankId方法查询出这个题库的所有题目
         List<ChoiceDTO> list = choiceQuestionMapper.selectByBankId(bankId);
         //判断是否有题目
         if(list.size()>0){
             //有则计算星级平均数
             for (int i=0;i<list.size();i++) {
-                sum = sum + list.get(i).getStarLevel();
+                if(list.get(i).getStarLevel()==0) {
+                    sum = sum + list.get(i).getStarLevel();
+                    count++;
+                }
             }
-            sum = sum/list.size();
+            sum = sum/count;
             //返回星级平均数
             return sum;
         }

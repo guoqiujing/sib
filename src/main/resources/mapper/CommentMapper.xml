@@ -55,6 +55,13 @@
 
   </select>
 
+  <!--查询所有用户评论记录-->
+  <select id="selectAllComment" resultMap="BaseResultMap">
+    SELECT *
+    FROM comment
+    ORDER BY create_time DESC
+  </select>
+
   <!--添加用户评论-->
   <insert id="insert" parameterType="cn.myzqu.pojo.Comment">
     insert into comment

@@ -33,5 +33,10 @@ public interface CommentMapper {
      * @param userId
      * @return
      */
-    List<CommentDTO> selectByUserId(String  userId);
+    List<CommentDTO> selectByUserId(String userId);
+
+    /**
+     * 查询所有用户评论记录
+     */
+    List<Comment> selectAllComment();
 }
