@@ -56,7 +56,7 @@ public class StatisticsServiceImpl implements StatisticsService{
         if(list.size()>0){
             //有则计算星级平均数
             for (int i=0;i<list.size();i++) {
-                if(list.get(i).getStarLevel()==0) {
+                if(list.get(i).getStarLevel()!=0) {
                     sum = sum + list.get(i).getStarLevel();
                     count++;
                 }
