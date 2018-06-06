@@ -111,4 +111,9 @@
   <select id="selectUserByTime" parameterType="Map" resultMap="BaseResultMap">
     SELECT * FROM points WHERE user_id=1  AND create_time  BETWEEN #{first} AND #{end}
   </select>
+
+  <!--计算用户积分总数-->
+  <select id="selectUserPoints" parameterType="String" resultType="int">
+    SELECT SUM(VALUE) FROM points WHERE user_id=#{VALUE }
+  </select>
 </mapper>

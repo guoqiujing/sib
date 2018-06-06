@@ -54,4 +54,6 @@ public interface PointsMapper {
      * @return
      */
     List<Points> selectUserByTime(Map<String,Object> map);
+
+    int selectUserPoints(String userId);//计算用户积分
 }

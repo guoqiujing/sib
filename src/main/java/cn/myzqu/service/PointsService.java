@@ -1,6 +1,7 @@
 package cn.myzqu.service;
 
 import cn.myzqu.dto.PageDTO;
+import cn.myzqu.dto.PointsDTO;
 import cn.myzqu.pojo.Points;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
@@ -69,4 +70,6 @@ public interface PointsService {
     Boolean addUser(List<Points> points);//批量增加用户积分
 
     Boolean ChoiceByGrade(String userId);//用户评级题目后增加积分
+
+//    PointsDTO calUserPoints(String userId);//计算用户积分
 }
