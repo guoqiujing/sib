@@ -79,7 +79,7 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
         if(findById(id)==null)
             throw new CustomException(ResultEnum.QUESTION_NOT_EXIST);
         ChoiceQuestion choiceQuestion=choiceQuestionMapper.selectById(id);
-        choiceQuestion.setStatus(2);
+        choiceQuestion.setStatus(3);
         if(choiceQuestionMapper.updateById(choiceQuestion)>0)
             return true;
         else
