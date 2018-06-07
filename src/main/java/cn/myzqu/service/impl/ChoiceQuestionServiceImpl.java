@@ -5,6 +5,7 @@ import cn.myzqu.dao.ChoiceQuestionMapper;
 import cn.myzqu.dao.FavoriteMapper;
 import cn.myzqu.dao.PointsMapper;
 import cn.myzqu.dao.RatingMapper;
+import cn.myzqu.dto.BankDTO;
 import cn.myzqu.dto.ChoiceDTO;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.enums.ResultEnum;
@@ -183,5 +184,16 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
             return true;
         else
             return false;
+    }
+
+    @Override
+    public PageDTO findByUserId(String id, int pageNum, int pageSize) {
+        Page page = PageHelper.startPage(pageNum,pageSize);
+        List<ChoiceDTO> choiceDTOS=choiceQuestionMapper.selectByUserId(id);
+        if(choiceDTOS.isEmpty()) return null;
+        int total = (int)page.getTotal();
+        int pages = page.getPages();
+        PageDTO pageDTO = new PageDTO(choiceDTOS,total,pageSize,pageNum,pages);
+        return pageDTO;
     }
 }

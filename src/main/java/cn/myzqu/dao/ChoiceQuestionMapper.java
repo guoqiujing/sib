@@ -62,4 +62,6 @@ public interface ChoiceQuestionMapper {
     List<ChoiceDTO> selectByUserBankId(String id);
 
     List<ChoiceQuestion> selectAllChoice();//显示题目
+
+    List<ChoiceDTO> selectByUserId(String userId);//根据用户id查询题目
 }

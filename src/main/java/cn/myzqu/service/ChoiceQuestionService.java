@@ -83,4 +83,6 @@ public interface ChoiceQuestionService {
     List<ChoiceDTO> findByUserBankId(String id);
 
     Boolean updateChoiceRating();//批量更新题目评分
+
+    PageDTO findByUserId(String id,int pageNum, int pageSize);//根据用户id查询题目
 }

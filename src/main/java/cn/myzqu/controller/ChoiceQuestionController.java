@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +46,6 @@ public class ChoiceQuestionController {
 
     /**
      * 根据题目id删除题目
-     *
      * @param id
      * @return
      */
@@ -60,7 +60,6 @@ public class ChoiceQuestionController {
 
     /**
      * 根据题目id查询题目
-     *
      * @param id
      * @return
      */
@@ -77,7 +76,6 @@ public class ChoiceQuestionController {
 
     /**
      * 根据题目id修改题目
-     *
      * @param choiceQuestion
      * @return
      */
@@ -175,5 +173,29 @@ public class ChoiceQuestionController {
             return ResultVOUtil.error(ResultEnum.QUESTION_NOT_EXIST);
         else
             return ResultVOUtil.success(choiceDTOS);
+    }
+
+    /**
+     * 根据用户id查询题目
+     * @param id
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("/list/way/user")
+    public Map<String,Object> getByUid(@RequestParam String id,
+                                       @RequestParam(value="page",defaultValue = "1") Integer page,
+                                       @RequestParam(value = "size",defaultValue = "10") Integer size) {
+        PageDTO pageDTO = choiceQuestionService.findByUserId(id,page,size);
+        Map<String,Object> result = new HashMap<>();
+        if(pageDTO!=null){
+            result.put("code",0);
+            result.put("data",pageDTO.getRows());
+            result.put("count",pageDTO.getTotal());
+            return result;
+        }
+        result.put("code",525);
+        result.put("msg","没有查询到题目");
+        return result;
     }
 }
