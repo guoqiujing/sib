@@ -1,6 +1,7 @@
 package cn.myzqu.service.impl;
 
 import cn.myzqu.dao.BuyMapper;
+import cn.myzqu.dto.PointsDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.exception.CustomException;
 import cn.myzqu.pojo.Buy;
@@ -31,14 +32,20 @@ public class BuyServiceImpl implements BuyService {
         //判断用户是否购买过该题库
         if(findByUser(userId,bankId)!=null)
             throw new CustomException(ResultEnum.BANK_BUY_EXIST);
-        //购买题库
-        if(buyMapper.insertSelective(buy)>0) {
-            //添加到积分记录
-            pointsService.buyBank(userId,points);
-            return true;
-        }
+        //判断是否够积分购买题库
+        PointsDTO pointsDTO=pointsService.calUserPoints(userId);
+        int now=pointsDTO.getPoints();
+        if(now+points<0)
+            throw new CustomException(ResultEnum.POINT_NOT_ENOUGHT);
+            //购买题库
+            if (buyMapper.insertSelective(buy) > 0) {
+                //添加到积分记录
+                pointsService.buyBank(userId, points);
+                return true;
+            }
             else
-            return false;
+                return false;
+
     }
 
     @Override

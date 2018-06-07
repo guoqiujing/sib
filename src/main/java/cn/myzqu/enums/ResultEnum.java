@@ -76,6 +76,7 @@ public enum ResultEnum {
     POINT_NOT_EXIST(8000,"积分记录不存在"),
     POINT_ADD_FAIL(8001,"批量增加用户积分失败"),
     POINT_USER_FALL(8002,"用户积分查询失败"),
+    POINT_NOT_ENOUGHT(8003,"用户积分不够"),
 
     //题目星级类
     RATING_COMPLETION(9000,"你已经评价过该题的星级啦"),
