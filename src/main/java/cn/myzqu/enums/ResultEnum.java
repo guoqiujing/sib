@@ -17,6 +17,7 @@ public enum ResultEnum {
     BANK_DELETE_FAIL(2002,"删除题库失败"),
     BANK_BUY_EXIST(2003,"该题库已购买"),
     BANK_BUY_FAIL(2004,"该题库购买失败"),
+    BANK_IS_EXIST(2005,"该题库是自己的"),
 
     BANK_NOT_EXIST(2100,"题库不存在"),
 

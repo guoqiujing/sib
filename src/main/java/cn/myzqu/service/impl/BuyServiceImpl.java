@@ -57,6 +57,11 @@ public class BuyServiceImpl implements BuyService {
 
     @Override
     public Buy findByUser(String userId, String bankId) {
+        QuestionBank questionBank=questionBankService.findById(bankId);
+        String id=questionBank.getUserId();
+        //判断是否为自己的题库
+        if(id.equals(userId))
+            throw new CustomException(ResultEnum.BANK_IS_EXIST);
         //查询是否已购买该题库
       return buyMapper.selectByUser(userId,bankId);
     }
