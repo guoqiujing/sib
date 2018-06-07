@@ -15,6 +15,8 @@ public enum ResultEnum {
     BANK_CREATE_FAIL(2000,"创建题库失败"),
     BANK_UPDATE_FAIL(2001,"更新题库失败"),
     BANK_DELETE_FAIL(2002,"删除题库失败"),
+    BANK_BUY_EXIST(2003,"该题库已购买"),
+    BANK_BUY_FAIL(2004,"该题库购买失败"),
 
     BANK_NOT_EXIST(2100,"题库不存在"),
 
@@ -85,6 +87,9 @@ public enum ResultEnum {
     COMMENT_FAIL(11000,"评论失败了呢，请稍后重试"),
     COMMENT_USER_EMPTY(12000,"你还有评论过题目哦"),
     COMMENT_UPDATE_FAIL(13000,"删除失败了呢，请稍后重试"),
+
+    //购买题库类
+    BUY_BANK_EMPTY(14000,"查询不到购买记录"),
     ;
 
     private Integer code;

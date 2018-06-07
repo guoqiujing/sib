@@ -1,5 +1,8 @@
 package cn.myzqu.pojo;
 
+import cn.myzqu.utils.Serializer.CustomDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import java.util.Date;
 
 public class Buy {
@@ -13,8 +16,10 @@ public class Buy {
 
     private Byte status;
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date createTime;
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date updateTime;
 
     public Long getId() {
@@ -71,5 +76,18 @@ public class Buy {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Buy{" +
+                "id=" + id +
+                ", user='" + user + '\'' +
+                ", bank='" + bank + '\'' +
+                ", point=" + point +
+                ", status=" + status +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 }

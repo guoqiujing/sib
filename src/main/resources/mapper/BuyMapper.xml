@@ -13,24 +13,20 @@
   <sql id="Base_Column_List" >
     id, user, bank, point, status, create_time, update_time
   </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from buy
     where id = #{id,jdbcType=BIGINT}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from buy
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="cn.myzqu.pojo.Buy" >
-    insert into buy (id, user, bank, 
-      point, status, create_time, 
-      update_time)
-    values (#{id,jdbcType=BIGINT}, #{user,jdbcType=VARCHAR}, #{bank,jdbcType=VARCHAR}, 
-      #{point,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
-  </insert>
+
+  <!--购买题库-->
   <insert id="insertSelective" parameterType="cn.myzqu.pojo.Buy" >
     insert into buy
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -80,6 +76,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="cn.myzqu.pojo.Buy" >
     update buy
     <set >
@@ -104,14 +101,9 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.myzqu.pojo.Buy" >
-    update buy
-    set user = #{user,jdbcType=VARCHAR},
-      bank = #{bank,jdbcType=VARCHAR},
-      point = #{point,jdbcType=INTEGER},
-      status = #{status,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+
+  <!--判断是否购买题库-->
+  <select id="selectByUser" parameterType="String" resultMap="BaseResultMap">
+  SELECT * FROM buy WHERE user=#{arg0} AND bank=#{arg1}
+  </select>
 </mapper>

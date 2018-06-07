@@ -153,6 +153,20 @@ public class PointsServiceImpl implements PointsService {
     }
 
     @Override
+    public Boolean buyBank(String userId,int point) {
+        Points points=new Points();
+        points.setId(KeyUtil.getUUID());
+        points.setValue(point);
+        points.setUserId(userId);
+        points.setNote("用户购买题库");
+        //用户购买题库
+        if(pointsMapper.insert(points)>0)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
     public Boolean sign(String userId) {
         Points points=new Points();
         points.setId(KeyUtil.getUUID());
