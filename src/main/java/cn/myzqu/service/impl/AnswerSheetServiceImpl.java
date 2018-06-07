@@ -30,10 +30,16 @@ public class AnswerSheetServiceImpl implements AnswerSheetService {
 
     @Override
     public Boolean add(AnswerSheet answerSheet) {
+        System.err.println(answerSheet.getUserId());
+        System.err.println(answerSheet.getBankId());
+        System.err.println(answerSheet.getQuestionId());
+        System.err.println(answerSheet.getAnswer());
+        System.err.println(answerSheet.getIstrue());
         //生成记录id
         answerSheet.setId(KeyUtil.getUUID());
         //调用answerSheetMapper插入记录,成功返回true
         if (answerSheetMapper.insert(answerSheet)>0) {
+            System.err.println(answerSheet.getBankId());
             int a = questionBankMapper.insertPractiseByBankId(answerSheet.getBankId());
             System.err.println(a);
             return true;
