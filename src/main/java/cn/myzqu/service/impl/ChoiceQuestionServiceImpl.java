@@ -78,8 +78,9 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
         //判断是否该题目是否存在
         if(findById(id)==null)
             throw new CustomException(ResultEnum.QUESTION_NOT_EXIST);
-        int result=choiceQuestionMapper.deleteById(id);
-        if(result>0)
+        ChoiceQuestion choiceQuestion=choiceQuestionMapper.selectById(id);
+        choiceQuestion.setStatus(2);
+        if(choiceQuestionMapper.updateById(choiceQuestion)>0)
             return true;
         else
             return false;

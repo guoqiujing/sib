@@ -59,8 +59,10 @@ public class QuestionBankServiceImpl implements QuestionBankService {
         //根据题库id查询题库信息
         if (findById(id)==null)
             throw new CustomException(ResultEnum.BANK_NOT_EXIST);
+        QuestionBank questionBank=questionBankMapper.selectById(id);
+        questionBank.setStatus(2);
         //根据题库id删除题库信息
-        if (questionBankMapper.deleteById(id) > 0)
+        if (questionBankMapper.updateById(questionBank) > 0)
             return true;
         return false;
     }
