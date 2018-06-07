@@ -156,7 +156,7 @@ public class PointsServiceImpl implements PointsService {
     public Boolean buyBank(String userId,int point) {
         Points points=new Points();
         points.setId(KeyUtil.getUUID());
-        points.setValue(point);
+        points.setValue(-point);
         points.setUserId(userId);
         points.setNote("用户购买题库");
         //用户购买题库
