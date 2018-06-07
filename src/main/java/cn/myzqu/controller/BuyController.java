@@ -43,7 +43,7 @@ public class BuyController {
      * @return
      */
     @PostMapping("/info")
-    public Result buyBank(@Valid Buy buy)
+    public Result buyBank(@Valid @RequestBody Buy buy)
     {
         if(buyService.buyBank(buy))
             return ResultVOUtil.success();
