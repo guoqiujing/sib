@@ -34,7 +34,8 @@ public class AnswerSheetServiceImpl implements AnswerSheetService {
         answerSheet.setId(KeyUtil.getUUID());
         //调用answerSheetMapper插入记录,成功返回true
         if (answerSheetMapper.insert(answerSheet)>0) {
-            questionBankMapper.insertPractiseByBankId(answerSheet.getBankId());
+            int a = questionBankMapper.insertPractiseByBankId(answerSheet.getBankId());
+            System.err.println(a);
             return true;
         }
         //否则返回false
