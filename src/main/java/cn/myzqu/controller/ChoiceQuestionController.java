@@ -109,8 +109,7 @@ public class ChoiceQuestionController {
 
     /**
      * 综合查询(根据题目id，题目，答案，分析,用户id，题库标题模糊搜索）
-     *
-     * @param condition
+     * @param condition 与上面注释对应说明:id question answer analysis userId title
      * @param page
      * @param size
      * @return
@@ -129,8 +128,7 @@ public class ChoiceQuestionController {
 
     /**
      * 题目综合显示
-     *
-     * @param condition
+     * @param condition 说明:id 按编号排序 star_level按星级排序 否则按更新时间排序
      * @param page
      * @param size
      * @return
