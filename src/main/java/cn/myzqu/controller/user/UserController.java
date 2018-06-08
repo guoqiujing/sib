@@ -1,4 +1,4 @@
-package cn.myzqu.controller;
+package cn.myzqu.controller.user;
 
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.dto.UserDTO;

@@ -1,4 +1,4 @@
-package cn.myzqu.controller;
+package cn.myzqu.controller.user;
 
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.pojo.Buy;
@@ -21,9 +21,9 @@ public class BuyController {
     private BuyService buyService;
 
     /**
-     * 查询是否已购买该题库
-     * @param userId
-     * @param bankId
+     * 检查用户是否用户该题库使用权
+     * @param userId 用户id
+     * @param bankId 题库id
      * @return
      */
     @GetMapping("/info")

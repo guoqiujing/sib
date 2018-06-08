@@ -1,18 +1,14 @@
-package cn.myzqu.controller;
+package cn.myzqu.controller.user;
 
-import cn.myzqu.dto.CommentDTO;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.pojo.Comment;
 import cn.myzqu.service.CommentService;
 import cn.myzqu.utils.ResultVOUtil;
 import cn.myzqu.vo.Result;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * 用户评论控制层
@@ -26,7 +22,7 @@ public class CommentController {
     private CommentService commentService;
 
     /**
-     * 添加用户评论记录
+     * 用户添加题目评论
      * @param comment  用户评论记录对象
      * @return
      */
@@ -46,7 +42,7 @@ public class CommentController {
      * @return
      */
     @GetMapping("/getComment")
-    public Result getCommentByQusetionId(@RequestParam String questionId,
+    public Result getCommentByQId(@RequestParam String questionId,
                                          @RequestParam(value="page",defaultValue = "1") Integer page,
                                          @RequestParam(value = "size",defaultValue = "10") Integer size){
         //调用commentService的findByQuestionId方法查询出该题目的所有用户的评论记录

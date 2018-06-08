@@ -1,4 +1,4 @@
-package cn.myzqu.controller;
+package cn.myzqu.controller.user;
 
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.pojo.Attendance;
@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.io.IOException;
 
 

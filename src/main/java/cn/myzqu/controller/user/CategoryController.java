@@ -1,12 +1,13 @@
-package cn.myzqu.controller;
+package cn.myzqu.controller.user;
 
 import cn.myzqu.dto.CategoryDTO;
-import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.service.CategoryService;
 import cn.myzqu.utils.ResultVOUtil;
 import cn.myzqu.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -29,20 +30,6 @@ public class CategoryController {
     public Result list(){
         List<CategoryDTO> categoryDTOList = categoryService.findAll();
         return ResultVOUtil.success(categoryDTOList);
-    }
-
-    /**
-     * 新增题库类目
-     * @param name 新增的题库类型名称
-     * @param parentId 所属父题库类型
-     * @return
-     */
-    @PostMapping("/info")
-    public Result add(@RequestParam(value = "name") String name,
-                      @RequestParam(value = "parentId",defaultValue = "") Integer parentId){
-
-        if(categoryService.add(name,parentId)) return ResultVOUtil.success();
-        else return ResultVOUtil.error(ResultEnum.CATEGORY_CREATE_FAIL);
     }
 
 }

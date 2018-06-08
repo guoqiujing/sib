@@ -1,4 +1,4 @@
-package cn.myzqu.controller;
+package cn.myzqu.controller.user;
 
 import cn.myzqu.file.ReadExcel;
 import cn.myzqu.pojo.ChoiceQuestion;
@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.List;
 
 /**

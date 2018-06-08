@@ -1,4 +1,4 @@
-package cn.myzqu.controller;
+package cn.myzqu.controller.user;
 
 /**
  * Created by Chrky on 2018/5/10.
@@ -14,18 +14,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 
 @RestController
 @RequestMapping("/questionBank")
-public class QuestionBankController {
+public class BankController {
 
     @Autowired
     private QuestionBankService questionBankService;
 
     /**
-     * 创建题库
+     * 用户创建题库
      * @param questionBank
      * @return
      */
@@ -55,13 +54,12 @@ public class QuestionBankController {
      * @return
      */
     @PutMapping("/info")
-    public Result updateQuestionBank(QuestionBank questionBank) {
+    public Result updateQuestionBank(@RequestBody QuestionBank questionBank) {
         if (questionBankService.updateById(questionBank))
             return ResultVOUtil.success();
         else
             return ResultVOUtil.error(ResultEnum.BANK_UPDATE_FAIL);
     }
-
 
     /**
      * 题库排序显示
@@ -80,25 +78,7 @@ public class QuestionBankController {
     }
 
     /**
-     * 根据题库id或题库标题或用户id或类目名称查询题库信息
-     * @param condition  说明:  id or title or userId or categoryName
-     * @param page
-     * @param size
-     * @return
-     */
-    @GetMapping("/info")
-    public Result get(@RequestParam Map<String,Object> condition,
-                                    @RequestParam(value="page",defaultValue = "1") Integer page,
-                                    @RequestParam(value = "size",defaultValue = "10") Integer size) {
-        PageDTO pageDTO = questionBankService.find(condition,page,size);
-        if (pageDTO==null)
-            return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
-        else
-            return ResultVOUtil.success(pageDTO);
-    }
-
-    /**
-     * 根据用户id查询题库
+     * 用户根据用户id查询该用户上传的题库
      * @param id
      * @param page
      * @param size
@@ -113,6 +93,25 @@ public class QuestionBankController {
             return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
         else
             return ResultVOUtil.success(pageDTO);
+    }
+
+    /**
+     * 用户根据用户id查询该用户上传的题库，为tabale制作
+     * @param id
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("/list/way/user")
+    public Result getByUid(@RequestParam String id,
+                              @RequestParam(value="page",defaultValue = "1") Integer page,
+                              @RequestParam(value = "size",defaultValue = "100") Integer size) {
+        PageDTO pageDTO = questionBankService.findByUserId(id,page,size);
+
+        if(pageDTO!=null){
+            return ResultVOUtil.success(pageDTO.getRows(),pageDTO.getTotal());
+        }
+        return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
     }
 
     /**

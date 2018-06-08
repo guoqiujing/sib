@@ -1,9 +1,7 @@
-package cn.myzqu.controller;
+package cn.myzqu.controller.user;
 
 import cn.myzqu.dto.AnswerCountDTO;
 import cn.myzqu.dto.AnswerSheetDTO;
-import cn.myzqu.dto.PageDTO;
-import cn.myzqu.dto.QuestionCountDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.pojo.AnswerSheet;
 import cn.myzqu.service.AnswerSheetService;
@@ -14,7 +12,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 答题控制处理器
@@ -28,7 +25,7 @@ public class AnswerSheetController {
     private AnswerSheetService answerSheetService;
 
     /**
-     * 添加一条答题记录
+     * 添加答题记录
      * @param answerSheet
      * @return
      */
@@ -53,19 +50,6 @@ public class AnswerSheetController {
     }
 
     /**
-     * 获取用户答题数量
-     * @param userId
-     * @return
-     */
-    @GetMapping("/count/{user_id}")
-    public Result getCount(@PathVariable("user_id") String userId){
-        AnswerCountDTO answerCountDTO = answerSheetService.findCount(userId);
-        return ResultVOUtil.success(answerCountDTO);
-    }
-
-
-
-    /**
      * 获取单个用户的错题记录
      * @param userId 用户id
      * @return
@@ -78,20 +62,14 @@ public class AnswerSheetController {
     }
 
     /**
-     * 多条件分页查询
-     * @param condition，说明 userId：用户id,answerIsTrue:答案是对还是错
-     * @param page
-     * @param size
+     * 获取用户答题数量
+     * @param userId
      * @return
      */
-    @GetMapping("/list")
-    public Result getList(@RequestParam Map<String,Object> condition,
-                          @RequestParam(value="page",defaultValue = "1") Integer page,
-                          @RequestParam(value = "size",defaultValue = "10") Integer size){
-        System.out.println(condition.get("userId"));
-        PageDTO pageDTO = answerSheetService.findByCondition(condition,page,size);
-        if (pageDTO!=null) return ResultVOUtil.success(pageDTO);
-        return  ResultVOUtil.error(ResultEnum.ANSWERSHEETLIST_EMPTY);
+    @GetMapping("/count/{user_id}")
+    public Result getCount(@PathVariable("user_id") String userId){
+        AnswerCountDTO answerCountDTO = answerSheetService.findCount(userId);
+        return ResultVOUtil.success(answerCountDTO);
     }
 
 }

@@ -1,8 +1,7 @@
-package cn.myzqu.controller;
+package cn.myzqu.controller.user;
 
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.enums.ResultEnum;
-import cn.myzqu.pojo.Comment;
 import cn.myzqu.pojo.Message;
 import cn.myzqu.service.MessageService;
 import cn.myzqu.utils.ResultVOUtil;
@@ -23,7 +22,7 @@ public class MessageController {
     private MessageService messageService;
 
     /**
-     * 添加用户反馈记录
+     * 用户新增题目反馈记录
      * @param message  用户反馈记录对象
      * @return
      */

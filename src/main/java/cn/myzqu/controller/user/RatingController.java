@@ -1,6 +1,5 @@
-package cn.myzqu.controller;
+package cn.myzqu.controller.user;
 
-import cn.myzqu.dto.PageDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.pojo.Rating;
 import cn.myzqu.service.PointsService;
@@ -55,17 +54,4 @@ public class RatingController {
         return ResultVOUtil.error(ResultEnum.RATING_UNCOMPLETE);
     }
 
-    /**
-     * 查找并分页显示用户星级评价记录（管理端
-     * @param page  当前页数
-     * @param size  当前页数的记录条数
-     * @return
-     */
-    @GetMapping("/getAllRating")
-    public Result getAllRating(@RequestParam(value="page",defaultValue = "1") Integer page,
-                               @RequestParam(value = "size",defaultValue = "10") Integer size){
-        PageDTO data = ratingService.findAllRating(page,size);
-        if(data==null) return ResultVOUtil.error(ResultEnum.RATING_EMPTY);
-        return ResultVOUtil.success(data);
-    }
 }
