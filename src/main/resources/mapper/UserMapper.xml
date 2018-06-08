@@ -140,12 +140,6 @@
       <if test="locked != null" >
         locked = #{locked,jdbcType=BIT},
       </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
