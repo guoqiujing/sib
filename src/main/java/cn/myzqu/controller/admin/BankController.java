@@ -131,7 +131,7 @@ public class BankController {
      * @param size
      * @return
      */
-    @GetMapping("/greatList")
+    @GetMapping("/great/list")
     public Result findGreatBank(@RequestParam(value="page",defaultValue = "1") Integer page,
                               @RequestParam(value = "size",defaultValue = "10") Integer size) {
         PageDTO data = questionBankService.findGreatBank(page, size);
@@ -140,4 +140,5 @@ public class BankController {
         }
         return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
     }
+
 }
