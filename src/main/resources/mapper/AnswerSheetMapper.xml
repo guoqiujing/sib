@@ -141,4 +141,9 @@
       </if>
   </select>
 
+  <select id="selectCountByBankId" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT COUNT(*) from answer_sheet
+    where answer_sheet.bank_id = #{bankId}
+  </select>
+
 </mapper>

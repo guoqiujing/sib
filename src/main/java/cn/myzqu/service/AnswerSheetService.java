@@ -58,6 +58,4 @@ public interface AnswerSheetService {
      */
     PageDTO findByCondition(Map<String,Object> condition,int pageNum, int pageSize);
 
-
-
 }
