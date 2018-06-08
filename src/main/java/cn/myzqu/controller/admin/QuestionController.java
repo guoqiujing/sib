@@ -109,7 +109,7 @@ public class QuestionController {
      * @param choiceQuestion
      * @return
      */
-    @PutMapping("/info/check")
+        @PutMapping("/info/check")
     public Result checkChoice(ChoiceQuestion choiceQuestion) {
         //审核题目信息
         if (choiceQuestionService.check(choiceQuestion)) {

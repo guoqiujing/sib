@@ -253,4 +253,9 @@
   <select id="selectAllBank" resultMap="BaseResultMap">
     SELECT * FROM question_bank
   </select>
+
+  <!--显示推荐题库-->
+  <select id="selectGreatBank" resultMap="BaseResultMap">
+    SELECT * FROM question_bank WHERE status=4
+  </select>
 </mapper>

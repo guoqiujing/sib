@@ -1,6 +1,7 @@
 package cn.myzqu.service.impl;
 
 import cn.myzqu.dao.BuyMapper;
+import cn.myzqu.dto.BuyDTO;
 import cn.myzqu.dto.PointsDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.exception.CustomException;
@@ -11,6 +12,8 @@ import cn.myzqu.service.PointsService;
 import cn.myzqu.service.QuestionBankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by Chrky on 2018/6/7.
@@ -63,5 +66,10 @@ public class BuyServiceImpl implements BuyService {
             throw new CustomException(ResultEnum.BANK_IS_EXIST);
         //查询是否已购买该题库
       return buyMapper.selectByUser(userId,bankId);
+    }
+
+    @Override
+    public List<BuyDTO> findBuyByUser(String userId) {
+        return buyMapper.selectBuyByUser(userId);
     }
 }

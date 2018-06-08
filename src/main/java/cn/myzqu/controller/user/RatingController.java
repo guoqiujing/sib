@@ -29,7 +29,7 @@ public class RatingController {
      * @return
      */
     @PostMapping("/addRating")
-    public Result addRating(@Validated @RequestBody Rating rating){
+    public Result addRating(@Validated Rating rating){
         //调用ratingService，成功则返回信息
         if(ratingService.addRatingRecord(rating)) {
             pointsService.ChoiceByGrade(rating.getUserId());

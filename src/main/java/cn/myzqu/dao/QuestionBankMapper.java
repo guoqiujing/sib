@@ -95,4 +95,6 @@ public interface QuestionBankMapper {
     int insertPractiseByBankId(String id);
 
     List<QuestionBank> selectAllBank();//显示所有题库
+
+    List<QuestionBank> selectGreatBank();//显示推荐题库
 }
