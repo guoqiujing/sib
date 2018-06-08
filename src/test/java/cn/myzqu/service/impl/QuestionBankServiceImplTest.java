@@ -19,6 +19,8 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class QuestionBankServiceImplTest {
+
+
     @Test
     public void findByTitle() throws Exception {
         String title="实打实的";
@@ -66,15 +68,21 @@ public class QuestionBankServiceImplTest {
     @Autowired
     private QuestionBankService questionBankService;
 //
+
+    @Test
+    public void updateBankFrequency() throws Exception {
+        questionBankService.updateBankFrequency();
+    }
+
     @Test
     public void add() throws Exception {
         for(int i=0;i<10;i++){
-            String name = ""+"("+i+")";
+            String name = "网络工程师历年考试试题"+"("+i+")";
             QuestionBank questionBank=new QuestionBank();
             questionBank.setTitle(name);
             questionBank.setIntro(name);
-            questionBank.setUserId("82e705688305435382df908076ba3e66");
-            questionBank.setCategoryName("初级程序员");
+            questionBank.setUserId("9e933d889da6458eb7fcc96aaf5ab74b");
+            questionBank.setCategoryName("中级网络工程师");
             System.out.print(questionBankService.add(questionBank));
         }
 
