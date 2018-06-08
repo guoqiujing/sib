@@ -95,4 +95,10 @@ public interface QuestionBankService
      * @return
      */
     Boolean updateBankRating();
+
+    PageDTO findAllBank(int pageNum, int pageSize);//浏览所有题库
+
+    Boolean check(QuestionBank questionBank);//审核题库
+
+    PageDTO findGreatBank(int pageNum, int pageSize);//显示推荐题库
 }

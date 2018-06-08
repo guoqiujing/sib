@@ -1,5 +1,7 @@
 package cn.myzqu.controller.user;
 
+import cn.myzqu.dto.BankDTO;
+import cn.myzqu.dto.BuyDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.pojo.Buy;
 import cn.myzqu.service.BuyService;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by Chrky on 2018/6/7.
@@ -49,5 +52,20 @@ public class BuyController {
             return ResultVOUtil.success();
         else
             return ResultVOUtil.error(ResultEnum.BANK_BUY_FAIL);
+    }
+
+    /**
+     * 根据用户id查询购买记录
+     * @param userId
+     * @return
+     */
+    @GetMapping("/record")
+    public Result buyRecord(@RequestParam String userId)
+    {
+        List<BuyDTO> bankDTOList=buyService.findBuyByUser(userId);
+        if(bankDTOList!=null)
+            return ResultVOUtil.success(bankDTOList);
+        else
+            return ResultVOUtil.error(ResultEnum.BUY_BANK_EMPTY);
     }
 }

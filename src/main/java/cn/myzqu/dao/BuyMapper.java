@@ -1,6 +1,9 @@
 package cn.myzqu.dao;
 
+import cn.myzqu.dto.BuyDTO;
 import cn.myzqu.pojo.Buy;
+
+import java.util.List;
 
 public interface BuyMapper {
     int deleteByPrimaryKey(Long id);
@@ -14,4 +17,6 @@ public interface BuyMapper {
     int updateByPrimaryKey(Buy record);
 
     Buy selectByUser(String userId,String bankId);//判断是否购买题库
+
+    List<BuyDTO> selectBuyByUser(String userId);//根据用户查看购买题库记录
 }

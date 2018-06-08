@@ -100,4 +100,12 @@
   <select id="selectByUser" parameterType="String" resultMap="BaseResultMap">
   SELECT * FROM buy WHERE user=#{arg0} AND bank=#{arg1}
   </select>
+
+  <!--根据用户id查看购买题库记录-->
+  <select id="selectBuyByUser" parameterType="String" resultType="cn.myzqu.dto.BuyDTO">
+    SELECT buy.*,question_bank.title
+    FROM buy,question_bank
+    WHERE buy.bank=question_bank.id
+    AND user=#{VALUE }
+  </select>
 </mapper>

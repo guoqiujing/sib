@@ -4,6 +4,7 @@ import cn.myzqu.dto.PageDTO;
 import cn.myzqu.dto.UserDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.pojo.User;
+import cn.myzqu.service.PointsService;
 import cn.myzqu.service.UserService;
 import cn.myzqu.utils.ResultVOUtil;
 import cn.myzqu.vo.Result;
@@ -21,6 +22,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PointsService pointsService;
 
     /**
      * 获取用户列表
@@ -74,6 +78,7 @@ public class UserController {
         System.out.println(user.getId());
         User data = userService.add(user);
         if(data!=null){
+            pointsService.register(user.getId());
             return ResultVOUtil.success(data);
         }
         return ResultVOUtil.error(ResultEnum.USER_CREATE_FAIL);

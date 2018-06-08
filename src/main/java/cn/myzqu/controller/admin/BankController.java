@@ -6,6 +6,8 @@ package cn.myzqu.controller.admin;
 
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.enums.ResultEnum;
+import cn.myzqu.pojo.ChoiceQuestion;
+import cn.myzqu.pojo.QuestionBank;
 import cn.myzqu.service.QuestionBankService;
 import cn.myzqu.utils.ResultVOUtil;
 import cn.myzqu.vo.Result;
@@ -91,5 +93,51 @@ public class BankController {
             return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
         else
             return ResultVOUtil.success(pageDTO);
+    }
+
+    /**
+     * 浏览题库信息
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("/list")
+    public Result findAllBank(@RequestParam(value="page",defaultValue = "1") Integer page,
+                              @RequestParam(value = "size",defaultValue = "10") Integer size) {
+        PageDTO data = questionBankService.findAllBank(page, size);
+        if (data != null) {
+            return ResultVOUtil.success(data.getRows(), data.getTotal());
+        }
+        return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
+    }
+
+    /**
+     * 修改审核信息 取消推荐题库
+     * @param questionBank
+     * @return
+     */
+    @PutMapping("/info/check")
+    public Result checkBank(QuestionBank questionBank) {
+        //审核题库信息
+        if (questionBankService.check(questionBank)) {
+            return ResultVOUtil.success();
+        } else
+            return ResultVOUtil.error(ResultEnum.BANK_CHECK_FAIL);
+    }
+
+    /**
+     * 浏览推荐题库信息
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("/greatList")
+    public Result findGreatBank(@RequestParam(value="page",defaultValue = "1") Integer page,
+                              @RequestParam(value = "size",defaultValue = "10") Integer size) {
+        PageDTO data = questionBankService.findGreatBank(page, size);
+        if (data != null) {
+            return ResultVOUtil.success(data.getRows(), data.getTotal());
+        }
+        return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
     }
 }
