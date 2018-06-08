@@ -51,6 +51,11 @@ public interface AnswerSheetMapper {
      */
     List<AnswerSheetDTO> select(Map<String,Object> map);
 
-
+    /**
+     * 查询题库练习次数
+     * @param bankId
+     * @return
+     */
+    int selectCountByBankId(String bankId);
 
 }

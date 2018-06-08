@@ -1,5 +1,6 @@
 package cn.myzqu.service.impl;
 
+import cn.myzqu.dao.AnswerSheetMapper;
 import cn.myzqu.dao.QuestionBankMapper;
 import cn.myzqu.dto.BankDTO;
 import cn.myzqu.dto.PageDTO;
@@ -36,6 +37,9 @@ public class QuestionBankServiceImpl implements QuestionBankService {
 
     @Autowired
     private StatisticsService statisticsService;
+
+    @Autowired
+    private AnswerSheetMapper answerSheetMapper;
 
     @Override
     public Boolean add(QuestionBank questionBank) {
@@ -236,6 +240,32 @@ public class QuestionBankServiceImpl implements QuestionBankService {
         int pages = page.getPages();
         PageDTO pageDTO = new PageDTO(bankDTOS,total,pageSize,pageNum,pages);
         return pageDTO;
+    }
+
+    /**
+     * 更新题库练习人次
+     * @return
+     */
+    @Override
+    public Boolean updateBankFrequency() {
+        int n = 0;
+        //获得所有题库对象
+        List<QuestionBank> questionBanks=questionBankMapper.selectAllBank();
+        //遍历所有题库对象
+        for(int i=0;i<questionBanks.size();i++)
+        {
+            QuestionBank questionBank=questionBanks.get(i);
+            String id=questionBank.getId();
+            int frequency = answerSheetMapper.selectCountByBankId(id);
+            questionBank.setFrequency(frequency);
+            //更新题库评分
+            questionBankMapper.updateById(questionBank);
+            n++;
+        }
+        if (n==questionBanks.size())
+            return true;
+        else
+            return false;
     }
 
 }

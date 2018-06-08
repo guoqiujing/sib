@@ -101,4 +101,10 @@ public interface QuestionBankService
     Boolean check(QuestionBank questionBank);//审核题库
 
     PageDTO findGreatBank(int pageNum, int pageSize);//显示推荐题库
+
+    /**
+     * 更新题库练习人次
+     * @return
+     */
+    Boolean updateBankFrequency();
 }
