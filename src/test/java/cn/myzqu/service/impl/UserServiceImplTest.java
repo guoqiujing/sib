@@ -3,7 +3,6 @@ package cn.myzqu.service.impl;
 import cn.myzqu.dto.UserDTO;
 import cn.myzqu.file.ReadExcel;
 import cn.myzqu.pojo.User;
-import cn.myzqu.service.ChoiceQuestionService;
 import cn.myzqu.service.UserService;
 import cn.myzqu.utils.ListToPojo;
 import org.junit.Test;
@@ -14,14 +13,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by 的川 on 2018/5/21.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserServiceImplTest {
+
+    @Test
+    public void calUserValue() throws Exception {
+        userService.calUserValue();
+    }
+
     @Test
     public void add() throws Exception {
 
