@@ -4,6 +4,7 @@ import cn.myzqu.dto.PageDTO;
 import cn.myzqu.dto.PointsDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.service.PointsService;
+import cn.myzqu.service.UserService;
 import cn.myzqu.utils.ResultVOUtil;
 import cn.myzqu.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,19 +72,4 @@ public class PointsController {
         return ResultVOUtil.error(ResultEnum.POINT_NOT_EXIST);
     }
 
-
-    /**
-     * 根据用户id查询用户积分
-     * @param userId
-     * @return
-     */
-    @GetMapping("/points")
-    public Result calUserPoints(@RequestParam String userId)
-    {
-        PointsDTO pointsDTO=pointsService.calUserPoints(userId);
-        if(pointsDTO!=null)
-            return ResultVOUtil.success(pointsDTO);
-        else
-            return ResultVOUtil.error(ResultEnum.POINT_USER_FALL);
-    }
 }
