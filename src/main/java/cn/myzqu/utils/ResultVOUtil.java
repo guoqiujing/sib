@@ -1,6 +1,7 @@
 package cn.myzqu.utils;
 
 import cn.myzqu.enums.ResultEnum;
+import cn.myzqu.vo.ListResultVO;
 import cn.myzqu.vo.Result;
 import cn.myzqu.vo.ResultVO;
 
@@ -20,6 +21,21 @@ public class ResultVOUtil {
         resultVO.setMsg(ResultEnum.SUCCESS.getMessage());
         resultVO.setData(object);
         return resultVO;
+    }
+
+    /**
+     * 返回成功信息，专门为列表
+     * @param object
+     * @param total
+     * @return
+     */
+    public static ListResultVO success(Object object,int total){
+        ListResultVO listResultVO = new ListResultVO();
+        listResultVO.setCode(ResultEnum.SUCCESS.getCode());
+        listResultVO.setMsg(ResultEnum.SUCCESS.getMessage());
+        listResultVO.setData(object);
+        listResultVO.setTotal(total);
+        return listResultVO;
     }
 
 
