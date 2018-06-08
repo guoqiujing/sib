@@ -86,12 +86,16 @@ public enum ResultEnum {
 
     //用户评论类
     COMMENT_EMPTY(10000,"该题目还没有评论哦"),
-    COMMENT_FAIL(11000,"评论失败了呢，请稍后重试"),
-    COMMENT_USER_EMPTY(12000,"你还有评论过题目哦"),
-    COMMENT_UPDATE_FAIL(13000,"删除失败了呢，请稍后重试"),
+    COMMENT_FAIL(10100,"评论失败了呢，请稍后重试"),
+    COMMENT_USER_EMPTY(10200,"你还有评论过题目哦"),
+    COMMENT_UPDATE_FAIL(10300,"删除失败了呢，请稍后重试"),
 
     //购买题库类
-    BUY_BANK_EMPTY(14000,"查询不到购买记录"),
+    BUY_BANK_EMPTY(11000,"查询不到购买记录"),
+
+    //用户反馈类
+    MESSAGE_FAIL(12000,"反馈失败了呢，请稍后重试"),
+    MESSAGE_EMPTY(12100,"还没有用户反馈哦"),
     ;
 
     private Integer code;

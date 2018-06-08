@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class StatisticsServiceImplTest {
+
     @Autowired
     private StatisticsService statisticsService;
 
@@ -25,6 +26,15 @@ public class StatisticsServiceImplTest {
         String id = "1111";
         double a = statisticsService.reckonStareLevel(id);
         System.err.println(a);
+    }
+
+    @Test
+    public void reckonBankStareLevel() throws Exception {
+
+        String id = "10625d1f4b0a4d56a2af2bfcb4ff50ab";
+        double b = statisticsService.reckonBankStareLevel(id);
+        System.out.println(b);
+
     }
 
 }

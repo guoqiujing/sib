@@ -1,17 +1,22 @@
 package cn.myzqu.dao;
 
+import cn.myzqu.dto.MessageDTO;
 import cn.myzqu.pojo.Message;
 
-public interface MessageMapper {
-    int deleteByPrimaryKey(Long id);
+import java.util.List;
 
+public interface MessageMapper {
+    /**
+     * 添加反馈记录
+     * @param record
+     * @return
+     */
     int insert(Message record);
 
-    int insertSelective(Message record);
-
-    Message selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(Message record);
-
-    int updateByPrimaryKey(Message record);
+    /**
+     * 通过接收者的用户id查询反馈信息
+     * @param userId
+     * @return
+     */
+    List<MessageDTO> selectByUserId(String userId);
 }

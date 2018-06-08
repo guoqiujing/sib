@@ -56,12 +56,13 @@ public class AnswerSheetMapperTest {
 
         AnswerSheet answerSheet = new AnswerSheet();
         answerSheet.setId(KeyUtil.getUUID());
-        answerSheet.setUserId("123");
-        answerSheet.setBankId("1");
-        answerSheet.setQuestionId(KeyUtil.getUUID());
-        answerSheet.setAnswer("A");
-        answerSheet.setIstrue(true);
-        dao.insert(answerSheet);
+        answerSheet.setUserId("0381bd9111fa4999a85922eb8075b293");
+        answerSheet.setBankId("5dcc37b441824641b1e7e825eed79c21");
+        answerSheet.setQuestionId("030d16f2cf41467b9b79ad57356468a6");
+        answerSheet.setAnswer("D");
+        answerSheet.setIstrue(false);
+        int a = dao.insert(answerSheet);
+        System.err.println(a);
     }
 
     @Test

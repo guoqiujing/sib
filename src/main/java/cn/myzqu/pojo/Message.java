@@ -1,20 +1,29 @@
 package cn.myzqu.pojo;
 
+import cn.myzqu.utils.Serializer.CustomDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class Message {
     private Long id;
 
     private String sender;
 
-    private String acceptor;
+    private String questionId;
+
+    private String bankId;
 
     private String message;
 
     private Byte status;
 
+    @JsonSerialize(using= CustomDateSerializer.class)
     private Date createTime;
 
+    @JsonSerialize(using= CustomDateSerializer.class)
     private Date updateTime;
 
     public Long getId() {
@@ -33,12 +42,20 @@ public class Message {
         this.sender = sender == null ? null : sender.trim();
     }
 
-    public String getAcceptor() {
-        return acceptor;
+    public String getQuestionId() {
+        return questionId;
     }
 
-    public void setAcceptor(String acceptor) {
-        this.acceptor = acceptor == null ? null : acceptor.trim();
+    public void setQuestionId(String questionId) {
+        this.questionId = questionId == null ? null : questionId.trim();
+    }
+
+    public String getBankId() {
+        return bankId;
+    }
+
+    public void setBankId(String bankId) {
+        this.bankId = bankId == null ? null : bankId.trim();
     }
 
     public String getMessage() {
