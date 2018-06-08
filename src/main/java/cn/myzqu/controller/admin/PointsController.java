@@ -22,6 +22,22 @@ public class PointsController {
     @Autowired
     private PointsService pointsService;
 
+    /**
+     * 浏览所有用户积分记录
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("/info/User")
+    public Result getPointsByUser( @RequestParam(value = "page",defaultValue = "1") Integer page,
+                                   @RequestParam(value = "size", defaultValue = "10") Integer size)
+    {
+        PageDTO pageDTO=pointsService.find(page,size);
+        if(pageDTO==null)
+            return ResultVOUtil.error(ResultEnum.POINT_NOT_EXIST);
+        else
+            return ResultVOUtil.success(pageDTO);
+    }
 
     /**
      * 根据用户id和时间段查询积分记录

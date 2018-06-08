@@ -28,11 +28,11 @@ public class RatingController {
      * @param size  当前页数的记录条数
      * @return
      */
-    @GetMapping("/getAllRating")
+    @GetMapping("/rating")
     public Result getAllRating(@RequestParam(value="page",defaultValue = "1") Integer page,
                                @RequestParam(value = "size",defaultValue = "10") Integer size){
         PageDTO data = ratingService.findAllRating(page,size);
         if(data==null) return ResultVOUtil.error(ResultEnum.RATING_EMPTY);
-        return ResultVOUtil.success(data);
+        return ResultVOUtil.success(data.getRows(),data.getTotal());
     }
 }
