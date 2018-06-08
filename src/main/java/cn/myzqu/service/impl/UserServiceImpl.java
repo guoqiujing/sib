@@ -1,10 +1,12 @@
 package cn.myzqu.service.impl;
 
+import cn.myzqu.dao.PointsMapper;
 import cn.myzqu.dao.UserMapper;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.dto.UserDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.exception.CustomException;
+import cn.myzqu.pojo.Points;
 import cn.myzqu.pojo.User;
 import cn.myzqu.service.UserService;
 import cn.myzqu.utils.KeyUtil;
@@ -32,8 +34,11 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private PointsMapper pointsMapper;
+
     @Override
-    public Boolean login(String code, String password) {
+    public User login(String code, String password) {
         //查找用户名是否存在
         User user = userMapper.selectById(code);
         if(user==null) throw new CustomException(ResultEnum.LOGIN_FAIL);
@@ -43,9 +48,10 @@ public class UserServiceImpl implements UserService{
         //对传进来的passsword进行加密
         password = MD5Util.encrypt(password,salt);
         //和数据库中的密码进行对比
-        if(encryptPassword.equals(password)||password==encryptPassword)
-            return true;
-        return false;
+        if(encryptPassword.equals(password)||password==encryptPassword){
+            return user;
+        }
+        return null;
     }
 
     @Override
@@ -107,6 +113,7 @@ public class UserServiceImpl implements UserService{
         PageDTO pageDTO = new PageDTO(list,total,pageSize,pageNum,pages);
         return pageDTO;
     }
+
 
     @Override
     public User add(User user) {
@@ -226,6 +233,31 @@ public class UserServiceImpl implements UserService{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Boolean calUserValue() {
+        //遍历所有用户
+        List<UserDTO> userDTOS = userMapper.selectAll();
+        for(UserDTO userDTO : userDTOS){
+            String id = userDTO.getId();
+            int value = userDTO.getValue();
+            //根据用户id获取该用户的所有积分记录
+            List<Points> pointsList = pointsMapper.selectByUserId(id);
+            for(Points points:pointsList){
+                value += points.getValue();
+            }
+            System.out.println("更新用户"+id+"后的积分为："+value);
+            User user = new User();
+            user.setId(id);
+            user.setValue(value);
+            int result = userMapper.updateById(user);
+            if(result>0){
+                System.out.println("插入数据库成功。用户："+id+"积分："+value);
+            }
+
+        }
+        return null;
     }
 
 

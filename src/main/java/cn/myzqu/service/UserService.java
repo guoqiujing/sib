@@ -18,7 +18,7 @@ public interface UserService {
      * @param password
      * @return
      */
-    Boolean login(String code,String password);
+    User login(String code,String password);
 
     /**
      * 核对密码是否正确
@@ -100,5 +100,11 @@ public interface UserService {
      * @return
      */
     PageDTO findAll(int pageNum,int pageSize);
+
+    /**
+     * 定时更新用户积分
+     * @return
+     */
+    Boolean calUserValue();
 
 }
