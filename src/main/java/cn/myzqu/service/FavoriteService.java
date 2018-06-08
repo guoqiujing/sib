@@ -2,10 +2,6 @@ package cn.myzqu.service;
 
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.pojo.Favorite;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Chrky on 2018/5/18.

@@ -1,7 +1,6 @@
 package cn.myzqu.service.impl;
 
 import cn.myzqu.dao.PointsMapper;
-import cn.myzqu.dto.ChoiceDTO;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.dto.PointsDTO;
 import cn.myzqu.enums.ResultEnum;
@@ -16,8 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.Key;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 

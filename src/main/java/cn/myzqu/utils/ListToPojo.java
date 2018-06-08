@@ -1,10 +1,8 @@
 package cn.myzqu.utils;
 
 import cn.myzqu.pojo.ChoiceQuestion;
-import cn.myzqu.pojo.QuestionBank;
 import cn.myzqu.pojo.User;
 
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 

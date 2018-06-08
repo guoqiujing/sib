@@ -3,19 +3,15 @@ package cn.myzqu.service.impl;
 import cn.myzqu.dao.RatingMapper;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.pojo.Rating;
-import cn.myzqu.service.PointsService;
 import cn.myzqu.service.RatingService;
 import cn.myzqu.utils.KeyUtil;
-import cn.myzqu.utils.MD5Util;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 用户评定星级接口实现类

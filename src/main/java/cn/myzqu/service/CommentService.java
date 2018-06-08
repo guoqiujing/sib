@@ -1,10 +1,7 @@
 package cn.myzqu.service;
 
-import cn.myzqu.dto.CommentDTO;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.pojo.Comment;
-
-import java.util.List;
 
 /**
  * 用户评论服务接口

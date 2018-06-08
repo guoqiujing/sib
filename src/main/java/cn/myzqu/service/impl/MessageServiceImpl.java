@@ -1,13 +1,10 @@
 package cn.myzqu.service.impl;
 
 import cn.myzqu.dao.MessageMapper;
-import cn.myzqu.dto.CommentDTO;
 import cn.myzqu.dto.MessageDTO;
 import cn.myzqu.dto.PageDTO;
-import cn.myzqu.pojo.Comment;
 import cn.myzqu.pojo.Message;
 import cn.myzqu.service.MessageService;
-import cn.myzqu.utils.KeyUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;

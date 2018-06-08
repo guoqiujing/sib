@@ -3,7 +3,6 @@ package cn.myzqu.service;
 import cn.myzqu.dto.AnswerCountDTO;
 import cn.myzqu.dto.AnswerSheetDTO;
 import cn.myzqu.dto.PageDTO;
-import cn.myzqu.dto.QuestionCountDTO;
 import cn.myzqu.pojo.AnswerSheet;
 
 import java.util.List;

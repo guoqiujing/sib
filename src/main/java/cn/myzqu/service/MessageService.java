@@ -1,13 +1,7 @@
 package cn.myzqu.service;
 
-import cn.myzqu.dto.CommentDTO;
-import cn.myzqu.dto.MessageDTO;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.pojo.Message;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-
-import java.util.List;
 
 /**
  * 反馈信息服务接口

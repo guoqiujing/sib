@@ -4,7 +4,6 @@ import cn.myzqu.dao.CommentMapper;
 import cn.myzqu.dto.CommentDTO;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.pojo.Comment;
-import cn.myzqu.pojo.Rating;
 import cn.myzqu.service.CommentService;
 import cn.myzqu.utils.KeyUtil;
 import com.github.pagehelper.Page;

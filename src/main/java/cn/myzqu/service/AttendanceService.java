@@ -2,7 +2,6 @@ package cn.myzqu.service;
 
 import cn.myzqu.pojo.Attendance;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**

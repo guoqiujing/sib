@@ -3,15 +3,12 @@ package cn.myzqu.service.impl;
 
 import cn.myzqu.dao.ChoiceQuestionMapper;
 import cn.myzqu.dao.FavoriteMapper;
-import cn.myzqu.dao.PointsMapper;
 import cn.myzqu.dao.RatingMapper;
-import cn.myzqu.dto.BankDTO;
 import cn.myzqu.dto.ChoiceDTO;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.exception.CustomException;
 import cn.myzqu.pojo.ChoiceQuestion;
-import cn.myzqu.pojo.Favorite;
 import cn.myzqu.pojo.Rating;
 import cn.myzqu.service.ChoiceQuestionService;
 import cn.myzqu.service.StatisticsService;
@@ -21,6 +18,7 @@ import com.github.pagehelper.PageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -158,9 +156,10 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
         //根据题库id查询题库
         return choiceQuestionMapper.selectByUserBankId(id);
     }
-
+    @Scheduled(cron = "0 0 17 * * ?")
     @Override
     public Boolean updateChoiceRating() {
+        System.out.println("开始更新题目星级评分：");
         //获得所有题目
         List<ChoiceQuestion> choiceQuestions=choiceQuestionMapper.selectAllChoice();
         //定义更新次数
@@ -180,10 +179,12 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
             }
         }
         //判断是否批量更新成功
-        if(size==choiceQuestions.size())
+        if(size==choiceQuestions.size()) {
+            System.out.println("更新题目星级评分结束：");
             return true;
-        else
-            return false;
+        }
+        System.out.println("更新题目星级评分失败：");
+        return false;
     }
 
     @Override

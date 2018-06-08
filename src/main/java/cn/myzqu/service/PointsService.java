@@ -3,7 +3,6 @@ package cn.myzqu.service;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.dto.PointsDTO;
 import cn.myzqu.pojo.Points;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.List;
 import java.util.Map;

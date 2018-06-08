@@ -7,12 +7,10 @@ import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.exception.CustomException;
 import cn.myzqu.pojo.Category;
 import cn.myzqu.service.CategoryService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

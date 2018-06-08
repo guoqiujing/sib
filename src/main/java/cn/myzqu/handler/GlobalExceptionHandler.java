@@ -4,7 +4,6 @@ import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.exception.CustomException;
 import cn.myzqu.utils.ResultVOUtil;
 import cn.myzqu.vo.Result;
-import org.apache.ibatis.jdbc.SQL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.BadSqlGrammarException;
@@ -13,11 +12,8 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 /**

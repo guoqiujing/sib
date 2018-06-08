@@ -1,7 +1,6 @@
 package cn.myzqu.dto;
 
 import cn.myzqu.pojo.QuestionBank;
-import lombok.Data;
 
 /**
  * Created by Chrky on 2018/5/11.

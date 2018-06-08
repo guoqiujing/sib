@@ -5,18 +5,12 @@ import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.exception.CustomException;
 import cn.myzqu.pojo.Attendance;
 import cn.myzqu.service.AttendanceService;
-import cn.myzqu.utils.AddressUtil;
-import cn.myzqu.utils.IPUtil;
-import cn.myzqu.utils.KeyUtil;
-import cn.myzqu.utils.ResultVOUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.net.InetAddress;
 
 
 /**

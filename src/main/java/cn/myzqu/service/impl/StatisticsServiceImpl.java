@@ -3,7 +3,6 @@ package cn.myzqu.service.impl;
 import cn.myzqu.dao.ChoiceQuestionMapper;
 import cn.myzqu.dao.RatingMapper;
 import cn.myzqu.dto.ChoiceDTO;
-import cn.myzqu.pojo.ChoiceQuestion;
 import cn.myzqu.pojo.Rating;
 import cn.myzqu.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,6 @@ public class StatisticsServiceImpl implements StatisticsService{
             return sum;
         }
         //没有则返回默认星级 0
-
         return sum;
     }
 

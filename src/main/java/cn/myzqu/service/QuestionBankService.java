@@ -1,11 +1,8 @@
 package cn.myzqu.service;
 
-import cn.myzqu.dto.BankDTO;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.pojo.QuestionBank;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
-import java.util.List;
 import java.util.Map;
 
 /**

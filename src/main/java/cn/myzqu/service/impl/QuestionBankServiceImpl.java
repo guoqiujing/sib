@@ -3,7 +3,6 @@ package cn.myzqu.service.impl;
 import cn.myzqu.dao.QuestionBankMapper;
 import cn.myzqu.dto.BankDTO;
 import cn.myzqu.dto.PageDTO;
-import cn.myzqu.dto.UserDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.exception.CustomException;
 import cn.myzqu.pojo.QuestionBank;
@@ -12,10 +11,10 @@ import cn.myzqu.service.StatisticsService;
 import cn.myzqu.utils.KeyUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -142,7 +141,7 @@ public class QuestionBankServiceImpl implements QuestionBankService {
         PageDTO pageDTO = new PageDTO(bankDTOS,total,pageSize,pageNum,pages);
         return pageDTO;
     }
-
+    @Scheduled(cron = "0 0 0 * * ? ")
     @Override
     public Boolean updateBankRating() {
         //获得所有题库对象
@@ -155,6 +154,7 @@ public class QuestionBankServiceImpl implements QuestionBankService {
            QuestionBank questionBank=questionBanks.get(i);
            String id=questionBank.getId();
            Double starLevel=statisticsService.reckonBankStareLevel(id);
+           System.out.println(i+":更新后的星级："+starLevel);
            questionBank.setStarLevel(starLevel);
            //更新题库评分
            if(questionBankMapper.updateById(questionBank)>0)

@@ -3,8 +3,6 @@ package cn.myzqu.service;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.pojo.Rating;
 
-import java.util.List;
-
 /**
  * 用户评定星级接口
  * Created by xiraly on 2018/5/22.

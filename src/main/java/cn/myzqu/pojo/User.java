@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 @Data
 public class User {
-    @NotNull(message = "用户id不能为空哦")
+
     private String id;
 
     private String name;

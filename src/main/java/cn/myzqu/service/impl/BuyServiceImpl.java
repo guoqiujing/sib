@@ -9,7 +9,6 @@ import cn.myzqu.pojo.QuestionBank;
 import cn.myzqu.service.BuyService;
 import cn.myzqu.service.PointsService;
 import cn.myzqu.service.QuestionBankService;
-import cn.myzqu.utils.KeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -4,7 +4,6 @@ import cn.myzqu.dto.FavoriteDTO;
 import cn.myzqu.pojo.Favorite;
 
 import java.util.List;
-import java.util.Map;
 
 public interface FavoriteMapper {
 
