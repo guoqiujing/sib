@@ -63,9 +63,9 @@ public class BuyController {
     public Result buyRecord(@RequestParam String userId)
     {
         List<BuyDTO> bankDTOList=buyService.findBuyByUser(userId);
-        if(bankDTOList!=null)
-            return ResultVOUtil.success(bankDTOList);
-        else
+        if(bankDTOList.isEmpty())
             return ResultVOUtil.error(ResultEnum.BUY_BANK_EMPTY);
+        else
+            return ResultVOUtil.success(bankDTOList);
     }
 }
