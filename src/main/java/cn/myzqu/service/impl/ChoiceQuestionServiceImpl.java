@@ -210,4 +210,16 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
         PageDTO pageDTO = new PageDTO(choiceDTOS,total,pageSize,pageNum,pages);
         return pageDTO;
     }
+
+    @Override
+    public PageDTO findCheatChoice(int pageNum, int pageSize) {
+        Page page = PageHelper.startPage(pageNum,pageSize);
+        //获取所有题目
+        List<ChoiceDTO> choiceDTOS=choiceQuestionMapper.selectCheatChoice();
+        if(choiceDTOS.isEmpty()) return null;
+        int total = (int)page.getTotal();
+        int pages = page.getPages();
+        PageDTO pageDTO = new PageDTO(choiceDTOS,total,pageSize,pageNum,pages);
+        return pageDTO;
+    }
 }

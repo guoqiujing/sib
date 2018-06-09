@@ -261,4 +261,11 @@
     where choice_question.bank_id=question_bank.id
     and choice_question.user_id=#{VALUE }
   </select>
+  
+  <!--显示所有待审核题目-->
+  <select id="selectCheatChoice" resultType="cn.myzqu.dto.ChoiceDTO">
+    select choice_question.*,question_bank.title
+    from choice_question,question_bank
+    where choice_question.bank_id=question_bank.id and choice_question.status=1 ORDER BY update_time DESC
+  </select>
 </mapper>

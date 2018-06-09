@@ -64,4 +64,6 @@ public interface ChoiceQuestionMapper {
     List<ChoiceDTO> selectAllChoice();//显示题目
 
     List<ChoiceDTO> selectByUserId(String userId);//根据用户id查询题目
+
+    List<ChoiceDTO> selectCheatChoice();//显示所有待审核题目
 }
