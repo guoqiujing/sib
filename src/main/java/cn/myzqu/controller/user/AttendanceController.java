@@ -4,7 +4,6 @@ import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.pojo.Attendance;
 import cn.myzqu.service.AttendanceService;
 import cn.myzqu.service.PointsService;
-import cn.myzqu.utils.AddressUtil;
 import cn.myzqu.utils.IPUtil;
 import cn.myzqu.utils.KeyUtil;
 import cn.myzqu.utils.ResultVOUtil;
@@ -41,7 +40,8 @@ public class AttendanceController {
     {
         String ip=IPUtil.getIP(request);
         Attendance attendance=new Attendance();
-        String address=AddressUtil.getAddressBySina(ip);
+      //  String address=AddressUtil.getAddressBySina(ip);
+        String address = "中国";
         attendance.setId(KeyUtil.getUUID());
         attendance.setIp(ip);
         attendance.setUserId(userId);
