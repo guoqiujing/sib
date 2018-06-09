@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>题目管理</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/static/layui/layui.js"></script>
+    <script src="/static/js/user/question.js"></script>
+</head>
+<body>
+<!-- 内容主体区域 -->
+<div style="padding: 20px;">
+    <div class="layui-form-item">
+        <div class="layui-inline demoTable">
+            <button data-type="add" id="add" class="layui-btn layui-btn-sm">
+                <i class="layui-icon">&#xe654;</i>新增题目
+            </button>
+        </div>
+        <div class="layui-inline demoTable">
+            <button data-type="upload" id="upload"
+                    class="layui-btn layui-btn-sm">
+                <i class="layui-icon">&#xe654;</i>批量新增
+            </button>
+        </div>
+    </div>
+    <table class="layui-hide" id="tableElem" lay-filter="demo"></table>
+    <script type="text/html" id="table_bar">
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon"></i>删除</a>
+    </script>
+</div>
+</body>
+<!-- 详情div -->
+<div id="details_form_div" style="width: 600px; display: none">
+    <form action="" class="layui-form" style="padding: 20px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">编号</label>
+            <div class="layui-input-block">
+                <input type="text" name="id" disabled="disabled" id="select_id"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">题干</label>
+            <div class="layui-input-block">
+                <input type="text" name="question" disabled="disabled"
+                       id="select_question" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item ">
+            <label class="layui-form-label">选项A</label>
+            <div class="layui-input-block">
+                <input type="text" name="choiceA" disabled="disabled"
+                       id="select_choiceA" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选项B</label>
+            <div class="layui-input-block">
+                <input type="text" name="choiceB" disabled="disabled"
+                       id="select_choiceB" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选项C</label>
+            <div class="layui-input-block">
+                <input type="text" name="choiceC" disabled="disabled"
+                       id="select_choiceC" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选项D</label>
+            <div class="layui-input-block">
+                <input type="text" name="choiceD" disabled="disabled"
+                       id="select_choiceD" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">答案</label>
+            <div class="layui-input-block">
+                <input type="text" name="answer" disabled="disabled"
+                       id="select_answer" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">解析</label>
+            <div class="layui-input-block">
+                <textarea name="analysis" disabled="disabled" id="select_analysis"
+                          class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">创建时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="createtime" disabled="disabled"
+                       id="select_createtime" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属题库</label>
+            <div class="layui-input-block">
+                <input type="text" name="bankId" disabled="disabled"
+                       id="select_bankId" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">题目状态</label>
+            <div class="layui-input-block">
+                <input type="text" name="status" disabled="disabled"
+                       id="select_status" class="layui-input">
+            </div>
+        </div>
+    </form>
+</div>
+<!-- 编辑div -->
+<div id="edit_form_div" style="width: 600px; display: none">
+    <form action="" class="layui-form" lay-filter="edit_form"
+          style="padding: 20px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">编号</label>
+            <div class="layui-input-block">
+                <input type="text" name="id" disabled="disabled" id="edit_id"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">题干</label>
+            <div class="layui-input-block">
+                <input type="text" name="question" id="edit_question"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item ">
+            <label class="layui-form-label">选项A</label>
+            <div class="layui-input-block">
+                <input type="text" name="choiceA" id="edit_choiceA"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选项B</label>
+            <div class="layui-input-block">
+                <input type="text" name="choiceB" id="edit_choiceB"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选项C</label>
+            <div class="layui-input-block">
+                <input type="text" name="choiceC" id="edit_choiceC"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选项D</label>
+            <div class="layui-input-block">
+                <input type="text" name="choiceD" id="edit_choiceD"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">答案</label>
+            <div class="layui-input-block">
+                <input type="text" name="answer" id="edit_answer"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">解析</label>
+            <div class="layui-input-block">
+
+                <textarea name="analysis" id="edit_analysis" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="edit_sub">提交修改</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- 添加div -->
+<div id="add_form_div" style="width: 600px; display: none">
+    <form action="" class="layui-form" lay-filter="add_form"
+          style="padding: 20px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">题干</label>
+            <div class="layui-input-block">
+                <input type="text" name="question" id="add_question"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item ">
+            <label class="layui-form-label">选项A</label>
+            <div class="layui-input-block">
+                <input type="text" name="choiceA" id="add_choiceA"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选项B</label>
+            <div class="layui-input-block">
+                <input type="text" name="choiceB" id="add_choiceB"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选项C</label>
+            <div class="layui-input-block">
+                <input type="text" name="choiceC" id="add_choiceC"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选项D</label>
+            <div class="layui-input-block">
+                <input type="text" name="choiceD" id="add_choiceD"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">答案</label>
+            <div class="layui-input-block">
+                <input type="text" name="answer" id="add_answer"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">解析</label>
+            <div class="layui-input-block">
+
+                <textarea name="analysis" id="add_analysis" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属题库</label>
+            <div class="layui-input-block">
+                <select name="bankId" id="add_bankId" autocomplete="off">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="add_sub">提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="upload_form_div" style="width: 600px; display: none">
+    <form class="layui-form" id="upload_form" action="admin_choiceQuestion/upload.action" enctype="multipart/form-data" method="post"
+          style="padding: 20px;">
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">选择文件</label>
+            <div class="layui-input-block">
+                <input type="file" name="file">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属题库</label>
+            <div class="layui-input-block">
+                <select name="bankId" id="upload_bankId" autocomplete="off">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" id="upload_submit">提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+</html>
