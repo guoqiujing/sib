@@ -145,7 +145,7 @@ public class QuestionBankServiceImpl implements QuestionBankService {
         PageDTO pageDTO = new PageDTO(bankDTOS,total,pageSize,pageNum,pages);
         return pageDTO;
     }
-    @Scheduled(cron = "0 0 0 * * ? ")
+
     @Override
     public Boolean updateBankRating() {
         //获得所有题库对象
