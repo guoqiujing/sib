@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>题库管理</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/static/layui/layui.js"></script>
+    <script src="/static/js/user/bank.js"></script>
+    <script src="/static/js/category.js"></script>
+</head>
+<body>
+<div style="padding: 20px">
+    <div class="layui-form-item">
+        <div class="layui-inline demoTable">
+            <button data-type="add" id="add" class="layui-btn layui-btn-sm">
+                <i class="layui-icon">&#xe654;</i>新增题库
+            </button>
+        </div>
+        <div class="layui-inline demoTable">
+            <button class="layui-btn layui-btn-sm layui-btn-danger"  data-type="batchDel">
+                <i class="layui-icon">&#x1006;</i>批量删除
+            </button>
+        </div>
+    </div>
+    <table class="layui-hide" id="tableElem" lay-filter="demo"></table>
+</div>
+<!-- 详情div -->
+<div id="details_form_div" style="width: 600px; display: none">
+    <form action="" class="layui-form" style="padding: 20px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">题库编号</label>
+            <div class="layui-input-block">
+                <input type="text" name="id" disabled="disabled" id="select_id"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">题库标题</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" disabled="disabled"
+                       id="select_title" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">题库介绍</label>
+            <div class="layui-input-block">
+					<textarea name="intro" disabled="disabled" id="select_intro"
+                              class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">创建时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="createtime" disabled="disabled"
+                       id="select_createtime" class="layui-input">
+            </div>
+        </div>
+        <!--<div class="layui-form-item">-->
+            <!--<label class="layui-form-label">所属用户</label>-->
+            <!--<div class="layui-input-block">-->
+                <!--<input type="text" name="userId" disabled="disabled"-->
+                       <!--id="select_userId" class="layui-input">-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属类型</label>
+            <div class="layui-input-block">
+                <input type="text" name="bankType" disabled="disabled"
+                       id="select_bankType" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">练习人次</label>
+            <div class="layui-input-block">
+                <input type="text" name="frequency" disabled="disabled"
+                       id="select_frequency" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">题目数量</label>
+            <div class="layui-input-block">
+                <input type="text" name="count" disabled="disabled"
+                       id="select_count" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">题库状态</label>
+            <div class="layui-input-block">
+                <input type="text" name="status" disabled="disabled"
+                       id="select_status" class="layui-input">
+            </div>
+        </div>
+    </form>
+</div>
+<!-- 编辑div -->
+<div id="edit_form_div" style="width: 600px; display: none">
+    <form action="" class="layui-form" lay-filter="edit_form"  style="padding: 20px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">题库编号</label>
+            <div class="layui-input-block">
+                <input type="text" name="id" disabled="disabled" id="edit_id"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">题库标题</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" id="edit_title" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">题库介绍</label>
+            <div class="layui-input-block">
+                <textarea name="intro" id="edit_intro" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="edit_sub">提交修改</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- 添加div -->
+<div id="add_form_div" style="width: 600px; display: none">
+    <form action="" class="layui-form" lay-filter="add_form"  style="padding: 20px;">
+        <div class="layui-form-item" style="display: none">
+            <label class="layui-form-label">所属用户</label>
+            <div class="layui-input-block">
+                <input type="text" name="userId"
+                       id="add_userId" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">题库标题</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" id="add_title" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">题库介绍</label>
+            <div class="layui-input-block">
+                <textarea name="intro" id="add_intro" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item" id="x-city">
+            <label class="layui-form-label">所属类型</label>
+            <div class="layui-input-inline">
+                <select  lay-filter="topCategory">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="categoryName" lay-filter="category">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="add_sub">提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!--列表操作栏-->
+<script type="text/html" id="table_bar">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon"></i>删除</a>
+</script>
+<script>
+    layui.use(['form','code'], function(){
+        form = layui.form;
+        $('#x-city').category('计算机水平考试','初级程序员');
+    });
+</script>
+</body>
+</html>
