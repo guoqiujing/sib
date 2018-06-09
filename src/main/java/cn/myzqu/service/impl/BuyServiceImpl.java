@@ -1,12 +1,15 @@
 package cn.myzqu.service.impl;
 
 import cn.myzqu.dao.BuyMapper;
+import cn.myzqu.dao.UserMapper;
 import cn.myzqu.dto.BuyDTO;
 import cn.myzqu.dto.PointsDTO;
+import cn.myzqu.dto.UserDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.exception.CustomException;
 import cn.myzqu.pojo.Buy;
 import cn.myzqu.pojo.QuestionBank;
+import cn.myzqu.pojo.User;
 import cn.myzqu.service.BuyService;
 import cn.myzqu.service.PointsService;
 import cn.myzqu.service.QuestionBankService;
@@ -30,6 +33,9 @@ public class BuyServiceImpl implements BuyService {
     @Autowired
     private QuestionBankService questionBankService;
 
+    @Autowired
+    private UserMapper userMapper;
+
 
     @Override
     public Boolean buyBank(Buy buy) {
@@ -43,8 +49,8 @@ public class BuyServiceImpl implements BuyService {
         if(findByUser(userId,bankId)!=null)
             throw new CustomException(ResultEnum.BANK_BUY_EXIST);
         //判断是否够积分购买题库
-        PointsDTO pointsDTO=pointsService.calUserPoints(userId);
-        int now=pointsDTO.getPoints();
+        User user=userMapper.selectById(userId);
+        int now=user.getValue();
         if(now-points<0)
             throw new CustomException(ResultEnum.POINT_NOT_ENOUGHT);
             //购买题库
