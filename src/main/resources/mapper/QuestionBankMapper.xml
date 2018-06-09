@@ -258,4 +258,12 @@
   <select id="selectGreatBank" resultMap="BaseResultMap">
     SELECT * FROM question_bank WHERE status=4 ORDER BY update_time DESC
   </select>
+
+  <!--动态显示题库-->
+  <select id="selectNewBank" resultMap="BaseAndCountResultMap">
+    SELECT question_bank.*,user.icon,user.nickname
+    FROM question_bank,user
+    WHERE question_bank.user_id=user.id
+    ORDER BY question_bank.update_time DESC
+  </select>
 </mapper>
