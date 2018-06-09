@@ -251,7 +251,7 @@
   <select id="selectAllChoice" resultType="cn.myzqu.dto.ChoiceDTO">
     select choice_question.*,question_bank.title
     from choice_question,question_bank
-    where choice_question.bank_id=question_bank.id
+    where choice_question.bank_id=question_bank.id ORDER BY update_time DESC
   </select>
 
   <!--根据用户id查询题目-->
