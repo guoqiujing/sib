@@ -146,11 +146,13 @@ public class BankController {
      * @param questionBank
      * @return
      */
-    @PutMapping("/info/check")
+    @PutMapping("/bank/check")
     public Result greatBank(QuestionBank questionBank) {
         if (questionBankService.greatBank(questionBank)) {
             return ResultVOUtil.success();
         } else
             return ResultVOUtil.error(ResultEnum.BANK_GREAT_FAIL);
     }
+
+
 }

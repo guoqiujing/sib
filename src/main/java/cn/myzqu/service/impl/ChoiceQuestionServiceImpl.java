@@ -161,7 +161,7 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
     public Boolean updateChoiceRating() {
         System.out.println("开始更新题目星级评分：");
         //获得所有题目
-        List<ChoiceQuestion> choiceQuestions=choiceQuestionMapper.selectAllChoice();
+        List<ChoiceDTO> choiceQuestions=choiceQuestionMapper.selectAllChoice();
         //定义更新次数
         int size=0;
         for(int i=0;i<choiceQuestions.size();i++)
@@ -190,7 +190,20 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
     @Override
     public PageDTO findByUserId(String id, int pageNum, int pageSize) {
         Page page = PageHelper.startPage(pageNum,pageSize);
+        //根据用户id查询题目
         List<ChoiceDTO> choiceDTOS=choiceQuestionMapper.selectByUserId(id);
+        if(choiceDTOS.isEmpty()) return null;
+        int total = (int)page.getTotal();
+        int pages = page.getPages();
+        PageDTO pageDTO = new PageDTO(choiceDTOS,total,pageSize,pageNum,pages);
+        return pageDTO;
+    }
+
+    @Override
+    public PageDTO findAllChoice(int pageNum, int pageSize) {
+        Page page = PageHelper.startPage(pageNum,pageSize);
+        //获取所有题目
+        List<ChoiceDTO> choiceDTOS=choiceQuestionMapper.selectAllChoice();
         if(choiceDTOS.isEmpty()) return null;
         int total = (int)page.getTotal();
         int pages = page.getPages();

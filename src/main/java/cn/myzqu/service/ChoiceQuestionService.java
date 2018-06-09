@@ -85,4 +85,6 @@ public interface ChoiceQuestionService {
     Boolean updateChoiceRating();//批量更新题目评分
 
     PageDTO findByUserId(String id,int pageNum, int pageSize);//根据用户id查询题目
+
+    PageDTO findAllChoice(int pageNum, int pageSize);//获取所有题目
 }
