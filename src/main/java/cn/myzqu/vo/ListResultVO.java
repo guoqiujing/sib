@@ -8,6 +8,6 @@ import lombok.Data;
 @Data
 public class ListResultVO extends ResultVO {
 
-    private int total;
+    private int count;
 
 }
