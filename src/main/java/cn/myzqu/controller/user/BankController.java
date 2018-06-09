@@ -149,4 +149,20 @@ public class BankController {
         else
             return ResultVOUtil.success(pageDTO);
     }
+
+    /**
+     * 动态显示所有题库
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("/info/way/new")
+    public Result getNewBank(@RequestParam(value="page",defaultValue = "1") Integer page,
+                              @RequestParam(value = "size",defaultValue = "10") Integer size) {
+        PageDTO pageDTO = questionBankService.findNewBank(page,size);
+        if (pageDTO==null)
+            return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
+        else
+            return ResultVOUtil.success(pageDTO);
+    }
 }

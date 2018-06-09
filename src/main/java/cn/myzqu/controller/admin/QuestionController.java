@@ -134,4 +134,20 @@ public class QuestionController {
         }
         return ResultVOUtil.error(ResultEnum.QUESTIONLIST_EMPTY);
     }
+
+    /**
+     * 获取所有待审核题目
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("/cheat/list")
+    public Result getCheatChoice(@RequestParam(value="page",defaultValue = "1") Integer page,
+                       @RequestParam(value = "size",defaultValue = "10") Integer size){
+        PageDTO data = choiceQuestionService.findCheatChoice(page,size);
+        if(data!=null) {
+            return ResultVOUtil.success(data.getRows(),data.getTotal());
+        }
+        return ResultVOUtil.error(ResultEnum.QUESTIONLIST_EMPTY);
+    }
 }

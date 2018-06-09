@@ -109,4 +109,6 @@ public interface QuestionBankService
     Boolean updateBankFrequency();
 
     Boolean greatBank(QuestionBank questionBank);//推荐和取消推荐题库
+
+    PageDTO findNewBank(int pageNum, int pageSize);//动态显示题库
 }

@@ -87,4 +87,6 @@ public interface ChoiceQuestionService {
     PageDTO findByUserId(String id,int pageNum, int pageSize);//根据用户id查询题目
 
     PageDTO findAllChoice(int pageNum, int pageSize);//获取所有题目
+
+    PageDTO findCheatChoice(int pageNum, int pageSize);//显示所有待审核题目
 }

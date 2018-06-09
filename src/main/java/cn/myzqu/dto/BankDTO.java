@@ -13,6 +13,12 @@ public class BankDTO extends QuestionBank
     //总题目数
     private int countAll;
 
+    //用户头像
+    private String icon;
+
+    //用户昵称
+    private String nickname;
+
     public int getCountAll() {
         return countAll;
     }
@@ -29,8 +35,29 @@ public class BankDTO extends QuestionBank
         this.count = count;
     }
 
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     @Override
     public String toString() {
-        return "BankDTO [count=" + count + ",countAll="+countAll+", toString()=" + super.toString() + "]";
+        return "BankDTO{" +
+                "count=" + count +
+                ", countAll=" + countAll +
+                ", icon='" + icon + '\'' +
+                ", nickname='" + nickname + '\'' +
+                "} " + super.toString();
     }
 }
