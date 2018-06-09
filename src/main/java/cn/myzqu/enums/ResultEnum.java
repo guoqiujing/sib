@@ -19,6 +19,7 @@ public enum ResultEnum {
     BANK_BUY_FAIL(2004,"该题库购买失败"),
     BANK_IS_EXIST(2005,"该题库是自己的"),
     BANK_CHECK_FAIL(2006,"题库审核失败"),
+    BANK_GREAT_FAIL(2007,"推荐题库修改失败"),
 
     BANK_NOT_EXIST(2100,"题库不存在"),
 

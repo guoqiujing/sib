@@ -145,7 +145,7 @@ public class QuestionBankServiceImpl implements QuestionBankService {
         PageDTO pageDTO = new PageDTO(bankDTOS,total,pageSize,pageNum,pages);
         return pageDTO;
     }
-    @Scheduled(cron = "0 0 0 * * ? ")
+
     @Override
     public Boolean updateBankRating() {
         //获得所有题库对象
@@ -208,6 +208,15 @@ public class QuestionBankServiceImpl implements QuestionBankService {
         //封装数据到分页类PageDTO
         PageDTO pageDTO = new PageDTO(questionBanks,total,pageSize,pageNum,pages);
         return pageDTO;
+    }
+
+    @Override
+    public Boolean greatBank(QuestionBank questionBank) {
+        //修改推荐题库信息
+        if(questionBankMapper.updateById(questionBank)>0)
+            return true;
+        else
+            return false;
     }
 
     @Override

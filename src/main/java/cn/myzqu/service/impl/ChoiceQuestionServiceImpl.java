@@ -156,7 +156,7 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
         //根据题库id查询题库
         return choiceQuestionMapper.selectByUserBankId(id);
     }
-    @Scheduled(cron = "0 0 17 * * ?")
+
     @Override
     public Boolean updateChoiceRating() {
         System.out.println("开始更新题目星级评分：");
