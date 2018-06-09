@@ -107,4 +107,6 @@ public interface QuestionBankService
      * @return
      */
     Boolean updateBankFrequency();
+
+    Boolean greatBank(QuestionBank questionBank);//推荐和取消推荐题库
 }

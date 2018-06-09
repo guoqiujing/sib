@@ -251,11 +251,11 @@
 
   <!--显示所有题库-->
   <select id="selectAllBank" resultMap="BaseResultMap">
-    SELECT * FROM question_bank
+    SELECT * FROM question_bank ORDER BY update_time DESC
   </select>
 
   <!--显示推荐题库-->
   <select id="selectGreatBank" resultMap="BaseResultMap">
-    SELECT * FROM question_bank WHERE status=4
+    SELECT * FROM question_bank WHERE status=4 ORDER BY update_time DESC
   </select>
 </mapper>

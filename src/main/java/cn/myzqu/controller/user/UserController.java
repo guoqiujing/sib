@@ -1,6 +1,7 @@
 package cn.myzqu.controller.user;
 
 import cn.myzqu.dto.PageDTO;
+import cn.myzqu.dto.PointsDTO;
 import cn.myzqu.dto.UserDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.pojo.User;
@@ -126,4 +127,18 @@ public class UserController {
 
     }
 
+    /**
+     * 根据用户id查询用户积分
+     * @param userId
+     * @return
+     */
+    @GetMapping("/points")
+    public Result getUserPoints(@RequestParam String userId)
+    {
+        UserDTO userDTO = userService.findById(userId);
+        if(userDTO!=null){
+            return ResultVOUtil.success(userDTO.getValue());
+        }
+            return ResultVOUtil.error(ResultEnum.POINT_USER_FALL);
+    }
 }

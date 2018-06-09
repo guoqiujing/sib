@@ -75,7 +75,7 @@
     <select id="selectByUserId" parameterType="String" resultType="cn.myzqu.dto.FavoriteDTO">
     SELECT favorite.*,choice_question.question,question_bank.title
     FROM favorite,choice_question,question_bank
-    WHERE favorite.user_id=#{VALUE } AND favorite.question_id=choice_question.id AND favorite.bank_id=question_bank.id
+    WHERE favorite.user_id=#{VALUE } AND favorite.question_id=choice_question.id AND favorite.bank_id=question_bank.id ORDER BY favorite.create_time DESC3W
   </select>
 
     <!--根据用户id和题目id判断是否收藏-->

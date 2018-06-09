@@ -30,6 +30,7 @@ public class RatingController {
      */
     @PostMapping("/addRating")
     public Result addRating(@Validated Rating rating){
+        System.err.println(rating.getUserId());
         //调用ratingService，成功则返回信息
         if(ratingService.addRatingRecord(rating)) {
             pointsService.ChoiceByGrade(rating.getUserId());

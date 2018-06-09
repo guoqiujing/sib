@@ -32,11 +32,11 @@ public class PointsController {
     public Result getPointsByUser( @RequestParam(value = "page",defaultValue = "1") Integer page,
                                    @RequestParam(value = "size", defaultValue = "10") Integer size)
     {
-        PageDTO pageDTO=pointsService.find(page,size);
-        if(pageDTO==null)
-            return ResultVOUtil.error(ResultEnum.POINT_NOT_EXIST);
-        else
-            return ResultVOUtil.success(pageDTO);
+        PageDTO data = pointsService.find(page,size);
+        if(data!=null) {
+            return ResultVOUtil.success(data.getRows(),data.getTotal());
+        }
+        return ResultVOUtil.error(ResultEnum.POINT_NOT_EXIST);
     }
 
     /**

@@ -96,7 +96,7 @@ public class BankController {
     }
 
     /**
-     * 浏览题库信息
+     * 浏览所有题库信息
      * @param page
      * @param size
      * @return
@@ -112,7 +112,7 @@ public class BankController {
     }
 
     /**
-     * 修改审核信息 取消推荐题库
+     * 修改审核信息
      * @param questionBank
      * @return
      */
@@ -140,5 +140,19 @@ public class BankController {
         }
         return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
     }
+
+    /**
+     * 推荐题库 取消推荐题库
+     * @param questionBank
+     * @return
+     */
+    @PutMapping("/bank/check")
+    public Result greatBank(QuestionBank questionBank) {
+        if (questionBankService.greatBank(questionBank)) {
+            return ResultVOUtil.success();
+        } else
+            return ResultVOUtil.error(ResultEnum.BANK_GREAT_FAIL);
+    }
+
 
 }

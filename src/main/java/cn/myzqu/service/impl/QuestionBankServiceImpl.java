@@ -211,6 +211,15 @@ public class QuestionBankServiceImpl implements QuestionBankService {
     }
 
     @Override
+    public Boolean greatBank(QuestionBank questionBank) {
+        //修改推荐题库信息
+        if(questionBankMapper.updateById(questionBank)>0)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
     public PageDTO findSort(String condition,int pageNum,int pageSize) {
         //封装条件
         Map<String,Object> conditionMap = new HashMap<>();

@@ -109,7 +109,7 @@ public class QuestionController {
      * @param choiceQuestion
      * @return
      */
-        @PutMapping("/info/check")
+    @PutMapping("/info/check")
     public Result checkChoice(ChoiceQuestion choiceQuestion) {
         //审核题目信息
         if (choiceQuestionService.check(choiceQuestion)) {
@@ -119,4 +119,19 @@ public class QuestionController {
             return ResultVOUtil.error(ResultEnum.QUESTION_CHECK_FAIL);
     }
 
+    /**
+     * 获取所有题目
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping("/list")
+    public Result list(@RequestParam(value="page",defaultValue = "1") Integer page,
+                       @RequestParam(value = "size",defaultValue = "10") Integer size){
+        PageDTO data = choiceQuestionService.findAllChoice(page,size);
+        if(data!=null) {
+            return ResultVOUtil.success(data.getRows(),data.getTotal());
+        }
+        return ResultVOUtil.error(ResultEnum.QUESTIONLIST_EMPTY);
+    }
 }
