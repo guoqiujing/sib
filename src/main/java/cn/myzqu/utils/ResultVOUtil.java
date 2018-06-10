@@ -34,7 +34,7 @@ public class ResultVOUtil {
         listResultVO.setCode(ResultEnum.SUCCESS.getCode());
         listResultVO.setMsg(ResultEnum.SUCCESS.getMessage());
         listResultVO.setData(object);
-        listResultVO.setTotal(total);
+        listResultVO.setCount(total);
         return listResultVO;
     }
 

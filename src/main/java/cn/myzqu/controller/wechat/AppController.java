@@ -19,7 +19,7 @@ import java.util.Map;
  * Created by 的川 on 2018/5/10.
  */
 @RestController
-@RequestMapping("/wechat")
+@RequestMapping("wechat")
 public class AppController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
