@@ -37,8 +37,8 @@ public class AnswerSheetController {
                           @RequestParam(value="page",defaultValue = "1") Integer page,
                           @RequestParam(value = "size",defaultValue = "10") Integer size){
         System.out.println(condition.get("userId"));
-        PageDTO pageDTO = answerSheetService.findByCondition(condition,page,size);
-        if (pageDTO!=null) return ResultVOUtil.success(pageDTO);
+        PageDTO data = answerSheetService.findByCondition(condition,page,size);
+        if (data!=null) return ResultVOUtil.success(data.getRows(),data.getTotal());
         return  ResultVOUtil.error(ResultEnum.ANSWERSHEETLIST_EMPTY);
     }
 

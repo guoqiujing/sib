@@ -36,4 +36,12 @@ public interface CommentService {
      * @return
      */
     Boolean updateById(String id);
+
+    /**
+     * 查询用户所有的评论记录
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    PageDTO findAllComment(int pageNum,int pageSize);
 }

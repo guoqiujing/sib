@@ -103,6 +103,7 @@
     <include refid="Base_Column_List" />
     from answer_sheet
     where id = #{id,jdbcType=VARCHAR}
+    ORDER BY answer_sheet.create_time DESC
   </select>
 
   <!--综合查询答题记录-->
@@ -131,6 +132,8 @@
         AND answer_sheet.istrue = #{answerIsTrue}
       </if>
     </where>
+
+    ORDER BY answer_sheet.create_time DESC
   </select>
 
   <select id="selectCountByUserId" resultType="java.lang.Integer">
@@ -144,6 +147,7 @@
   <select id="selectCountByBankId" resultType="java.lang.Integer" parameterType="java.lang.String">
     SELECT COUNT(*) from answer_sheet
     where answer_sheet.bank_id = #{bankId}
+
   </select>
 
 </mapper>

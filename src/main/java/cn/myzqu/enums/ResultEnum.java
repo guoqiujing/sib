@@ -91,6 +91,7 @@ public enum ResultEnum {
     COMMENT_FAIL(10100,"评论失败了呢，请稍后重试"),
     COMMENT_USER_EMPTY(10200,"你还有评论过题目哦"),
     COMMENT_UPDATE_FAIL(10300,"删除失败了呢，请稍后重试"),
+    COMMENT_ALLEMPTY(10400,"暂时还没有用户评论呢"),
 
     //购买题库类
     BUY_BANK_EMPTY(11000,"查询不到购买记录"),
