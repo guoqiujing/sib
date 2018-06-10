@@ -73,4 +73,6 @@ public interface PointsService {
     PointsDTO calUserPoints(String userId);//计算用户积分
 
     Boolean buyBank(String userId,int point);//用户购买题库
+
+    Boolean getPoints(String id,int point);//获得他人购买题库的积分
 }

@@ -44,6 +44,7 @@ public class BuyServiceImpl implements BuyService {
         //得到购买题库所需积分
         QuestionBank questionBank=questionBankService.findById(bankId);
         int points=questionBank.getValue();
+        String id=questionBank.getUserId();
         buy.setPoint(points);
         //判断用户是否购买过该题库
         if(findByUser(userId,bankId)!=null)
@@ -56,6 +57,7 @@ public class BuyServiceImpl implements BuyService {
             //购买题库
             if (buyMapper.insertSelective(buy) > 0) {
                 //添加到积分记录
+                pointsService.getPoints(id,points);
                 pointsService.buyBank(userId, points);
                 return true;
             }
