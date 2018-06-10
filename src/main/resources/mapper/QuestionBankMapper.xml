@@ -264,6 +264,6 @@
     SELECT question_bank.*,user.icon,user.nickname
     FROM question_bank,user
     WHERE question_bank.user_id=user.id
-    ORDER BY question_bank.update_time DESC
+    ORDER BY question_bank.create_time DESC
   </select>
 </mapper>
