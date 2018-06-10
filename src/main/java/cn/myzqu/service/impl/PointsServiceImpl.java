@@ -164,12 +164,12 @@ public class PointsServiceImpl implements PointsService {
     }
 
     @Override
-    public Boolean getPoints(String id,int point) {
+    public Boolean getPoints(String id,int point,String title) {
         Points points=new Points();
         points.setId(KeyUtil.getUUID());
         points.setValue(point);
         points.setUserId(id);
-        points.setNote("其他用户购买你的题库");
+        points.setNote("用户购买你的"+title+"题库");
         //上传题库者获得他人购买题库积分
         if(pointsMapper.insert(points)>0)
             return true;
