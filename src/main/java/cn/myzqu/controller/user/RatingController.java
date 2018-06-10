@@ -31,13 +31,17 @@ public class RatingController {
     @PostMapping("/addRating")
     public Result addRating(@Validated Rating rating){
         System.err.println(rating.getUserId());
-        //调用ratingService，成功则返回信息
-        if(ratingService.addRatingRecord(rating)) {
-            pointsService.ChoiceByGrade(rating.getUserId());
-            return ResultVOUtil.success();
+        //判断用户是否已经评价星级
+        if(ratingService.findByUserId(rating.getUserId(),rating.getQuestionId())==null) {
+            //调用ratingService，成功则返回信息
+            if (ratingService.addRatingRecord(rating)) {
+                pointsService.ChoiceByGrade(rating.getUserId());
+                return ResultVOUtil.success();
+            }
+            //失败则返回异常
+            return ResultVOUtil.error(ResultEnum.ERROR);
         }
-        //失败则返回异常
-        return ResultVOUtil.error(ResultEnum.ERROR);
+        return ResultVOUtil.error(ResultEnum.RATING_COMPLETION);
     }
 
     /**
