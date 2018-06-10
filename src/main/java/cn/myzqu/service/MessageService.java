@@ -24,4 +24,12 @@ public interface MessageService {
      * @return
      */
     PageDTO findByUserId(String userId, int pageNum, int pageSize);
+
+    /**
+     * 查询所有用户的反馈记录
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    PageDTO findAllMessage(int pageNum, int pageSize);
 }

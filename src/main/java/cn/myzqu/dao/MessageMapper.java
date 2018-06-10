@@ -19,4 +19,10 @@ public interface MessageMapper {
      * @return
      */
     List<MessageDTO> selectByUserId(String userId);
+
+    /**
+     * 查询所有用户反馈列表
+     * @return
+     */
+    List<Message> selectAllMessage();
 }

@@ -65,4 +65,31 @@ public class MessageServiceImpl implements MessageService {
         PageDTO pageDTO = new PageDTO(list,total,pageSize,pageNum,pages);
         return pageDTO;
     }
+
+    /**
+     * 查询所有用户的反馈记录
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public PageDTO findAllMessage(int pageNum, int pageSize){
+        //使用PageHelper插件实现分页
+        //注意：下面这两条语句必须紧跟，保证分页安全
+        Page page = PageHelper.startPage(pageNum,pageSize);
+        //调用messageMapper的selectAllMessage方法查询该接收者用户收到的反馈信息
+        List<Message> list = messageMapper.selectAllMessage();
+        //判断是否为空
+        if(list.isEmpty())
+            //没有数据，则返回null
+            return null;
+
+        //获取总记录数
+        int total = (int)page.getTotal();
+        //获取总页数
+        int pages = page.getPages();
+        //封装数据到分页类PageDTO
+        PageDTO pageDTO = new PageDTO(list,total,pageSize,pageNum,pages);
+        return pageDTO;
+    }
 }
