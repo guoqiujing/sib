@@ -1,5 +1,5 @@
 var bankQuestion = ''
-var userId = '82e705688305435382df908076ba3e66'
+var userId = '1c835621dc694337b713f086404dabe8'
 $(document).ready(function(e) {
     //查询题库列表
     $.ajax({
@@ -102,7 +102,7 @@ layui.use('table', function () {
             layer.confirm('真的删除' + data.id + "?", {icon: 3, title: '提醒', shade: 0,offset: 't'}, function () {
                 $.ajax({
                     type: "delete",
-                    url: "/choice/info/" + data.id,
+                    url: "/admin/question/info/" + data.id,
                     success: function (res) {
                         if (res.code == "0") {
                             obj.del();

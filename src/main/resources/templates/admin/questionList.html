@@ -15,8 +15,89 @@
 <!--列表操作栏-->
 <script type="text/html" id="table_bar">
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon"></i>删除</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon"></i>下线</a>
 </script>
 </body>
+<!-- 详情div -->
+<div id="details_form_div" style="width: 600px; display: none">
+    <form action="" class="layui-form" style="padding: 20px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">编号</label>
+            <div class="layui-input-block">
+                <input type="text" name="id" disabled="disabled" id="select_id"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">题干</label>
+            <div class="layui-input-block">
+                <input type="text" name="question" disabled="disabled"
+                       id="select_question" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item ">
+            <label class="layui-form-label">选项A</label>
+            <div class="layui-input-block">
+                <input type="text" name="choiceA" disabled="disabled"
+                       id="select_choiceA" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选项B</label>
+            <div class="layui-input-block">
+                <input type="text" name="choiceB" disabled="disabled"
+                       id="select_choiceB" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选项C</label>
+            <div class="layui-input-block">
+                <input type="text" name="choiceC" disabled="disabled"
+                       id="select_choiceC" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选项D</label>
+            <div class="layui-input-block">
+                <input type="text" name="choiceD" disabled="disabled"
+                       id="select_choiceD" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">答案</label>
+            <div class="layui-input-block">
+                <input type="text" name="answer" disabled="disabled"
+                       id="select_answer" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">解析</label>
+            <div class="layui-input-block">
+                <textarea name="analysis" disabled="disabled" id="select_analysis"
+                          class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">创建时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="createtime" disabled="disabled"
+                       id="select_createtime" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属题库</label>
+            <div class="layui-input-block">
+                <input type="text" name="bankId" disabled="disabled"
+                       id="select_bankId" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">题目状态</label>
+            <div class="layui-input-block">
+                <input type="text" name="status" disabled="disabled"
+                       id="select_status" class="layui-input">
+            </div>
+        </div>
+    </form>
+</div>
 </html>

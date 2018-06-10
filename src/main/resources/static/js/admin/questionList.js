@@ -9,29 +9,104 @@ layui.use('table', function() {
         url: '/admin/question/list',
         request: {
             pageName: 'page' //页码的参数名称，默认：page
-            ,limitName: 'size' //每页数据量的参数名，默认：limit
+            , limitName: 'size' //每页数据量的参数名，默认：limit
         },
         page: true,
         cols: [
             [
-                {type:'checkbox'},
-                { field: 'question', title: '题干', width:300, sort: true },
-                { field: 'title', title: '所属题库', width:80, sort: true },
-                { field: 'userId', title: '创建者' ,  sort: true },
-                { field: 'answer', title: '答案', sort: true },
-                { field: 'analysis', title: '分析', sort: true },
-                { field: 'frequency', title: '练习人次', width:100, sort: true },
-                { field: 'starLevel', title: '综合评级', width:100, sort: true },
-                { field: 'status', title: '状态', width:80, sort: true },
-                { field: 'createTime', title: '创建时间', width:200, sort: true },
-                { fixed: 'right', title: '操作',  align: 'center', toolbar: '#table_bar' }
+                {type: 'checkbox'},
+                {field: 'question', title: '题干', width: 300, sort: true},
+                {field: 'title', title: '所属题库', width: 80, sort: true},
+                {field: 'userId', title: '创建者', sort: true},
+                {field: 'answer', title: '答案', sort: true},
+                {field: 'analysis', title: '分析', sort: true},
+                {field: 'frequency', title: '练习人次', width: 100, sort: true},
+                {field: 'starLevel', title: '综合评级', width: 100, sort: true},
+                {field: 'status', title: '状态', width: 80, sort: true},
+                {field: 'createTime', title: '创建时间', width: 200, sort: true},
+                {fixed: 'right', title: '操作', align: 'center', toolbar: '#table_bar'}
             ]
         ],
         id: 'tableReload'
     });
     //监听表格复选框选择
-    table.on('checkbox(demo)', function(obj){
+    table.on('checkbox(demo)', function (obj) {
         console.log(obj)
     });
 
-})
+    //监听工具条
+    table.on('tool(demo)', function (obj) {
+        var data = obj.data;
+        if (obj.event === 'detail') {
+            $("#select_id").val(data.id)
+            $("#select_question").val(data.question)
+            $("#select_choiceA").val(data.choiceA)
+            $("#select_choiceB").val(data.choiceB)
+            $("#select_choiceC").val(data.choiceC)
+            $("#select_choiceD").val(data.choiceD)
+            $("#select_analysis").val(data.analysis)
+            $("#select_answer").val(data.answer)
+            $("#select_createtime").val(data.createTime)
+            $("#select_bankId").val(data.title)
+            $("#select_status").val(data.status)
+            layui.use('layer', function () {
+                layer.open({
+                    type: 1,
+                    title: '查看题目详情',
+                    shadeClose: true,
+                    shade: 0,
+                    offset: 't',
+                    area: ['630px', '730px'],
+                    content: $("#details_form_div"),
+                });
+            });
+        } else if (obj.event === 'del') {
+            layer.confirm('真的删除' + data.id + "?", {icon: 3, title: '提醒', shade: 0, offset: 't'}, function () {
+                $.ajax({
+                    type: "delete",
+                    url: "/admin/question/info/" + data.id,
+                    success: function (res) {
+                        if (res.code == "0") {
+                            obj.del();
+                        }
+                        layer.alert(res.msg, {offset: 't'});
+                    }
+                });
+            });
+        }
+    });
+    var $ = layui.$, active = {
+        batchDel: function () { //获取选中数据
+            var checkStatus = table.checkStatus('tableReload')
+            var data = checkStatus.data
+            if (data.length <= 0) {
+                layer.alert("请选择数据", {offset: 't'})
+            } else {
+                layer.confirm('真的要删除这' + data.length + '条数据吗？',
+                    {icon: 3, title: '提醒', offset: 't'}
+                    , function () {
+                        for (var i in data) {
+                            var id = data[i].id
+                            $.ajax({
+                                type: "delete",
+                                url: "/choice/info/" + id,
+                                success: function (res) {
+                                    if (res.code == "0") {
+                                        console.log(res.msg)
+                                    } else {
+                                        layer.alert(res.msg, {icon: 2, offset: 't'})
+                                    }
+                                }
+                            });
+                        }
+                        table.reload('tableReload', {});
+                    }
+                )
+            }
+        }
+    };
+    $('.demoTable .layui-btn').on('click', function () {
+        var type = $(this).data('type');
+        active[type] ? active[type].call(this) : '';
+    });
+});
