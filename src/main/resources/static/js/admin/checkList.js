@@ -1,25 +1,26 @@
 /**
- * Created by Administrator on 2018/6/9.
+ * Created by xiraly on 2018/6/9.
  */
 layui.use('table', function() {
 
     var table = layui.table;
     table.render({
         elem: '#tableElem',
-        url: '/admin/question/list',
+        url: '/admin/question/check/list',
         request: {
             pageName: 'page' //页码的参数名称，默认：page
-            , limitName: 'size' //每页数据量的参数名，默认：limit
+            ,limitName: 'size' //每页数据量的参数名，默认：limit
         },
         page: true,
         cols: [
             [
-                {type: 'checkbox'},
+                {type:'checkbox'},
                 {field: 'question', title: '题干', width: 300, sort: true},
-                {field: 'title', title: '所属题库', width: 200, sort: true},
+                {field: 'title', title: '所属题库', width: 80, sort: true},
                 {field: 'userId', title: '创建者', sort: true},
                 {field: 'answer', title: '答案', sort: true},
                 {field: 'analysis', title: '分析', sort: true},
+                {field: 'frequency', title: '练习人次', width: 100, sort: true},
                 {field: 'starLevel', title: '综合评级', width: 100, sort: true},
                 {field: 'status', title: '状态', width: 80, sort: true},
                 {field: 'createTime', title: '创建时间', width: 200, sort: true},
@@ -29,11 +30,10 @@ layui.use('table', function() {
         id: 'tableReload'
     });
     //监听表格复选框选择
-    table.on('checkbox(demo)', function (obj) {
+    table.on('checkbox(demo)', function(obj){
         console.log(obj)
     });
-
-    //监听工具条
+//监听工具条
     table.on('tool(demo)', function (obj) {
         var data = obj.data;
         if (obj.event === 'detail') {
@@ -60,6 +60,20 @@ layui.use('table', function() {
                 });
             });
         }
+        else if (obj.event === 'check') {
+            layer.confirm('确定通过这条题目' + data.id + "?", {icon: 3, title: '提醒', shade: 0, offset: 't'}, function () {
+                $.ajax({
+                    type: "put",
+                    url: "/admin/question/info/check/" + data.id,
+                    success: function (res) {
+                        if (res.code == "0") {
+                            obj.del();
+                        }
+                        layer.alert(res.msg, {offset: 't'});
+                    }
+                });
+            });
+        }
         else if (obj.event === 'del') {
             layer.confirm('真的下线这条题目' + data.id + "?", {icon: 3, title: '提醒', shade: 0, offset: 't'}, function () {
                 $.ajax({
@@ -76,4 +90,7 @@ layui.use('table', function() {
         }
     });
 
-});
+})
+/**
+ * Created by Administrator on 2018/6/12.
+ */

@@ -18,7 +18,7 @@ layui.use('table', function() {
                 {type:'checkbox'},
                 { field: 'title', title: '标题', width:300, sort: true },
                 { field: 'value', title: '分值', width:80, sort: true },
-                { field: 'userId', title: '创建者' ,  sort: true },
+                { field: 'userId', title: '创建者' , width:400, sort: true },
                 { field: 'categoryName', title: '所属类型', sort: true },
                 { field: 'frequency', title: '练习人次', width:100, sort: true },
                 { field: 'starLevel', title: '综合评级', width:100, sort: true },

@@ -77,9 +77,7 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
         //判断是否该题目是否存在
         if(findById(id)==null)
             throw new CustomException(ResultEnum.QUESTION_NOT_EXIST);
-        ChoiceQuestion choiceQuestion=choiceQuestionMapper.selectById(id);
-        choiceQuestion.setStatus(3);
-        if(choiceQuestionMapper.updateById(choiceQuestion)>0)
+        if(choiceQuestionMapper.deleteById(id)>0)
             return true;
         else
             return false;
@@ -143,7 +141,9 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
     }
 
     @Override
-    public Boolean check(ChoiceQuestion choiceQuestion) {
+    public Boolean check(String id) {
+        ChoiceQuestion choiceQuestion=choiceQuestionMapper.selectById(id);
+        choiceQuestion.setStatus(0);
         //修改审核信息
         if(choiceQuestionMapper.updateById(choiceQuestion)>0)
             return true;

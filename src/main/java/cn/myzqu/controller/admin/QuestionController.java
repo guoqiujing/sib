@@ -106,14 +106,14 @@ public class QuestionController {
 
     /**
      * 修改审核信息
-     * @param choiceQuestion
+     * @param id
      * @return
      */
-    @PutMapping("/info/check")
-    public Result checkChoice(ChoiceQuestion choiceQuestion) {
+    @PutMapping("/info/check/{id}")
+    public Result checkChoice(@PathVariable(value="id") String id) {
         //审核题目信息
-        if (choiceQuestionService.check(choiceQuestion)) {
-            pointsService.checkChoice(choiceQuestion.getUserId());
+        if (choiceQuestionService.check(id)) {
+            pointsService.checkChoice(id);
             return ResultVOUtil.success();
         } else
             return ResultVOUtil.error(ResultEnum.QUESTION_CHECK_FAIL);
@@ -141,7 +141,7 @@ public class QuestionController {
      * @param size
      * @return
      */
-    @GetMapping("/cheat/list")
+    @GetMapping("/check/list")
     public Result getCheatChoice(@RequestParam(value="page",defaultValue = "1") Integer page,
                        @RequestParam(value = "size",defaultValue = "10") Integer size){
         PageDTO data = choiceQuestionService.findCheatChoice(page,size);
