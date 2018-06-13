@@ -140,7 +140,6 @@ public class UserServiceImpl implements UserService{
         //插入数据
         int result =  userMapper.insert(user);
         if(result>0){
-            userMapper.userPointByRegister(user.getId());
             return user;
         }
         return null;
