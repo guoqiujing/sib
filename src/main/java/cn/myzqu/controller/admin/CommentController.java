@@ -8,6 +8,9 @@ import cn.myzqu.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 用户评论控制层
  * Created by xiraly on 2018/5/25.
@@ -26,9 +29,17 @@ public class CommentController {
      * @return
      */
     @GetMapping("/comment")
-    public Result getAllRating(@RequestParam(value="page",defaultValue = "1") Integer page,
+    public Result getAllRating(@RequestParam(value="nickname",defaultValue = "") String nickname,
+                               @RequestParam(value="bankTitle",defaultValue = "") String bankTitle,
+                               @RequestParam(value="question",defaultValue = "") String question,
+                               @RequestParam(value="page",defaultValue = "1") Integer page,
                                @RequestParam(value = "size",defaultValue = "10") Integer size){
-        PageDTO data = commentService.findAllComment(page,size);
+        System.err.println(bankTitle);
+        Map<String,Object> map = new HashMap<>();
+        map.put("nickname",nickname);
+        map.put("bankTitle",bankTitle);
+        map.put("question",question);
+        PageDTO data = commentService.findAllComment(map,page,size);
         if(data==null) return ResultVOUtil.error(ResultEnum.COMMENT_ALLEMPTY);
         return ResultVOUtil.success(data.getRows(),data.getTotal());
     }

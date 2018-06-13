@@ -4,6 +4,7 @@ import cn.myzqu.dto.CommentDTO;
 import cn.myzqu.pojo.Comment;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CommentMapper {
 
@@ -38,5 +39,5 @@ public interface CommentMapper {
     /**
      * 查询所有用户评论记录
      */
-    List<Comment> selectAllComment();
+    List<CommentDTO> selectAllComment(Map<String,Object> map);
 }

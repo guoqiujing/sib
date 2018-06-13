@@ -73,12 +73,12 @@ public class MessageServiceImpl implements MessageService {
      * @return
      */
     @Override
-    public PageDTO findAllMessage(int pageNum, int pageSize){
+    public PageDTO findAllMessage(String nickname,String bankTitle,String question,int pageNum, int pageSize){
         //使用PageHelper插件实现分页
         //注意：下面这两条语句必须紧跟，保证分页安全
         Page page = PageHelper.startPage(pageNum,pageSize);
         //调用messageMapper的selectAllMessage方法查询该接收者用户收到的反馈信息
-        List<Message> list = messageMapper.selectAllMessage();
+        List<MessageDTO> list = messageMapper.selectAllMessage(nickname,bankTitle,question);
         //判断是否为空
         if(list.isEmpty())
             //没有数据，则返回null
