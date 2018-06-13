@@ -14,6 +14,7 @@ import cn.myzqu.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -41,20 +42,25 @@ public class BankController {
 
     /**
      * 根据题库id或题库标题或用户id或类目名称查询题库信息
-     * @param condition  说明:  id or title or userId or categoryName
+     * @param title  说明:  id or title or userId or categoryName
      * @param page
      * @param size
      * @return
      */
-    @GetMapping("/info")
-    public Result get(@RequestParam Map<String,Object> condition,
-                                    @RequestParam(value="page",defaultValue = "1") Integer page,
-                                    @RequestParam(value = "size",defaultValue = "10") Integer size) {
+    @GetMapping("/search")
+    public Result get(@RequestParam String title,@RequestParam String userId,
+                      @RequestParam String categoryName,
+                      @RequestParam(value="page",defaultValue = "1") Integer page,
+                      @RequestParam(value = "size",defaultValue = "10") Integer size) {
+        Map<String,Object> condition = new HashMap<>();
+        condition.put("title",title);
+        condition.put("userId",userId);
+        condition.put("categoryName",categoryName);
         PageDTO pageDTO = questionBankService.find(condition,page,size);
         if (pageDTO==null)
             return ResultVOUtil.error(ResultEnum.BANK_NOT_EXIST);
         else
-            return ResultVOUtil.success(pageDTO);
+            return ResultVOUtil.success(pageDTO.getRows(),pageDTO.getTotal());
     }
 
 

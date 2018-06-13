@@ -11,11 +11,53 @@
 </head>
 <body>
 <div style="padding: 20px">
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label" >题库标题</label>
+                <div class="layui-input-inline">
+                    <input type="text"  id="search_title" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" >所属用户</label>
+                <div class="layui-input-inline">
+                    <input type="text"  id="search_userId" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form layui-inline">
+            <form  class="layui-form" id="x-city">
+                <label class="layui-form-label">所属类型</label>
+                <div class="layui-input-inline">
+                    <select  lay-filter="topCategory">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline">
+                    <select name="categoryName" id="search_categoryName" lay-filter="category">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+            </form>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn " id="bt_search"><i class="layui-icon">&#xe615;</i>搜索</button>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn " id="bt_refresh"><i class="layui-icon">&#xe669;</i>刷新</button>
+            </div>
+    </div>
     <table class="layui-hide" id="tableElem" lay-filter="demo"></table>
 </div>
 <!--列表操作栏-->
 <script type="text/html" id="table_bar">
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+</script>
+<script>
+    layui.use(['form','code'], function(){
+        form = layui.form;
+        $('#x-city').category('','');
+    });
 </script>
 </body>
 <!-- 详情div -->

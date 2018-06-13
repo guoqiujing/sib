@@ -9,14 +9,25 @@
     <script src="/static/js/admin/checkList.js"></script>
 </head>
 <body>
+
 <div style="padding: 20px">
+    <div class="layui-form-item">
+        <div class="layui-inline demoTable">
+            <button class="layui-btn layui-btn-sm"  data-type="batchPass">
+                <i class="layui-icon"></i>批量通过
+            </button>
+            <button class="layui-btn layui-btn-sm"  data-type="batchNoPass">
+                <i class="layui-icon"></i>批量不通过
+            </button>
+        </div>
+    </div>
     <table class="layui-hide" id="tableElem" lay-filter="demo"></table>
 </div>
 <!--列表操作栏-->
 <script type="text/html" id="table_bar">
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-    <a class="layui-btn layui-btn-xs" lay-event="check">审核</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon"></i>下线</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">详情</a>
+    <a class="layui-btn layui-btn-xs" lay-event="pass">通过</a>
+    <a class="layui-btn layui-btn-xs" lay-event="noPass">不通过</a>
 </script>
 </body>
 <!-- 详情div -->

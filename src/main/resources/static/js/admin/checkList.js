@@ -33,7 +33,7 @@ layui.use('table', function() {
     table.on('checkbox(demo)', function(obj){
         console.log(obj)
     });
-//监听工具条
+    //监听工具条
     table.on('tool(demo)', function (obj) {
         var data = obj.data;
         if (obj.event === 'detail') {
@@ -60,11 +60,11 @@ layui.use('table', function() {
                 });
             });
         }
-        else if (obj.event === 'check') {
+        else if (obj.event === 'pass') {
             layer.confirm('确定通过这条题目' + data.id + "?", {icon: 3, title: '提醒', shade: 0, offset: 't'}, function () {
                 $.ajax({
                     type: "put",
-                    url: "/admin/question/info/check/" + data.id,
+                    url: "/admin/question/info/pass/" + data.id,
                     success: function (res) {
                         if (res.code == "0") {
                             obj.del();
@@ -74,11 +74,11 @@ layui.use('table', function() {
                 });
             });
         }
-        else if (obj.event === 'del') {
-            layer.confirm('真的下线这条题目' + data.id + "?", {icon: 3, title: '提醒', shade: 0, offset: 't'}, function () {
+        else if (obj.event === 'noPass') {
+            layer.confirm('确定通过这条题目' + data.id + "?", {icon: 3, title: '提醒', shade: 0, offset: 't'}, function () {
                 $.ajax({
-                    type: "delete",
-                    url: "/admin/question/info/" + data.id,
+                    type: "put",
+                    url: "/admin/question/info/nopass/" + data.id,
                     success: function (res) {
                         if (res.code == "0") {
                             obj.del();
@@ -88,6 +88,38 @@ layui.use('table', function() {
                 });
             });
         }
+    });
+    var $ = layui.$, active = {
+        batchCheck: function(){ //获取选中数据
+            var checkStatus = table.checkStatus('tableReload')
+            var data = checkStatus.data
+            if(data.length<=0){
+                layer.alert("请选择数据",{offset:'t'})
+            }else {
+                layer.confirm('确定通过'+ data.length +'数据吗？', {icon:3,title:'提醒',offset:'t'},function (index) {
+                        for(var i=0;i<data.length;i++){
+                            var id = data[i].id
+                            $.ajax({
+                                type: "put",
+                                url: "/admin/question/info/check/"+id,
+                                success: function(res) {
+                                    if (res.code == "0") {
+                                        console.log(res.msg)
+                                    }else{
+                                        layer.alert(res.msg,{icon: 2,offset: 't'})
+                                    }
+                                }
+                            });
+                        }
+                        layer.close(index);
+                        table.reload('tableReload', {})
+                    });
+            }
+        }
+    };
+    $('.demoTable .layui-btn').on('click', function(){
+        var type = $(this).data('type');
+        active[type] ? active[type].call(this) : '';
     });
 
 })

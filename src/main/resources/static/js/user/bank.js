@@ -106,9 +106,9 @@ layui.use('table', function() {
             if(data.length<=0){
                 layer.alert("请选择数据",{offset:'t'})
             }else{
-                layer.confirm('真的要删除这'+data.length+'条数据吗？',
+                layer.confirm('真的要删除选中的'+data.length+'个题库吗？',
                     {icon:3,title:'提醒',offset:'t'}
-                    ,function () {
+                    ,function (index) {
                         for(var i in data){
                             var id = data[i].id
                             $.ajax({
@@ -123,6 +123,7 @@ layui.use('table', function() {
                                 }
                             });
                         }
+                        layer.close(index);
                         table.reload('tableReload', {});
                     }
                 )

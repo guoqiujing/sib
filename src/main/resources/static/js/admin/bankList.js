@@ -18,12 +18,12 @@ layui.use('table', function() {
                 {type:'checkbox'},
                 { field: 'title', title: '标题', width:300, sort: true },
                 { field: 'value', title: '分值', width:80, sort: true },
-                { field: 'userId', title: '创建者' , width:400, sort: true },
+                { field: 'userId', title: '创建者' ,  sort: true },
                 { field: 'categoryName', title: '所属类型', sort: true },
                 { field: 'frequency', title: '练习人次', width:100, sort: true },
                 { field: 'starLevel', title: '综合评级', width:100, sort: true },
                 { field: 'status', title: '状态', width:80, sort: true },
-                { field: 'createTime', title: '创建时间', width:200, sort: true },
+                { field: 'createTime', title: '创建时间', width:150, sort: true },
                 { fixed: 'right', title: '操作',  align: 'center', toolbar: '#table_bar' }
             ]
         ],
@@ -139,22 +139,41 @@ layui.use('table', function() {
         active[type] ? active[type].call(this) : '';
     });
 });
+//自定義事件處理
+$(document).ready(function(e) {
 
+    ///搜索题库
+    $("#bt_search").click(function(e) {
+        var search_id = $('#search_id').val();
+        var search_title = $('#search_title').val();
+        var search_userId = $('#search_userId').val();
+        var search_categoryName = $('#search_categoryName').val();
+        //执行重载
+        layui.table.reload('tableReload', {
+            url: '/admin/questionBank/search',
+            where:{
+                title: search_title,
+                userId: search_userId,
+                categoryName: search_categoryName
+            }
+        });
+    });
+    //刷新页面
+    $("#bt_refresh").click(function(e) {
+        window.location.reload()
+    });
+
+});
 layui.use(['form'], function() {
-    var form = layui.form,
-        layer = layui.layer;
-    //自定义验证规则
-    form.verify({
-        name: function(value) {
-            if (value.length < 3 || value.length > 12) {
-                return '名称长度需控制在3-12内';
-            }
-        },
-        intro: function(value) {
-            if (value.length < 5 || value.length > 100) {
-                return '介绍长度需控制在5-100内';
-            }
-        }
+    var form = layui.form, layer = layui.layer;
+
+    //请求搜索
+    form.on('submit(search)', function(data) {
+        //执行重载
+        layui.table.reload('tableReload', {
+            url: '/admin/questionBank/search',
+            where:data.field
+        });
     });
     // 提交修改到后台
     form.on('submit(edit_sub)', function(data) {
