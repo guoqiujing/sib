@@ -41,4 +41,6 @@ public class MessageController {
         //若有数据，则返回成功信息和数据
         return  ResultVOUtil.success(data.getRows(),data.getTotal());
     }
+
+
 }
