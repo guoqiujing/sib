@@ -73,7 +73,7 @@ public interface ChoiceQuestionService {
      */
     PageDTO findSort(Map<String,Object> map, int pageNum, int pageSize);
 
-    Boolean check(String id);//修改题目审核信息
+    Boolean check(String id);//题目审核通过
 
     List<ChoiceDTO> findByUserBankId(String id);
 
@@ -84,4 +84,6 @@ public interface ChoiceQuestionService {
     PageDTO findAllChoice(int pageNum, int pageSize);//获取所有题目
 
     PageDTO findCheatChoice(int pageNum, int pageSize);//显示所有待审核题目
+
+    Boolean notCheck(String id);//题目审核不通过
 }

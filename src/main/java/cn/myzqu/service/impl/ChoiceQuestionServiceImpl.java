@@ -222,4 +222,15 @@ public class ChoiceQuestionServiceImpl implements ChoiceQuestionService {
         PageDTO pageDTO = new PageDTO(choiceDTOS,total,pageSize,pageNum,pages);
         return pageDTO;
     }
+
+    @Override
+    public Boolean notCheck(String id) {
+        ChoiceQuestion choiceQuestion=choiceQuestionMapper.selectById(id);
+        choiceQuestion.setStatus(2);
+        //修改审核信息
+        if(choiceQuestionMapper.updateById(choiceQuestion)>0)
+            return true;
+        else
+            return false;
+    }
 }

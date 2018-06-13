@@ -3,15 +3,15 @@ package cn.myzqu.dao;
 import cn.myzqu.pojo.UserRole;
 
 public interface UserRoleMapper {
-    int deleteByPrimaryKey(String id);
+
+    int deleteById(String id);
 
     int insert(UserRole record);
 
-    int insertSelective(UserRole record);
+    UserRole selectById(String id);
 
-    UserRole selectByPrimaryKey(String id);
+    UserRole selectByUserId(String UserId);
 
-    int updateByPrimaryKeySelective(UserRole record);
+    int updateById(UserRole record);
 
-    int updateByPrimaryKey(UserRole record);
 }

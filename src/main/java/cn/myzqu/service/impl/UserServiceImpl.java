@@ -2,12 +2,14 @@ package cn.myzqu.service.impl;
 
 import cn.myzqu.dao.PointsMapper;
 import cn.myzqu.dao.UserMapper;
+import cn.myzqu.dao.UserRoleMapper;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.dto.UserDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.exception.CustomException;
 import cn.myzqu.pojo.Points;
 import cn.myzqu.pojo.User;
+import cn.myzqu.pojo.UserRole;
 import cn.myzqu.service.UserService;
 import cn.myzqu.utils.KeyUtil;
 import cn.myzqu.utils.MD5Util;
@@ -33,6 +35,9 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserRoleMapper userRoleMapper;
 
     @Autowired
     private PointsMapper pointsMapper;
@@ -140,7 +145,14 @@ public class UserServiceImpl implements UserService{
         //插入数据
         int result =  userMapper.insert(user);
         if(result>0){
-            return user;
+            //插入用户身份
+            UserRole record = new UserRole();
+            record.setUserId(user.getId());
+            record.setRoleName("user");
+            if(userRoleMapper.insert(record)>0){
+                return user;
+            }
+            return null;
         }
         return null;
     }

@@ -58,20 +58,14 @@
     FROM choice_question,question_bank
     WHERE question_bank.id=choice_question.bank_id
       <choose>
-        <when test="id!=null and id!=''">
-          AND choice_question.id LIKE '%${id}%'
-        </when>
         <when test="question!=null and question!=''">
           AND choice_question.question LIKE '%${question}%'
         </when>
-        <when test="answer!=null and answer!=''">
-          AND choice_question.answer LIKE '%${answer}%'
-        </when>
-        <when test="analysis!=null and analysis!=''">
-          AND choice_question.analysis LIKE '%${analysis}%'
-        </when>
         <when test="userId!=null and userId!=''">
-          AND choice_question.user_id LIKE '%${user_id}%'
+          AND choice_question.user_id LIKE '%${userId}%'
+        </when>
+        <when test="title!=null and title!=''">
+          AND  question_bank.title LIKE '%${title}%'
         </when>
         <otherwise>
           AND 1=2
