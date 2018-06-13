@@ -88,27 +88,25 @@ public class QuestionController {
 
     /**
      * 综合查询(根据题目id，题目，答案，分析,用户id，题库标题模糊搜索）
-     * @param id question answer analysis userId title
+     * @param question userId title
      * @param page
      * @param size
      * @return
      */
     @GetMapping("/info")
-    public Result get(@RequestParam String id,@RequestParam String question,@RequestParam String answer,@RequestParam String analysis,@RequestParam String userId,@RequestParam String title,
+    public Result get(@RequestParam String question,
+                      @RequestParam String userId,@RequestParam String title,
                       @RequestParam(value = "page", defaultValue = "1") Integer page,
                       @RequestParam(value = "size", defaultValue = "10") Integer size) {
         Map<String,Object> condition = new HashMap<>();
-        condition.put("id",id);
         condition.put("question",question);
-        condition.put("answer",answer);
-        condition.put("analysis",analysis);
         condition.put("userId",userId);
         condition.put("title",title);
         PageDTO pageDTO = choiceQuestionService.find(condition, page, size);
         if (pageDTO == null)
             return ResultVOUtil.error(ResultEnum.QUESTION_NOT_EXIST);
         else
-            return ResultVOUtil.success(pageDTO);
+            return ResultVOUtil.success(pageDTO.getRows(),pageDTO.getTotal());
 
     }
 

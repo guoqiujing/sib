@@ -10,20 +10,29 @@
 </head>
 <body>
 <div style="padding: 20px">
-    <form class="layui-form">
         <div class="layui-form-item">
-            <label class="layui-form-label">题目编号</label>
+            <label class="layui-form-label">题干</label>
             <div class="layui-input-inline">
-                <input type="text" name="id" class="layui-input">
+                <input type="text" id="search_question" class="layui-input">
             </div>
-            <label class="layui-form-label">题库编号</label>
+            <label class="layui-form-label">所属题库</label>
             <div class="layui-input-inline">
-                <input type="text" name="title" class="layui-input">
+                <input type="text" id="search_title" class="layui-input">
+            </div>
+            <label class="layui-form-label">创建者编号</label>
+            <div class="layui-input-inline">
+                <input type="text" id="search_userId" class="layui-input">
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn " id="bt_search"><i class="layui-icon">&#xe615;</i>搜索</button>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn " id="bt_refresh"><i class="layui-icon">&#xe669;</i>刷新</button>
             </div>
         </div>
-    </form>
     <table class="layui-hide" id="tableElem" lay-filter="demo"></table>
 </div>
+
 <!--列表操作栏-->
 <script type="text/html" id="table_bar">
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>

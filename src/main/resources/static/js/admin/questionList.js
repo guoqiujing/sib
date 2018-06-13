@@ -75,5 +75,28 @@ layui.use('table', function() {
             });
         }
     });
+//自定義事件處理
+    $(document).ready(function(e) {
 
+        ///搜索题库
+        $("#bt_search").click(function(e) {
+            var search_question = $('#search_question').val();
+            var search_title = $('#search_title').val();
+            var search_userId = $('#search_userId').val();
+            //执行重载
+            layui.table.reload('tableReload', {
+                url: '/admin/question/info',
+                where:{
+                    question: search_question,
+                    title: search_title,
+                    userId: search_userId
+                }
+            });
+        });
+        //刷新页面
+        $("#bt_refresh").click(function(e) {
+            window.location.reload()
+        });
+
+    });
 });
