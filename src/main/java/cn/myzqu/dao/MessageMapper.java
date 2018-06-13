@@ -2,6 +2,7 @@ package cn.myzqu.dao;
 
 import cn.myzqu.dto.MessageDTO;
 import cn.myzqu.pojo.Message;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,8 +22,8 @@ public interface MessageMapper {
     List<MessageDTO> selectByUserId(String userId);
 
     /**
-     * 查询所有用户反馈列表
+     * 多条件模糊查询用户反馈列表（管理端
      * @return
      */
-    List<Message> selectAllMessage();
+    List<MessageDTO> selectAllMessage(@Param("nickname") String nickname,@Param("bankTitle") String bankTitle,@Param("question") String question);
 }

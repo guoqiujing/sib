@@ -28,10 +28,14 @@ public class MessageController {
      * @return
      */
     @GetMapping("/getList")
-    public Result getMessageByUserId(@RequestParam(value="page",defaultValue = "1") Integer page,
+    public Result getMessageByUserId(@RequestParam(value="nickname",defaultValue = "") String nickname,
+                                     @RequestParam(value="bankTitle",defaultValue = "") String bankTitle,
+                                     @RequestParam(value="question",defaultValue = "") String question,
+                                     @RequestParam(value="page",defaultValue = "1") Integer page,
                                      @RequestParam(value = "size",defaultValue = "10") Integer size){
+        System.err.println(nickname);
         //调用messageService的findAllMessage方法查询出所有用户对该接收者的反馈记录
-        PageDTO data = messageService.findAllMessage(page,size);
+        PageDTO data = messageService.findAllMessage(nickname,bankTitle,question,page,size);
         //若没有就返回错误提示信息
         if(data==null)  return ResultVOUtil.error(ResultEnum.MESSAGE_EMPTY);
         //若有数据，则返回成功信息和数据

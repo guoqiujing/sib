@@ -31,5 +31,5 @@ public interface MessageService {
      * @param pageSize
      * @return
      */
-    PageDTO findAllMessage(int pageNum, int pageSize);
+    PageDTO findAllMessage(String nickname,String bankTitle,String question,int pageNum, int pageSize);
 }

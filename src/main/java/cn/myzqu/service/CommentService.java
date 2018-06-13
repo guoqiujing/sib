@@ -3,6 +3,8 @@ package cn.myzqu.service;
 import cn.myzqu.dto.PageDTO;
 import cn.myzqu.pojo.Comment;
 
+import java.util.Map;
+
 /**
  * 用户评论服务接口
  * Created by xiraly on 2018/5/25.
@@ -43,5 +45,5 @@ public interface CommentService {
      * @param pageSize
      * @return
      */
-    PageDTO findAllComment(int pageNum,int pageSize);
+    PageDTO findAllComment(Map<String,Object> map,int pageNum, int pageSize);
 }

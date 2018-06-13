@@ -16,8 +16,8 @@ layui.use('table', function() {
             [
                 {type:'checkbox'},
                 { field: 'userId', title: '创建者' ,width:400,  sort: true },
-                { field: 'value', title: '变动值',sort: true },
-                { field: 'note', title: '变动说明', width:900,sort: true },
+                { field: 'value', title: '变动值',width:200,sort: true },
+                { field: 'note', title: '变动说明', sort: true },
                 { field: 'createTime', title: '创建时间', width:200, sort: true },
             ]
         ],

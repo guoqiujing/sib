@@ -56,10 +56,32 @@
   </select>
 
   <!--查询所有用户评论记录-->
-  <select id="selectAllComment" resultMap="BaseResultMap">
-    SELECT *
-    FROM comment
-    ORDER BY create_time DESC
+  <select id="selectAllComment" resultType="cn.myzqu.dto.CommentDTO" parameterType="HashMap">
+      SELECT
+
+      comment.*,
+
+      question_bank.title as bank_title ,
+
+      choice_question.question as question,
+
+      user.nickname as nickname
+
+      FROM comment
+
+      INNER JOIN user ON user.id = comment.user_id
+
+      INNER JOIN question_bank ON comment.bank_id = question_bank.id
+
+      INNER JOIN choice_question ON comment.question_id = choice_question.id
+
+      WHERE  user.nickname LIKE CONCAT('%',#{nickname},'%')
+
+      and question_bank.title LIKE CONCAT('%',#{bankTitle},'%')
+
+      and choice_question.question LIKE CONCAT('%',#{question},'%')
+
+      ORDER BY comment.create_time DESC
   </select>
 
   <!--添加用户评论-->

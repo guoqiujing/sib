@@ -42,11 +42,33 @@
 
   </select>
 
-  <select id="selectAllMessage" resultMap="BaseResultMap">
+  <select id="selectAllMessage" resultType="cn.myzqu.dto.MessageDTO" parameterType="java.lang.String">
+    select
 
-    SELECT * FROM message
+    message.*,
+
+    user.nickname as nickname,
+
+    question_bank.title as bank_title,
+
+    choice_question.question as question
+
+    from message
+
+    INNER JOIN user ON message.sender = user.id
+
+    INNER JOIN question_bank ON message.bank_id = question_bank.id
+
+    INNER JOIN choice_question ON message.question_id = choice_question.id
+
+    WHERE  user.nickname LIKE  CONCAT('%',#{nickname},'%')
+
+    and question_bank.title LIKE CONCAT('%',#{bankTitle},'%')
+
+    and choice_question.question LIKE CONCAT('%',#{question},'%')
 
     ORDER BY message.create_time DESC
+
   </select>
 
   <!--添加反馈记录-->
