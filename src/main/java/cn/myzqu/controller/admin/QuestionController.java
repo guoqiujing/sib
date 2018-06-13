@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -87,32 +88,52 @@ public class QuestionController {
 
     /**
      * 综合查询(根据题目id，题目，答案，分析,用户id，题库标题模糊搜索）
-     * @param condition 与上面注释对应说明:id question answer analysis userId title
+     * @param question userId title
      * @param page
      * @param size
      * @return
      */
     @GetMapping("/info")
-    public Result get(@RequestParam Map<String, Object> condition,
+    public Result get(@RequestParam String question,
+                      @RequestParam String userId,@RequestParam String title,
                       @RequestParam(value = "page", defaultValue = "1") Integer page,
                       @RequestParam(value = "size", defaultValue = "10") Integer size) {
+        Map<String,Object> condition = new HashMap<>();
+        condition.put("question",question);
+        condition.put("userId",userId);
+        condition.put("title",title);
         PageDTO pageDTO = choiceQuestionService.find(condition, page, size);
         if (pageDTO == null)
             return ResultVOUtil.error(ResultEnum.QUESTION_NOT_EXIST);
         else
-            return ResultVOUtil.success(pageDTO);
+            return ResultVOUtil.success(pageDTO.getRows(),pageDTO.getTotal());
 
     }
 
     /**
-     * 修改审核信息
+     * 审核通过
      * @param id
      * @return
      */
     @PutMapping("/info/check/{id}")
     public Result checkChoice(@PathVariable(value="id") String id) {
-        //审核题目信息
+        //审核通过题目信息
         if (choiceQuestionService.check(id)) {
+            pointsService.checkChoice(id);
+            return ResultVOUtil.success();
+        } else
+            return ResultVOUtil.error(ResultEnum.QUESTION_CHECK_FAIL);
+    }
+
+    /**
+     * 审核不通过
+     * @param id
+     * @return
+     */
+    @PutMapping("/info/fail/Check/{id}")
+    public Result notCheck(@PathVariable(value="id") String id) {
+        //审核不通过题目信息
+        if (choiceQuestionService.notCheck(id)) {
             pointsService.checkChoice(id);
             return ResultVOUtil.success();
         } else
