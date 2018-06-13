@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User login(String code, String password) {
         //查找用户名是否存在
-        User user = userMapper.selectById(code);
+        User user = userMapper.selectByName(code);
         if(user==null) throw new CustomException(ResultEnum.LOGIN_FAIL);
         //获取数据库中的密码和秘钥
         String salt = user.getSalt();
@@ -147,6 +147,7 @@ public class UserServiceImpl implements UserService{
         if(result>0){
             //插入用户身份
             UserRole record = new UserRole();
+            record.setId(KeyUtil.getUUID());
             record.setUserId(user.getId());
             record.setRoleName("user");
             if(userRoleMapper.insert(record)>0){
