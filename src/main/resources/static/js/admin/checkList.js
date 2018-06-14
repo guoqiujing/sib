@@ -16,15 +16,15 @@ layui.use('table', function() {
             [
                 {type:'checkbox'},
                 {field: 'question', title: '题干', width: 300, sort: true},
-                {field: 'title', title: '所属题库', width: 80, sort: true},
+                {field: 'title', title: '所属题库', width: 180, sort: true},
                 {field: 'userId', title: '创建者', sort: true},
-                {field: 'answer', title: '答案', sort: true},
+                {field: 'answer', title: '答案', width: 80,sort: true},
                 {field: 'analysis', title: '分析', sort: true},
                 {field: 'frequency', title: '练习人次', width: 100, sort: true},
                 {field: 'starLevel', title: '综合评级', width: 100, sort: true},
                 {field: 'status', title: '状态', width: 80, sort: true},
                 {field: 'createTime', title: '创建时间', width: 200, sort: true},
-                {fixed: 'right', title: '操作', align: 'center', toolbar: '#table_bar'}
+                {fixed: 'right', title: '操作',width: 200, align: 'center', toolbar: '#table_bar'}
             ]
         ],
         id: 'tableReload'
@@ -75,10 +75,10 @@ layui.use('table', function() {
             });
         }
         else if (obj.event === 'noPass') {
-            layer.confirm('确定通过这条题目' + data.id + "?", {icon: 3, title: '提醒', shade: 0, offset: 't'}, function () {
+            layer.confirm('确定不通过这条题目' + data.id + "?", {icon: 3, title: '提醒', shade: 0, offset: 't'}, function () {
                 $.ajax({
                     type: "put",
-                    url: "/admin/question/info/nopass/" + data.id,
+                    url: "/admin/question/info/no/pass/" + data.id,
                     success: function (res) {
                         if (res.code == "0") {
                             obj.del();
@@ -90,7 +90,7 @@ layui.use('table', function() {
         }
     });
     var $ = layui.$, active = {
-        batchCheck: function(){ //获取选中数据
+        batchPass: function(){ //获取选中数据
             var checkStatus = table.checkStatus('tableReload')
             var data = checkStatus.data
             if(data.length<=0){
@@ -101,7 +101,7 @@ layui.use('table', function() {
                             var id = data[i].id
                             $.ajax({
                                 type: "put",
-                                url: "/admin/question/info/check/"+id,
+                                url: "/admin/question/info/pass/"+id,
                                 success: function(res) {
                                     if (res.code == "0") {
                                         console.log(res.msg)
@@ -114,6 +114,32 @@ layui.use('table', function() {
                         layer.close(index);
                         table.reload('tableReload', {})
                     });
+            }
+        },
+        batchNoPass: function(){ //获取选中数据
+            var checkStatus = table.checkStatus('tableReload')
+            var data = checkStatus.data
+            if(data.length<=0){
+                layer.alert("请选择数据",{offset:'t'})
+            }else {
+                layer.confirm('确定不通过'+ data.length +'数据吗？', {icon:3,title:'提醒',offset:'t'},function (index) {
+                    for(var i=0;i<data.length;i++){
+                        var id = data[i].id
+                        $.ajax({
+                            type: "put",
+                            url: "/admin/question/info/no/pass/"+id,
+                            success: function(res) {
+                                if (res.code == "0") {
+                                    console.log(res.msg)
+                                }else{
+                                    layer.alert(res.msg,{icon: 2,offset: 't'})
+                                }
+                            }
+                        });
+                    }
+                    layer.close(index);
+                    table.reload('tableReload', {})
+                });
             }
         }
     };

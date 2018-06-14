@@ -115,11 +115,11 @@ public class QuestionController {
      * @param id
      * @return
      */
-    @PutMapping("/info/check/{id}")
+    @PutMapping("/info/pass/{id}")
     public Result checkChoice(@PathVariable(value="id") String id) {
         //审核通过题目信息
         if (choiceQuestionService.check(id)) {
-            pointsService.checkChoice(id);
+            //pointsService.checkChoice(id);
             return ResultVOUtil.success();
         } else
             return ResultVOUtil.error(ResultEnum.QUESTION_CHECK_FAIL);
@@ -130,11 +130,10 @@ public class QuestionController {
      * @param id
      * @return
      */
-    @PutMapping("/info/fail/Check/{id}")
+    @PutMapping("/info/no/pass/{id}")
     public Result notCheck(@PathVariable(value="id") String id) {
         //审核不通过题目信息
         if (choiceQuestionService.notCheck(id)) {
-            pointsService.checkChoice(id);
             return ResultVOUtil.success();
         } else
             return ResultVOUtil.error(ResultEnum.QUESTION_CHECK_FAIL);
