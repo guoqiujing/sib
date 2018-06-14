@@ -29,7 +29,7 @@ public class CommentController {
      * @return
      */
     @GetMapping("/comment")
-    public Result getAllRating(@RequestParam(value="nickname",defaultValue = "") String nickname,
+    public Result getAllComment(@RequestParam(value="nickname",defaultValue = "") String nickname,
                                @RequestParam(value="bankTitle",defaultValue = "") String bankTitle,
                                @RequestParam(value="question",defaultValue = "") String question,
                                @RequestParam(value="page",defaultValue = "1") Integer page,

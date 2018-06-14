@@ -37,7 +37,7 @@ public class MessageController {
     }
 
     /**
-     * 根据题目id查询所有用户的评论记录
+     * 根据用户id查询所有用户的评论记录
      * @param userId  用户id
      * @return
      */
@@ -54,7 +54,7 @@ public class MessageController {
     }
 
     /**
-     * 根据题目id查询所有用户的评论记录
+     * 根据用户id查询所有用户的评论记录
      * @param userId  用户id
      * @return
      */

@@ -22,7 +22,7 @@ public class MessageController {
     private MessageService messageService;
 
     /**
-     * 根据题目id查询所有用户的评论记录
+     * 多条件查询所有用户的反馈记录
      * @param page
      * @param size
      * @return
