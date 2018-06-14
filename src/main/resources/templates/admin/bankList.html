@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/static/layui/css/layui.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="/static/layui/layui.js"></script>
+    <script type="text/javascript" src="/static/js/myPlugin.js"></script>
     <script src="/static/js/admin/bankList.js"></script>
     <script src="/static/js/category.js"></script>
 </head>
@@ -14,20 +15,17 @@
 
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label class="layui-form-label" >题库标题</label>
                 <div class="layui-input-inline">
-                    <input type="text"  id="search_title" class="layui-input">
+                    <input type="text" placeholder="题库标题" id="search_title" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label" >所属用户</label>
                 <div class="layui-input-inline">
-                    <input type="text"  id="search_userId" class="layui-input">
+                    <input type="text" placeholder="所属用户" id="search_userId" class="layui-input">
                 </div>
             </div>
             <div class="layui-form layui-inline">
             <form  class="layui-form" id="x-city">
-                <label class="layui-form-label">所属类型</label>
                 <div class="layui-input-inline">
                     <select  lay-filter="topCategory">
                         <option value="">请选择</option>
@@ -44,7 +42,7 @@
                 <button class="layui-btn " id="bt_search"><i class="layui-icon">&#xe615;</i>搜索</button>
             </div>
             <div class="layui-inline">
-                <button class="layui-btn " id="bt_refresh"><i class="layui-icon">&#xe669;</i>刷新</button>
+                <button class="layui-btn layui-btn-sm" id="bt_refresh"><i class="layui-icon">&#xe669;</i>刷新</button>
             </div>
     </div>
     <table class="layui-hide" id="tableElem" lay-filter="demo"></table>

@@ -6,11 +6,16 @@
     <link rel="stylesheet" href="/static/layui/css/layui.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="/static/layui/layui.js"></script>
+    <script type="text/javascript" src="/static/js/myPlugin.js"></script>
     <script src="/static/js/user/message.js"></script>
-    <script src="/static/js/category.js"></script>
 </head>
 <body>
 <div style="padding: 20px">
+    <div class="layui-form-item">
+        <div class="layui-inline" style="float: right">
+            <button class="layui-btn layui-btn-sm"  onclick="window.location.reload()"><i class="layui-icon">&#xe669;</i>刷新</button>
+        </div>
+    </div>
     <table class="layui-hide" id="tableElem" lay-filter="demo"></table>
 </div>
 </body>

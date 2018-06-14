@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class NavController {
 
     @RequestMapping("user/{htmlName}")
-    public String showPage(@PathVariable("htmlName") String htmlName)
+    public String user(@PathVariable("htmlName") String htmlName)
     {
         System.out.println(htmlName);
         return "/user/"+htmlName;
@@ -22,5 +22,10 @@ public class NavController {
     {
         System.out.println(htmlName);
         return "/admin/"+htmlName;
+    }
+    @RequestMapping("login")
+    public String login()
+    {
+        return "/login";
     }
 }

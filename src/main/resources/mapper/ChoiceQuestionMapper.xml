@@ -239,6 +239,7 @@
     select choice_question.*,question_bank.title
     from choice_question,question_bank
     where choice_question.bank_id=question_bank.id and bank_id=#{bank_id}
+    ORDER BY update_time DESC
   </select>
 
   <!--显示题目id-->
@@ -254,6 +255,7 @@
     from choice_question,question_bank
     where choice_question.bank_id=question_bank.id
     and choice_question.user_id=#{VALUE }
+    ORDER BY update_time DESC
   </select>
   
   <!--显示所有待审核题目-->

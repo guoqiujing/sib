@@ -1,4 +1,4 @@
-var userId = '82e705688305435382df908076ba3e66';
+var userId = $.myPlugin.getUserId();
 <!--layui表格相关处理-->
 layui.use('table', function() {
     var table = layui.table;
@@ -88,6 +88,7 @@ layui.use('table', function() {
             layui.use('layer', function() {
                 $("#add_title").val('')
                 $("#add_intro").val('')
+                $("#add_userId").val(userId)
                 layui.form.render('select', 'add_form');
                 layer.open({
                     type: 1,
@@ -139,19 +140,6 @@ layui.use('table', function() {
 layui.use(['form'], function() {
     var form = layui.form,
         layer = layui.layer;
-    //自定义验证规则
-    form.verify({
-        name: function(value) {
-            if (value.length < 3 || value.length > 12) {
-                return '名称长度需控制在3-12内';
-            }
-        },
-        intro: function(value) {
-            if (value.length < 5 || value.length > 100) {
-                return '介绍长度需控制在5-100内';
-            }
-        }
-    });
     // 提交修改到后台
     form.on('submit(edit_sub)', function(data) {
         $.ajax({

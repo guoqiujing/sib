@@ -52,4 +52,21 @@ public class MessageController {
         //若有数据，则返回成功信息和数据
         return  ResultVOUtil.success(data);
     }
+
+    /**
+     * 根据题目id查询所有用户的评论记录
+     * @param userId  用户id
+     * @return
+     */
+    @GetMapping("/list")
+    public Result getListByUserId(@RequestParam String userId,
+                                     @RequestParam(value="page",defaultValue = "1") Integer page,
+                                     @RequestParam(value = "size",defaultValue = "10") Integer size){
+        //调用messageService的findByUserId方法查询出所有用户对该接收者的反馈记录
+        PageDTO data = messageService.findByUserId(userId,page,size);
+        //若没有就返回错误提示信息
+        if(data==null)  return ResultVOUtil.error(ResultEnum.MESSAGE_EMPTY);
+        //若有数据，则返回成功信息和数据
+        return  ResultVOUtil.success(data.getRows(),data.getTotal());
+    }
 }

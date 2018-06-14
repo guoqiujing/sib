@@ -1,5 +1,5 @@
 
-var userId = '1c835621dc694337b713f086404dabe8';
+var userId = $.myPlugin.getUserId();
 <!--layui表格相关处理-->
 layui.use('table', function() {
     var table = layui.table;

@@ -1,13 +1,13 @@
 /**
  * Created by xiraly on 2018/6/13.
  */
-var userId = '82e705688305435382df908076ba3e66';
+var userId = $.myPlugin.getUserId();
 layui.use('table', function() {
 
     var table = layui.table;
     table.render({
         elem: '#tableElem',
-        url: '/message/getMessage?userId=' + userId,
+        url: '/message/list?userId=' + userId,
         page: true,
         cols: [
             [

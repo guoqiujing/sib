@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="/static/layui/css/layui.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="/static/layui/layui.js"></script>
+    <script type="text/javascript" src="/static/js/myPlugin.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.form.js"></script>
     <script src="/static/js/user/question.js"></script>
 </head>
 <body>
@@ -14,7 +16,7 @@
     <div class="layui-form-item">
         <div class="layui-inline demoTable">
             <button data-type="add" id="add" class="layui-btn layui-btn-sm">
-                <i class="layui-icon">&#xe654;</i>新增题目
+                <i class="layui-icon ">&#xe654;</i>新增题目
             </button>
         </div>
         <div class="layui-inline demoTable">
@@ -22,6 +24,9 @@
                     class="layui-btn layui-btn-sm">
                 <i class="layui-icon">&#xe654;</i>批量新增
             </button>
+        </div>
+        <div class="layui-inline" style="float: right">
+            <button class="layui-btn layui-btn-sm"  onclick="window.location.reload()"><i class="layui-icon">&#xe669;</i>刷新</button>
         </div>
     </div>
     <table class="layui-hide" id="tableElem" lay-filter="demo"></table>
@@ -251,7 +256,7 @@
     </form>
 </div>
 <div id="upload_form_div" style="width: 600px; display: none">
-    <form class="layui-form" id="upload_form" action="admin_choiceQuestion/upload.action" enctype="multipart/form-data" method="post"
+    <form class="layui-form" id="upload_form" action="/file/upload/excel" enctype="multipart/form-data" method="post"
           style="padding: 20px;">
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">选择文件</label>
@@ -264,6 +269,13 @@
             <div class="layui-input-block">
                 <select name="bankId" id="upload_bankId" autocomplete="off">
                 </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属用户</label>
+            <div class="layui-input-block">
+                <input name="userId" id="upload_userId" class="layui-input"  autocomplete="off">
+                </input>
             </div>
         </div>
         <div class="layui-form-item">

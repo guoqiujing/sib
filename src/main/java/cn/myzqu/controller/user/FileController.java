@@ -30,9 +30,10 @@ public class FileController {
 
     // 上传文件会自动绑定到MultipartFile中
     @PostMapping(value = "/upload/excel")
-    public Result uploadExcel(HttpServletRequest request,  @RequestParam("bankId") String bankId,
-                              @RequestParam("userId") String userId,
-                              @RequestParam("file") MultipartFile file) throws Exception {
+    public Result uploadExcel(HttpServletRequest request,
+                              @RequestParam("file") MultipartFile file,
+                              @RequestParam("bankId") String bankId,
+                              @RequestParam("userId") String userId) throws Exception {
         System.out.println("上传的题库id为："+ bankId);
         String filePath = FileUtil.uploadFile(file, request);
         StringBuffer stringBuffer = new StringBuffer();

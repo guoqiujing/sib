@@ -1,5 +1,5 @@
 var bankQuestion = ''
-var userId = '1c835621dc694337b713f086404dabe8'
+var userId = $.myPlugin.getUserId();
 $(document).ready(function(e) {
     //查询题库列表
     $.ajax({
@@ -20,6 +20,11 @@ $(document).ready(function(e) {
 
         }
     });
+
+    // 使用jquery.form的ajaxFrom得到提交表单后服务器返回的数据
+    $("#upload_form").ajaxForm(function(res) {
+        layer.alert(res.msg);
+    });
 }),
 <!--layui表格相关处理-->
 layui.use('table', function () {
@@ -28,6 +33,10 @@ layui.use('table', function () {
         elem: '#tableElem',
         url: '/choice/list/way/user?id=' + userId,
         page: true,
+        request: {
+            pageName: 'page' //页码的参数名称，默认：page
+            ,limitName: 'size' //每页数据量的参数名，默认：limit
+        },
         cols: [
             [
                 {type:'checkbox'},
@@ -132,6 +141,7 @@ layui.use('table', function () {
         upload: function() {
             layui.use('layer', function() {
                 layui.form.render('select', 'upload_form');
+                $("#upload_userId").val(userId)
                 layer.open({
                     type: 1,
                     title: '批量添加题目',
@@ -181,19 +191,6 @@ layui.use('table', function () {
 layui.use(['form'], function () {
     var form = layui.form,
         layer = layui.layer;
-    //自定义验证规则
-    form.verify({
-        name: function (value) {
-            if (value.length < 3 || value.length > 12) {
-                return '名称长度需控制在3-12内';
-            }
-        },
-        intro: function (value) {
-            if (value.length < 5 || value.length > 100) {
-                return '介绍长度需控制在5-100内';
-            }
-        }
-    });
     // 提交修改到后台
     form.on('submit(edit_sub)', function (data) {
         $.ajax({

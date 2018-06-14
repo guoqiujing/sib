@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2018/6/9.
  */
-var userId = '82e705688305435382df908076ba3e66';
+var userId = $.myPlugin.getUserId();
 <!--layui表格相关处理-->
 layui.use('table', function() {
     var table = layui.table;
@@ -141,6 +141,8 @@ layui.use('table', function() {
 });
 //自定義事件處理
 $(document).ready(function(e) {
+
+    console.log("userid="+userId)
 
     ///搜索题库
     $("#bt_search").click(function(e) {

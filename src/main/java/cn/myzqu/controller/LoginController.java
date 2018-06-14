@@ -54,4 +54,9 @@ public class LoginController {
         }
         return ResultVOUtil.error(ResultEnum.LOGIN_FAIL);
     }
+    @GetMapping("api/logout")
+    public Result logout(HttpServletRequest request){
+        request.getSession().removeAttribute("user");
+        return ResultVOUtil.success();
+    }
 }
