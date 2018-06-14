@@ -3,6 +3,8 @@ package cn.myzqu.controller;
 import cn.myzqu.dto.UserDTO;
 import cn.myzqu.enums.ResultEnum;
 import cn.myzqu.pojo.User;
+import cn.myzqu.pojo.UserRole;
+import cn.myzqu.service.UserRoleService;
 import cn.myzqu.service.UserService;
 import cn.myzqu.utils.ResultVOUtil;
 import cn.myzqu.vo.Result;
@@ -25,13 +27,16 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRoleService userRoleService;
+
     /**
      * 登录
      * @param code
      * @param password
      * @return
      */
-    @GetMapping("/login")
+    @GetMapping("api/login")
     public Result login(String code, String password,HttpServletRequest request){
         HttpSession session = request.getSession(true);
         User user = userService.login(code,password);
@@ -39,9 +44,13 @@ public class LoginController {
             UserDTO userDTO = new UserDTO();
             BeanUtils.copyProperties(user,userDTO);
             //生成session
-            session.setAttribute("userId",user.getId());
-            session.setAttribute("userIcon",user.getIcon());
-            return ResultVOUtil.success(userDTO);
+            session.setAttribute("user",userDTO);
+            //判断用户身份
+            UserRole userRole = userRoleService.findByUserId(userDTO.getId());
+            if(userRole.getRoleName().equals("user"))
+                return ResultVOUtil.success("user/index");
+            else if(userRole.getRoleName().equals("admin"))
+                return ResultVOUtil.success("admin/index");
         }
         return ResultVOUtil.error(ResultEnum.LOGIN_FAIL);
     }
