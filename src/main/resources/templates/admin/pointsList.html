@@ -11,6 +11,19 @@
 </head>
 <body>
 <div style="padding: 20px">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <input type="text"  id="search_nickname" placeholder="创建者" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <button class="layui-btn " id="bt_search"><i class="layui-icon">&#xe615;</i>搜索</button>
+        </div>
+        <div class="layui-inline" style="float: right">
+            <button class="layui-btn " onclick="window.location.reload()"><i class="layui-icon">&#xe669;</i>刷新</button>
+        </div>
+    </div>
     <table class="layui-hide" id="tableElem" lay-filter="demo"></table>
 </div>
 <!--列表操作栏-->

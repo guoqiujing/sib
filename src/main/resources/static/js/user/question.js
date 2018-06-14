@@ -23,7 +23,12 @@ $(document).ready(function(e) {
 
     // 使用jquery.form的ajaxFrom得到提交表单后服务器返回的数据
     $("#upload_form").ajaxForm(function(res) {
-        layer.alert(res.msg);
+        layer.alert(res.msg,{ offset: 't'},function () {
+            //刷新表格,执行重载
+            layui.table.reload('tableReload', {});
+            layer.closeAll();
+        });
+
     });
 }),
 <!--layui表格相关处理-->
@@ -127,6 +132,7 @@ layui.use('table', function () {
             layui.use('layer', function () {
                 $("#add_name").val('')
                 $("#add_intro").val('')
+                $("#add_userId").val(userId)
                 layer.open({
                     type: 1,
                     title: '添加题目',
