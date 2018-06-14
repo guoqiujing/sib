@@ -10,6 +10,7 @@ public enum ResultEnum {
     SQL_ERROR(-3,"哎呀，操作数据异常啦"),
 //    登录
     LOGIN_FAIL(1000,"登录失败，登录信息不正确"),
+    LOGIN_NOT(1000,"请先登录"),
 //    题库类
 
     BANK_CREATE_FAIL(2000,"创建题库失败"),
